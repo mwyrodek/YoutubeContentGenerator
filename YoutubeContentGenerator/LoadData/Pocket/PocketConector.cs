@@ -36,7 +36,7 @@ namespace YoutubeContentGenerator.LoadData.Pocket
             var id = item.ID;
             logger.LogInformation($"Article ID :{id}");
             var article = PocketMapper.Map(item);
-#if !TestRun
+#if !TEST
             pocketClient.Archive(id);
 #endif
             return article;
