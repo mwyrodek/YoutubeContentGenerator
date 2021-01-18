@@ -1,0 +1,72 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeContentGenerator", "YoutubeContentGenerator\YoutubeContentGenerator.csproj", "{FB4A3BA7-8559-4703-8D0E-47149D396BAB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YCG.Models", "YCG.Models\YCG.Models.csproj", "{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YCG.Tests", "YCG.Tests\YCG.Tests.csproj", "{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		TestDesc|Any CPU = TestDesc|Any CPU
+		TestLoader|Any CPU = TestLoader|Any CPU
+		TestRun|Any CPU = TestRun|Any CPU
+		TestShortener|Any CPU = TestShortener|Any CPU
+		TestShortener-Summary|Any CPU = TestShortener-Summary|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestDesc|Any CPU.ActiveCfg = TestDesc|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestDesc|Any CPU.Build.0 = TestDesc|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestLoader|Any CPU.ActiveCfg = TestLoader|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestLoader|Any CPU.Build.0 = TestLoader|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestRun|Any CPU.ActiveCfg = TestRun|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestRun|Any CPU.Build.0 = TestRun|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestShortener|Any CPU.ActiveCfg = TestShortener|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestShortener|Any CPU.Build.0 = TestShortener|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestShortener-Summary|Any CPU.ActiveCfg = TestShortener-Summary|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestShortener-Summary|Any CPU.Build.0 = TestShortener-Summary|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestDesc|Any CPU.ActiveCfg = TestDesc|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestDesc|Any CPU.Build.0 = TestDesc|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestLoader|Any CPU.ActiveCfg = DummyLoader|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestLoader|Any CPU.Build.0 = DummyLoader|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestRun|Any CPU.ActiveCfg = TestRun|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestRun|Any CPU.Build.0 = TestRun|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestShortener|Any CPU.ActiveCfg = TestShortener|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestShortener|Any CPU.Build.0 = TestShortener|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestShortener-Summary|Any CPU.ActiveCfg = TestShortener-Summary|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestShortener-Summary|Any CPU.Build.0 = TestShortener-Summary|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestDesc|Any CPU.ActiveCfg = TestDesc|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestDesc|Any CPU.Build.0 = TestDesc|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestLoader|Any CPU.ActiveCfg = DummyLoader|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestLoader|Any CPU.Build.0 = DummyLoader|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestRun|Any CPU.ActiveCfg = TestRun|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestRun|Any CPU.Build.0 = TestRun|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestShortener|Any CPU.ActiveCfg = TestShortener|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestShortener|Any CPU.Build.0 = TestShortener|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestShortener-Summary|Any CPU.ActiveCfg = TestShortener-Summary|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestShortener-Summary|Any CPU.Build.0 = TestShortener-Summary|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F01A1022-A571-4DE7-831F-9D952E019634}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <Configurations>Debug;Release;TestRun;TestLoader;TestShortener;TestDesc;TestShortener-Summary</Configurations>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestRun|AnyCPU'">
+      <DefineConstants>TRACE;TestRun;TEST</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestShortener|AnyCPU'">
+      <DefineConstants>TRACE;DUMMYLOADER;DUMMYSUMMARY;TEST</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestShortener-Summary|AnyCPU'">
+      <DefineConstants>TRACE;DUMMYLOADER;TEST</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestDesc|AnyCPU'">
+      <DefineConstants>TRACE;DUMMYLOADER;DUMMYSHORTENER;TEST</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestLoader|AnyCPU'">
+      <DefineConstants>TRACE;DUMMYSHORTENER;DUMMYSUMMARY;TEST</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.6" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.6" />
+      <PackageReference Include="PocketSharp" Version="5.0.0" />
+      <PackageReference Include="Selenium.Support" Version="3.141.0" />
+      <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+      <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="87.0.4280.2000" />
+      <PackageReference Include="TextCopy" Version="4.2.0" />
+      <PackageReference Include="WordPressPCL" Version="1.8.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\YCG.Models\YCG.Models.csproj" />
+    </ItemGroup>
+
+</Project>

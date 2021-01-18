@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+
+        <IsPackable>false</IsPackable>
+
+        <Configurations>Debug;Release;TestRun;DummyLoader;TestShortener;TestDesc;TestShortener-Summary</Configurations>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoFixture.AutoMoq" Version="4.13.0" />
+        <PackageReference Include="Google.Apis.Docs.v1" Version="1.49.0.2170" />
+        <PackageReference Include="Moq" Version="4.14.5" />
+        <PackageReference Include="nunit" Version="3.12.0" />
+        <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+        <PackageReference Include="PocketSharp" Version="5.0.0" />
+        <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+        <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="87.0.4280.2000" />
+        <PackageReference Include="WordPressPCL" Version="1.8.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\YCG.Models\YCG.Models.csproj" />
+      <ProjectReference Include="..\YoutubeContentGenerator\YoutubeContentGenerator.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Pocket\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="credentials.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>
