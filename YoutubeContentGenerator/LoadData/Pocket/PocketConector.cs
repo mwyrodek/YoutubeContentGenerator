@@ -6,7 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Extensions.Options;
+using OpenQA.Selenium;
 using YCG.Models;
+using YoutubeContentGenerator.Settings;
 
 namespace YoutubeContentGenerator.LoadData.Pocket
 {
@@ -14,13 +17,14 @@ namespace YoutubeContentGenerator.LoadData.Pocket
     {
        
        private readonly ILogger logger;
-        private readonly IConfiguration configuration;
+        //private readonly IConfiguration configuration;
+        private readonly AuthenticationOptions options;
         private readonly IPocketClient pocketClient;
 
-        public PocketConector(ILogger<PocketConector> logger, IConfiguration configuration, IPocketFactory pocketFactory)
+        public PocketConector(ILogger<PocketConector> logger, IOptions<AuthenticationOptions> options, IPocketFactory pocketFactory)
         {
             this.logger = logger;
-            this.configuration = configuration;
+            this.options = options.Value;
             this.pocketClient = pocketFactory.CreatePocketClient();
         }
 

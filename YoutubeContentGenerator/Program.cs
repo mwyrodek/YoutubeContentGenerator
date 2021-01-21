@@ -14,13 +14,14 @@ using YoutubeContentGenerator.ExtractDataFromFile;
 using YoutubeContentGenerator.LoadData;
 using YoutubeContentGenerator.LoadData.Pocket;
 using YoutubeContentGenerator.SeleniumLinkShortener;
+using YoutubeContentGenerator.Settings;
 using YoutubeContentGenerator.WeeklySummuryGenerator;
 
 namespace YoutubeContentGenerator
 {
     class Program
     {
-        public IConfigurationRoot Configuration { get; set; }
+        public static IConfiguration Configuration { get; set; }
         
         public static async Task Main(string[] args)
         {
@@ -54,6 +55,10 @@ namespace YoutubeContentGenerator
                 {
                     services.AddTransient<ContentGenerator>();
                     services.AddScoped<IYouTubeDescriptionGenerator, YouTubeDescriptionGenerator>();
+                    
+                    //Configs:
+                    services.Configure<AuthenticationOptions>(Configuration.GetSection(AuthenticationOptions.Authentication));
+                    services.Configure<DefaultsOptions>(Configuration.GetSection(DefaultsOptions.Defaults));
 #if DUMMYLOADER 
                     services.AddScoped<ILoadData, DummyLoadData>();
 #else

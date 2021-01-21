@@ -4,18 +4,20 @@ using PocketSharp;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Extensions.Options;
+using YoutubeContentGenerator.Settings;
 
 namespace YoutubeContentGenerator.LoadData.Pocket
 {
     public class PocketFactory : IPocketFactory
     {
         private readonly ILogger logger;
-        private readonly IConfiguration configuration;
+        private readonly AuthenticationOptions options;
 
-        public PocketFactory(ILogger<PocketFactory> logger, IConfiguration configuration)
+        public PocketFactory(ILogger<PocketFactory> logger, IOptions<AuthenticationOptions> options)
         {
             this.logger = logger;
-            this.configuration = configuration;
+            this.options = options.Value;
         }
 
         //configuration["Authentication:BlogLogin"];
@@ -24,9 +26,9 @@ namespace YoutubeContentGenerator.LoadData.Pocket
             try
             {
                 return new PocketClient(
-                consumerKey: configuration["Authentication:PocketConsumerKey"],
-                callbackUri: configuration["Authentication:CallbackUri"],
-                accessCode: configuration["Authentication:PokectAccessCode"]
+                consumerKey: options.PokectAccessCode,
+                callbackUri: options.CallbackUri,
+                accessCode: options.PokectAccessCode
                 );
             }
             catch (Exception e)
