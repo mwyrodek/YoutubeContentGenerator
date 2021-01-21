@@ -2,7 +2,9 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Microsoft.Extensions.Options;
 using YCG.Models;
+using YoutubeContentGenerator.Settings;
 
 namespace YoutubeContentGenerator.EpisodeGenerator
 {
@@ -33,11 +35,11 @@ License: http://creativecommons.org/licenses/by/4.0/
         
         private StringBuilder content = new StringBuilder();
         private string buildContent;
-        private readonly IConfiguration configuration;
+        private readonly DefaultsOptions options;
 
-        public YouTubeDescriptionGenerator(IConfiguration configuration)
+        public YouTubeDescriptionGenerator(IOptions<DefaultsOptions> options)
         {
-            this.configuration = configuration;
+            this.options = options.Value;
         }
         public void CreateEpisodesDescription(List<Episode> episodes)
         {
@@ -83,7 +85,7 @@ License: http://creativecommons.org/licenses/by/4.0/
 
         public void Save()
         {
-            using (StreamWriter writer = new StreamWriter($"{configuration["Defaults:DefaultDesciriptionLocation"]}\\{configuration["Defaults:DefaultDesciriptionFileName"]}", true))
+            using (StreamWriter writer = new StreamWriter($"{this.options.DefaultDesciriptionLocation}\\{this.options.DefaultDesciriptionFileName}", true))
             {
                 writer.Write(buildContent);
             }

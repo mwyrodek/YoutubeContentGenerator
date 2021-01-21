@@ -1,10 +1,12 @@
 using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Moq;
 using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
 using YoutubeContentGenerator.Blog;
+using YoutubeContentGenerator.Settings;
 using ILogger = Castle.Core.Logging.ILogger;
 
 namespace YCG.Tests.Blog
@@ -13,7 +15,7 @@ namespace YCG.Tests.Blog
     public class AddPostTest
     {
         private ILogger<LoginPage> logger;
-        private IConfiguration configuration;
+        private IOptions<WordPressOptions> options;
 
         [Test]
         public void FullAddPost()
@@ -21,11 +23,11 @@ namespace YCG.Tests.Blog
             logger = Mock.Of<ILogger<LoginPage>>();
             
             var driver = new ChromeDriver();
-            var login = new LoginPage(driver, logger,configuration);
+            var login = new LoginPage(driver, logger, options);
             login.GoTo();
             login.Login("fake", "fake");
 
-            var post = new AddPostPage(driver, configuration);
+            var post = new AddPostPage(driver, options);
             
             var date = DateTime.UtcNow.AddYears(1);
             post.GoTo()

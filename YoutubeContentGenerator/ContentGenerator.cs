@@ -18,8 +18,7 @@ namespace YoutubeContentGenerator
         /// </summary>
         /// <param name="logger">logger.</param>
         /// <param name="engine">engine.</param>
-        /// <param name="configuration">configuration.</param>
-        public ContentGenerator(ILogger<ContentGenerator> logger, IEngine engine, IConfiguration configuration)
+        public ContentGenerator(ILogger<ContentGenerator> logger, IEngine engine)
         {
             this.logger = logger;
             this.engine = engine;

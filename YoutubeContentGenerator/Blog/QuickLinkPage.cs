@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 
 namespace YoutubeContentGenerator.Blog
 {
+    [Obsolete]
     public class QuickLinkPage : IQuickLinkPage 
     {
         private IWebDriver driver;

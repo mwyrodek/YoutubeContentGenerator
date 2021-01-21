@@ -12,9 +12,9 @@ namespace YoutubeContentGenerator.LoadData.Pocket
     public class PocketFactory : IPocketFactory
     {
         private readonly ILogger logger;
-        private readonly AuthenticationOptions options;
+        private readonly PocketOptions options;
 
-        public PocketFactory(ILogger<PocketFactory> logger, IOptions<AuthenticationOptions> options)
+        public PocketFactory(ILogger<PocketFactory> logger, IOptions<PocketOptions> options)
         {
             this.logger = logger;
             this.options = options.Value;
@@ -26,7 +26,7 @@ namespace YoutubeContentGenerator.LoadData.Pocket
             try
             {
                 return new PocketClient(
-                consumerKey: options.PokectAccessCode,
+                consumerKey: options.PocketConsumerKey,
                 callbackUri: options.CallbackUri,
                 accessCode: options.PokectAccessCode
                 );

@@ -17,11 +17,10 @@ namespace YoutubeContentGenerator.LoadData.Pocket
     {
        
        private readonly ILogger logger;
-        //private readonly IConfiguration configuration;
-        private readonly AuthenticationOptions options;
+       private readonly WordPressOptions options;
         private readonly IPocketClient pocketClient;
 
-        public PocketConector(ILogger<PocketConector> logger, IOptions<AuthenticationOptions> options, IPocketFactory pocketFactory)
+        public PocketConector(ILogger<PocketConector> logger, IOptions<WordPressOptions> options, IPocketFactory pocketFactory)
         {
             this.logger = logger;
             this.options = options.Value;

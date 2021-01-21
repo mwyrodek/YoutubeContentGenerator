@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using OpenQA.Selenium;
 using YCG.Models;
 using YoutubeContentGenerator.Blog;
+using YoutubeContentGenerator.Settings;
 
 namespace YoutubeContentGenerator.SeleniumLinkShortener
 {
@@ -17,12 +19,12 @@ namespace YoutubeContentGenerator.SeleniumLinkShortener
         private string username; 
         private string passowrd; 
 
-        public SeleniumShortenLinks(ILoginPage loginPage, IQuickLinkPage quickLinkPage, IConfiguration configuration)
+        public SeleniumShortenLinks(ILoginPage loginPage, IQuickLinkPage quickLinkPage, IOptions<WordPressOptions> options)
         {
             this.loginPage = loginPage;
             this.quickLinkPage = quickLinkPage;
-            username = configuration["Authentication:BlogLogin"];
-            passowrd = configuration["Authentication:BlogPassword"];
+            username = options.Value.BlogLogin;
+            passowrd = options.Value.BlogPassword;
         }
         
 

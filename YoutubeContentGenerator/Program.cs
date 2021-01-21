@@ -1,32 +1,25 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using PocketSharp;
 using YoutubeContentGenerator.Blog;
-using YoutubeContentGenerator.DataExtractor;
 using YoutubeContentGenerator.Engine;
 using YoutubeContentGenerator.EpisodeGenerator;
-using YoutubeContentGenerator.ExtractDataFromFile;
 using YoutubeContentGenerator.LoadData;
-using YoutubeContentGenerator.LoadData.Pocket;
 using YoutubeContentGenerator.SeleniumLinkShortener;
 using YoutubeContentGenerator.Settings;
 using YoutubeContentGenerator.WeeklySummuryGenerator;
 
 namespace YoutubeContentGenerator
 {
-    class Program
+    public class Program
     {
-        public static IConfiguration Configuration { get; set; }
         
         public static async Task Main(string[] args)
         {
             Console.WriteLine("Starting");
-
 
             var host = CreateHostBuilder(args).Build();
             using (var serviceScope = host.Services.CreateScope())
@@ -57,8 +50,9 @@ namespace YoutubeContentGenerator
                     services.AddScoped<IYouTubeDescriptionGenerator, YouTubeDescriptionGenerator>();
                     
                     //Configs:
-                    services.Configure<AuthenticationOptions>(Configuration.GetSection(AuthenticationOptions.Authentication));
-                    services.Configure<DefaultsOptions>(Configuration.GetSection(DefaultsOptions.Defaults));
+                    services.Configure<WordPressOptions>(hostContext.Configuration.GetSection(WordPressOptions.WordPress));
+                    services.Configure<DefaultsOptions>(hostContext.Configuration.GetSection(DefaultsOptions.Defaults));
+                    services.Configure<PocketOptions>(hostContext.Configuration.GetSection(PocketOptions.Pocket));
 #if DUMMYLOADER 
                     services.AddScoped<ILoadData, DummyLoadData>();
 #else

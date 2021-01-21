@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using YCG.Models;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using WordPressPCL;
-using WordPressPCL.Client;
 using WordPressPCL.Models;
-using WordPressPCL.Utility;
+using YoutubeContentGenerator.Settings;
 
 namespace YoutubeContentGenerator.WeeklySummuryGenerator
 {
@@ -17,15 +16,17 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator
         private string username;
         private string passowrd;
         private string blogUrl;
+        private string category;
         private WordPressClient client;
 
 
-        public APIWeeklySummaryGenerator( ILogger<APIWeeklySummaryGenerator> logger, IConfiguration configuration)
+        public APIWeeklySummaryGenerator( ILogger<APIWeeklySummaryGenerator> logger, IOptions<WordPressOptions> options)
         {
             this.logger = logger;
-            username = configuration["Authentication:BlogLogin"];
-            passowrd = configuration["Authentication:BlogPassword"];
-            blogUrl =  $"{configuration["Authentication:BlogUrl"]}/wp-json/";
+            username = options.Value.BlogLogin;
+            passowrd = options.Value.BlogPassword;
+            category = options.Value.BlogCategoryName;
+            blogUrl =  $"{options.Value.BlogUrl}/wp-json/";
             client = new WordPressClient(blogUrl);
             client.AuthMethod = AuthMethod.JWTAuth;
             //todo wait
@@ -40,8 +41,8 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator
         public void Save()
         {
             var date = Dates.GetNextWeekSaturday();
-            
-            var result = client.Categories.GetAll().Result.Where(p=>p.Name == "ITea").First();
+            //todo to chyba tez trzeba wyciagnac do configa
+            var result = client.Categories.GetAll().Result.Where(p=>p.Name == category).First();
             
             var blogPost = new Post()
             {

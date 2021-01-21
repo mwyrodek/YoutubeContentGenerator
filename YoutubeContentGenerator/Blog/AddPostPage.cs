@@ -7,14 +7,16 @@ using System.Text;
 using System.Threading;
 using System.Windows;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using OpenQA.Selenium.Support.UI;
 using TextCopy;
+using YoutubeContentGenerator.Settings;
 
 namespace YoutubeContentGenerator.Blog
 {
     public class AddPostPage : PageBase, IAddPostPage
     {
-        public AddPostPage(IWebDriver Driver, IConfiguration configuration) : base(Driver,configuration)
+        public AddPostPage(IWebDriver Driver,  IOptions<WordPressOptions> options) : base(Driver,options)
         {
         }
 

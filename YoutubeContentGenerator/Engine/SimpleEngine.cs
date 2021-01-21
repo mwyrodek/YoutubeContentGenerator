@@ -2,9 +2,11 @@
 using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using YCG.Models;
 using YoutubeContentGenerator.EpisodeGenerator;
 using YoutubeContentGenerator.LoadData;
+using YoutubeContentGenerator.Settings;
 using YoutubeContentGenerator.WeeklySummuryGenerator;
 
 namespace YoutubeContentGenerator.Engine
@@ -17,18 +19,19 @@ namespace YoutubeContentGenerator.Engine
         private readonly IYouTubeDescriptionGenerator youTubeDescriptionGenerator;
         private readonly IWeeklySummaryGenerator summeryGenerator;
         private readonly ILoadData data;
-        private readonly IConfiguration configuration;
         private List<Episode> episodes;
+        private readonly DefaultsOptions options;
 
-        public SimpleEngine(ILogger<SimpleEngine> logger, ILinkShortener shortener, IYouTubeDescriptionGenerator youTubeDescriptionGenerator, IWeeklySummaryGenerator summeryGenerator, ILoadData data, IConfiguration configuration)
+        public SimpleEngine(ILogger<SimpleEngine> logger, ILinkShortener shortener, IYouTubeDescriptionGenerator youTubeDescriptionGenerator, IWeeklySummaryGenerator summeryGenerator, ILoadData data, IOptions<DefaultsOptions> options)
         {
             this.logger = logger;
             this.shortener = shortener;
             this.youTubeDescriptionGenerator = youTubeDescriptionGenerator;
             this.summeryGenerator = summeryGenerator;
             this.data = data;
-            this.configuration = configuration;
+            this.options = options.Value;
         }
+        
         public void LoadData()
         {
             episodes = data.Execute();
@@ -51,7 +54,7 @@ namespace YoutubeContentGenerator.Engine
         {
 
             int num = 0;
-            using (StreamReader sr = new StreamReader(configuration["Defaults:DefaultLastEpNumberFile"]))
+            using (StreamReader sr = new StreamReader(options.DefaultLastEpNumberFile))
             {
                 string line;
                 // Read and display lines from the file until the end of
@@ -76,7 +79,7 @@ namespace YoutubeContentGenerator.Engine
             logger.LogInformation("TEST RUN NO WRITE OPERATIONS PERFORMED");
             logger.LogInformation($"Pretending to update last ep number to {num}");
 #else
-            using (StreamWriter writer = new StreamWriter(configuration["Defaults:DefaultLastEpNumberFile"], false))
+            using (StreamWriter writer = new StreamWriter(options.DefaultLastEpNumberFile, false))
             {
                 writer.Write(num);
             }

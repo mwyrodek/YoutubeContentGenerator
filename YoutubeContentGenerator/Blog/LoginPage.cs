@@ -1,14 +1,16 @@
 using System.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using OpenQA.Selenium;
+using YoutubeContentGenerator.Settings;
 
 namespace YoutubeContentGenerator.Blog
 {
     public class LoginPage :PageBase, ILoginPage
     {
         private ILogger logger;
-        public LoginPage(IWebDriver driver, ILogger<LoginPage> logger, IConfiguration configuration) : base(driver,configuration)
+        public LoginPage(IWebDriver driver, ILogger<LoginPage> logger, IOptions<WordPressOptions> options) : base(driver,options)
         {
             this.logger = logger;
         }

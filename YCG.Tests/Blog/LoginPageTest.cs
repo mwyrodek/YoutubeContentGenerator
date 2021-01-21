@@ -1,10 +1,12 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using OpenQA.Selenium;
 using YoutubeContentGenerator.Blog;
+using YoutubeContentGenerator.Settings;
 
 namespace YCG.Tests.Blog
 {
@@ -12,7 +14,7 @@ namespace YCG.Tests.Blog
     {
         private Mock<IWebDriver> webDriverMock;
         private ILogger<LoginPage> logger;
-        private IConfiguration configuration;
+        private IOptions<WordPressOptions> options;
         
 
         [SetUp]
@@ -20,7 +22,7 @@ namespace YCG.Tests.Blog
         {
             webDriverMock = new Mock<IWebDriver>();
             logger = Mock.Of<ILogger<LoginPage>>();
-            configuration= Mock.Of<IConfiguration>();
+            options= Mock.Of<IOptions<WordPressOptions>>();
 
             //   logger.Setup(x => x.LogTrace(It.IsAny<string>()));
 
@@ -34,7 +36,7 @@ namespace YCG.Tests.Blog
 
 
             var webDriver = webDriverMock.Object;
-            var loginPage = new LoginPage(webDriver, logger, configuration);
+            var loginPage = new LoginPage(webDriver, logger, options);
             loginPage.GoTo();
             
             Assert.That(calls, Is.EqualTo(1));
@@ -60,7 +62,7 @@ namespace YCG.Tests.Blog
             
 
             var webDriver = webDriverMock.Object;
-            var loginPage = new LoginPage(webDriver, logger, configuration);
+            var loginPage = new LoginPage(webDriver, logger, options);
             loginPage.Login(login,password);
             
             Assert.That(callsLogin, Is.EqualTo(1));

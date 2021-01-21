@@ -3,7 +3,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Extensions.Options;
 using YCG.Models;
+using YoutubeContentGenerator.Settings;
 
 namespace YoutubeContentGenerator.LoadData.Pocket
 {
@@ -11,15 +13,19 @@ namespace YoutubeContentGenerator.LoadData.Pocket
     {
      //old categories
      //private List<string> tags = new List<string>{ "testing", "dev", "busisness", "joker" };
-        private List<string> tags = new List<string>{ "hard", "soft"};
+     //todo move it to config
+        private List<string> tags;
         private readonly ILogger logger;
-        private readonly IConfiguration configuration;
+        
         private readonly IPocketConector pocketConector;
+        private PocketOptions options;
 
-        public LoadDataFromPocket(ILogger<LoadDataFromPocket> logger, IConfiguration configuration, IPocketConector pocketConector)
+        public LoadDataFromPocket(ILogger<LoadDataFromPocket> logger, IOptions<PocketOptions> options, IPocketConector pocketConector)
         {
             this.logger = logger;
-            this.configuration = configuration;
+            this.options = options.Value; 
+            tags = options.Value.Tags;
+            
             this.pocketConector = pocketConector;
         }
 
@@ -42,7 +48,7 @@ namespace YoutubeContentGenerator.LoadData.Pocket
             return episode;
         }
 
-        //todo parametrise amount of episodes in season
+        
         /// <summary>
         /// lests asume season is week = 
         /// </summary>
@@ -50,7 +56,7 @@ namespace YoutubeContentGenerator.LoadData.Pocket
         private List<Episode> CreateSeason()
         {
             var list = new List<Episode>();
-            for (int i = 0; i < int.Parse(configuration["Defaults:SeasonLength"]); i++)
+            for (int i = 0; i < int.Parse(options.SeasonLength); i++)
             {
                 list.Add(CreateEpisode());
             }

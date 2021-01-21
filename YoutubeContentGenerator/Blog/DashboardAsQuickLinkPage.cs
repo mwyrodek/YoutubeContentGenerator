@@ -5,12 +5,14 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using YoutubeContentGenerator.Settings;
 
 namespace YoutubeContentGenerator.Blog
 {
     public class DashboardAsQuickLinkPage :PageBase, IQuickLinkPage
     {
-        public DashboardAsQuickLinkPage(IWebDriver driver, IConfiguration configuration) : base(driver,configuration)
+        public DashboardAsQuickLinkPage(IWebDriver driver, IOptions<WordPressOptions> options) : base(driver,options)
         {
         }
 
