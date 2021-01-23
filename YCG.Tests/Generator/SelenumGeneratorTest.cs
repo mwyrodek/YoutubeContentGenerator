@@ -31,7 +31,7 @@ namespace YCG.Tests.Generator
         [Test]
         public void SeleniumGenerator_LoginActionPErformed()
         {
-            var fixture = new Fixture().Customize(new AutoMoqCustomization());;
+            var fixture = new Fixture().Customize(new AutoMoqCustomization());
 
             var episodes = fixture.Create<List<Episode>>();
 
@@ -45,7 +45,7 @@ namespace YCG.Tests.Generator
         [Test]
         public void SeleniumGenerator_LoginGoToActionPErformed()
         {
-            var fixture = new Fixture().Customize(new AutoMoqCustomization());;
+            var fixture = new Fixture().Customize(new AutoMoqCustomization());
 
             var episodes = fixture.Create<List<Episode>>();
 

@@ -7,7 +7,6 @@ using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
 using YoutubeContentGenerator.Blog;
 using YoutubeContentGenerator.Settings;
-using ILogger = Castle.Core.Logging.ILogger;
 
 namespace YCG.Tests.Blog
 {

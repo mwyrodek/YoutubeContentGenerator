@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 using YCG.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -23,14 +24,20 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator
         public APIWeeklySummaryGenerator( ILogger<APIWeeklySummaryGenerator> logger, IOptions<WordPressOptions> options)
         {
             this.logger = logger;
-            username = options.Value.BlogLogin;
+           username = options.Value.BlogLogin;
             passowrd = options.Value.BlogPassword;
             category = options.Value.BlogCategoryName;
             blogUrl =  $"{options.Value.BlogUrl}/wp-json/";
+            
             client = new WordPressClient(blogUrl);
             client.AuthMethod = AuthMethod.JWTAuth;
             //todo wait
             client.RequestJWToken(username, passowrd);
+            logger.LogInformation($"Checking if token is valid {client.IsValidJWToken().Result}");
+            if (!client.IsValidJWToken().Result)
+            {
+                throw new AuthenticationException("Token is not valid");
+            }
         }
 
         public void CreateWeeklySummaryDescription(List<Episode> episodes)
@@ -42,6 +49,7 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator
         {
             var date = Dates.GetNextWeekSaturday();
             //todo to chyba tez trzeba wyciagnac do configa
+            
             var result = client.Categories.GetAll().Result.Where(p=>p.Name == category).First();
             
             var blogPost = new Post()
@@ -52,7 +60,11 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator
                 Date = date,
                 Categories = new []{result.Id}
             };
+#if !TEST            
             client.Posts.Create(blogPost);
+#else
+            logger.LogInformation("Test Run - pretending to save episode");            
+#endif
         }
     }
 }

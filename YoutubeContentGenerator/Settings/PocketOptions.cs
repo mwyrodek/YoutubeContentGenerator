@@ -9,6 +9,6 @@ namespace YoutubeContentGenerator.Settings
         public string CallbackUri { get; set; }
         public string PokectAccessCode { get; set; }
         public List<string> Tags { get; set; }
-        public string SeasonLength { get; set; }
+        public int SeasonLength { get; set; }
     }
 }
