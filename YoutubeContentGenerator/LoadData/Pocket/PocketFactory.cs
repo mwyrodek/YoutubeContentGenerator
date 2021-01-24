@@ -19,12 +19,12 @@ namespace YoutubeContentGenerator.LoadData.Pocket
             this.logger = logger;
             this.options = options.Value;
         }
-
-        //configuration["Authentication:BlogLogin"];
+        
         public IPocketClient CreatePocketClient()
         {
             try
             {
+                logger.LogTrace("Creating Pocket Client");
                 return new PocketClient(
                 consumerKey: options.PocketConsumerKey,
                 callbackUri: options.CallbackUri,
