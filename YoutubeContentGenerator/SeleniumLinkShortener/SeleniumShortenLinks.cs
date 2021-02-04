@@ -33,11 +33,14 @@ namespace YoutubeContentGenerator.SeleniumLinkShortener
 
         public List<Episode> ShortenAllLinks(List<Episode> episodes)
         {
+            logger.LogTrace("Loging to Wordpress");
             loginPage.GoTo();
             loginPage.Login(username, passowrd);
-
+            logger.LogTrace("user loged in goint to dashboard");
             quickLinkPage.GoTo();
-
+            logger.LogTrace("user on dashboard");
+            logger.LogTrace("Starting shortening links");
+            
             foreach (var episode in episodes)
             {
                 
@@ -49,6 +52,7 @@ namespace YoutubeContentGenerator.SeleniumLinkShortener
                     article.Link = addLink;
                 }
             }
+            logger.LogTrace("All links done");
             return episodes;
         }
     }
