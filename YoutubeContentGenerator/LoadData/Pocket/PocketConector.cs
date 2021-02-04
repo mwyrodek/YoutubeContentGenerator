@@ -17,13 +17,11 @@ namespace YoutubeContentGenerator.LoadData.Pocket
     {
        
        private readonly ILogger logger;
-       private readonly WordPressOptions options;
-        private readonly IPocketClient pocketClient;
+       private readonly IPocketClient pocketClient;
 
-        public PocketConector(ILogger<PocketConector> logger, IOptions<WordPressOptions> options, IPocketFactory pocketFactory)
+        public PocketConector(ILogger<PocketConector> logger, IPocketFactory pocketFactory)
         {
             this.logger = logger;
-            this.options = options.Value;
             this.pocketClient = pocketFactory.CreatePocketClient();
         }
 
@@ -35,7 +33,14 @@ namespace YoutubeContentGenerator.LoadData.Pocket
         {
             logger.LogDebug($"Starting downloading article for tag:{tag}");
             var items = pocketClient.Get(state: State.unread, tag: tag, sort: Sort.newest);
-            var item = items.Result.First();
+            items.Wait();
+            
+            var item = items.Result.FirstOrDefault();
+            if (item == null)
+            {
+                logger.LogWarning($"Tag {tag} has no more articles");
+                return null;
+            }
             var id = item.ID;
             logger.LogInformation($"Article ID :{id}");
             var article = PocketMapper.Map(item);

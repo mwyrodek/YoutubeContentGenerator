@@ -1,10 +1,8 @@
 using AutoFixture;
 using AutoFixture.AutoMoq;
-using AutoFixture.Kernel;
 using Microsoft.Extensions.Options;
 using Moq;
 using NUnit.Framework;
-using OpenQA.Selenium;
 using PocketSharp;
 using YoutubeContentGenerator.LoadData.Pocket;
 using YoutubeContentGenerator.Settings;

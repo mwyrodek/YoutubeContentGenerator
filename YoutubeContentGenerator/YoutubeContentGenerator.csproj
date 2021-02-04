@@ -32,7 +32,7 @@
       <PackageReference Include="PocketSharp" Version="5.0.0" />
       <PackageReference Include="Selenium.Support" Version="3.141.0" />
       <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-      <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="87.0.4280.2000" />
+      <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="88.0.4324.9600" />
       <PackageReference Include="TextCopy" Version="4.2.0" />
       <PackageReference Include="WordPressPCL" Version="1.8.4" />
     </ItemGroup>
