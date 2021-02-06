@@ -44,7 +44,8 @@ steps:
   inputs:
     command: 'test'
     projects: '**/*[Tt]ests/*.csproj'
-    arguments: '--collect "Code coverage"'''
+    arguments: '--configuration $(buildConfiguration) --collect "Code coverage" --setting CodeCoverage.runsettings'
+
 - task: SonarCloudAnalyze@1
 - task: SonarCloudPublish@1
   inputs:
