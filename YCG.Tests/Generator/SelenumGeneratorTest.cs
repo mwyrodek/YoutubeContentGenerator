@@ -17,7 +17,7 @@ namespace YCG.Tests.Generator
     public class SelenumGeneratorTest
     {
         private Mock<LoginPage> LoginMock;
-        private Mock<QuickLinkPage> QLPMock;
+        private Mock<IQuickLinkPage> QLPMock;
         private SeleniumShortenLinks _sut; 
 
         [SetUp]
@@ -25,7 +25,7 @@ namespace YCG.Tests.Generator
         {
             LoginMock = new Mock<LoginPage>();
             
-            QLPMock = new Mock<QuickLinkPage>();
+            QLPMock = new Mock<IQuickLinkPage>();
         }
 
         [Test]
