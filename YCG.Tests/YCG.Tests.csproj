@@ -30,10 +30,4 @@
       <Folder Include="Pocket\" />
     </ItemGroup>
 
-    <ItemGroup>
-      <None Update="credentials.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
 </Project>
