@@ -6,6 +6,8 @@
         <IsPackable>false</IsPackable>
 
         <Configurations>Debug;Release;TestRun;DummyLoader;TestShortener;TestDesc;TestShortener-Summary</Configurations>
+
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
     </PropertyGroup>
 
     <ItemGroup>

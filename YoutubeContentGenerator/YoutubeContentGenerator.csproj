@@ -4,6 +4,7 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <Configurations>Debug;Release;TestRun;TestLoader;TestShortener;TestDesc;TestShortener-Summary</Configurations>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestRun|AnyCPU'">
