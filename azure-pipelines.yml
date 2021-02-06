@@ -15,11 +15,20 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'Sonar'
+    organization: 'maciejwyrodek'
+    scannerMode: 'MSBuild'
+    projectKey: 'maciejwyrodek_YoutubeContentGenerator'
+    projectName: 'YoutubeContentGenerator'
 
 - task: VSBuild@1
   inputs:
@@ -32,3 +41,8 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: SonarCloudAnalyze@1
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
