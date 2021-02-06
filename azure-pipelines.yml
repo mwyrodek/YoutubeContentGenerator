@@ -40,20 +40,10 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
+- task: DotNetCoreCLI@2
   inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\*test*.dll
-      **\*Test*.dll
-      !**\*TestAdapter.dll
-      !**\obj\**
-    searchFolder: '$(System.DefaultWorkingDirectory)'
-    vsTestVersion: '16.0'
-    otherConsoleOptions: '/Framework:.NETCoreApp,Version=v3.1'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
+    command: 'test'
+    projects: '**/*[Tt]ests/*.csproj'
 - task: SonarCloudAnalyze@1
 - task: SonarCloudPublish@1
   inputs:
