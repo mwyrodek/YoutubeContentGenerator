@@ -1,7 +1,8 @@
-﻿using System;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace YCG.Models
 {
+    [ExcludeFromCodeCoverage]
     public class Article
     {
         public string Title { get; set; }

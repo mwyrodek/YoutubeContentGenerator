@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace YCG.Models
 {
+    [ExcludeFromCodeCoverage]
     public class Episode
     {
         public Episode()

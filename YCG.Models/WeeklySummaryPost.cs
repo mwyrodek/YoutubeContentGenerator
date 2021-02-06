@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace YCG.Models
 {
+    [ExcludeFromCodeCoverage]
     public class WeeklySummaryPost
     {
         public string Title { get; set; }

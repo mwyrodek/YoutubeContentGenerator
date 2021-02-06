@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using YCG.Models;
 
 namespace YoutubeContentGenerator.LoadData
 {
+    [ExcludeFromCodeCoverage]
     public class DummyLoadData : ILoadData
     {
         int episodeCount = 1;

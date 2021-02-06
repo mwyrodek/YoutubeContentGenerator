@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using YCG.Models;
 
 namespace YoutubeContentGenerator.WeeklySummuryGenerator
 {
+    [ExcludeFromCodeCoverage]
     public class DummuWeeklySummaryGenerator : IWeeklySummaryGenerator
     {
         public void CreateWeeklySummaryDescription(List<Episode> episodes)
