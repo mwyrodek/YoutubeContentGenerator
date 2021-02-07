@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenQA.Selenium;
@@ -12,6 +13,7 @@ using YoutubeContentGenerator.LoadData.Pocket;
 using YoutubeContentGenerator.SeleniumLinkShortener;
 using YoutubeContentGenerator.Settings;
 using YoutubeContentGenerator.WeeklySummuryGenerator;
+using YoutubeContentGenerator.WeeklySummuryGenerator.WordPressWrapper;
 
 namespace YoutubeContentGenerator
 {
@@ -76,16 +78,14 @@ namespace YoutubeContentGenerator
 #else
                     services.AddScoped<ILinkShortener, SeleniumShortenLinks>();
                     services.AddScoped<IQuickLinkPage, DashboardAsQuickLinkPage>();
-                    // services.AddScoped<IQuickLinkPage, QuickLinkPage>();
 #endif
 
                     
 #if DUMMYSUMMARY
                     services.AddScoped<IWeeklySummaryGenerator, WeeklySummuryGenerator.DummuWeeklySummaryGenerator>();
 #else
-                    //services.AddScoped<IWeeklySummeryGenerator, WeeklySummuryGenerator.WeeklySummeryGeneratorTxt>();
-//                    services.AddScoped<IWeeklySummaryGenerator, WeeklySummuryGenerator.SeleniumWeeklySummaryGenerator>();
-//                    services.AddScoped<IAddPostPage, AddPostPage>();
+
+                    services.AddScoped<IWordPressClientWrapper, WordPressClientWrapper>();
                     services.AddScoped<IWeeklySummaryGenerator, WeeklySummuryGenerator.APIWeeklySummaryGenerator>();
 #endif
 #if !DUMMYSUMMARY || !DUMMYSHORTENER
