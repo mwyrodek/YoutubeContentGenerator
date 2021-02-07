@@ -59,11 +59,6 @@ namespace YoutubeContentGenerator
 #if DUMMYLOADER 
                     services.AddScoped<ILoadData, DummyLoadData>();
 #else
-                    /*
-                    services.AddScoped<ILoadData, LoadDataFromXmind>();
-                    services.AddScoped<ITransformData, TransformXmindData>();
-                    services.AddScoped<IExctrectFromArchive, ExtractFromZipArchive>();
-                    */
                     services.AddScoped<ILoadData, LoadDataFromPocket>();
                     services.AddScoped<IPocketFactory, PocketFactory>();
                     services.AddScoped<IPocketConector, PocketConector>();

@@ -4,6 +4,5 @@ namespace YoutubeContentGenerator.Blog
     {
         public IQuickLinkPage GoTo();
         public string AddLink(string url);
-        void DealWithPopUP();
     }
 }

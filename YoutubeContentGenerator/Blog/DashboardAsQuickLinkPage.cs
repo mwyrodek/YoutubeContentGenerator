@@ -30,12 +30,7 @@ namespace YoutubeContentGenerator.Blog
             return $"{BaseUrl}/{link}";
             
         }
-
-        public void DealWithPopUP()
-        {
-            
-            throw new NotSupportedException("noPopuponDashboard");
-        }
+        
 
         public IQuickLinkPage GoTo()
         {
