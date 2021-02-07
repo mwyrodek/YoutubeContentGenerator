@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace YoutubeContentGenerator.Settings
 {
+    [ExcludeFromCodeCoverage]
     public class WordPressOptions
     {
         public const string WordPress = "WordPress";

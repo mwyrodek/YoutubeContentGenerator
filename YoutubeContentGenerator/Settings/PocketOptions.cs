@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace YoutubeContentGenerator.Settings
 {
+    [ExcludeFromCodeCoverage]
     public class PocketOptions
     {
         public const string Pocket = "Pocket";

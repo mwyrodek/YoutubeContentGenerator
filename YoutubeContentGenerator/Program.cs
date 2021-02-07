@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ using YoutubeContentGenerator.WeeklySummuryGenerator.WordPressWrapper;
 
 namespace YoutubeContentGenerator
 {
+    [ExcludeFromCodeCoverage]
     public class Program
     {
         

@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace YoutubeContentGenerator.Settings
 {
+    [ExcludeFromCodeCoverage]
     public class DefaultsOptions    {
         public const string Defaults = "Defaults";
         public string DefaultDesciriptionLocation { get; set; } 
