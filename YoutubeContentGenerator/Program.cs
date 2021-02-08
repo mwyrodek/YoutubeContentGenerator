@@ -52,6 +52,7 @@ namespace YoutubeContentGenerator
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddTransient<ContentGenerator>();
+                    services.AddScoped<IEpisodeNumberHelper, EpisodeNumberHelperFromTextFile>();
                     services.AddScoped<IYouTubeDescriptionGenerator, YouTubeDescriptionGenerator>();
                     
                     //Configs:

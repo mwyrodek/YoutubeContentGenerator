@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -9,6 +10,7 @@ using YoutubeContentGenerator.LoadData;
 using YoutubeContentGenerator.Settings;
 using YoutubeContentGenerator.WeeklySummuryGenerator;
 
+[assembly:InternalsVisibleTo("YCG.Tests")]
 namespace YoutubeContentGenerator.Engine
 {
     public class SimpleEngine : IEngine
@@ -19,10 +21,11 @@ namespace YoutubeContentGenerator.Engine
         private readonly IYouTubeDescriptionGenerator youTubeDescriptionGenerator;
         private readonly IWeeklySummaryGenerator summeryGenerator;
         private readonly ILoadData data;
-        private List<Episode> episodes;
+        private readonly IEpisodeNumberHelper episodeNumberHelper;
+        internal List<Episode> episodes { get; private set; }
         private readonly DefaultsOptions options;
 
-        public SimpleEngine(ILogger<SimpleEngine> logger, ILinkShortener shortener, IYouTubeDescriptionGenerator youTubeDescriptionGenerator, IWeeklySummaryGenerator summeryGenerator, ILoadData data, IOptions<DefaultsOptions> options)
+        public SimpleEngine(ILogger<SimpleEngine> logger, ILinkShortener shortener, IYouTubeDescriptionGenerator youTubeDescriptionGenerator, IWeeklySummaryGenerator summeryGenerator, ILoadData data, IOptions<DefaultsOptions> options, IEpisodeNumberHelper episodeNumberHelper)
         {
             this.logger = logger;
             this.shortener = shortener;
@@ -30,6 +33,7 @@ namespace YoutubeContentGenerator.Engine
             this.summeryGenerator = summeryGenerator;
             this.data = data;
             this.options = options.Value;
+            this.episodeNumberHelper = episodeNumberHelper;
         }
         
         public void LoadData()
@@ -50,20 +54,12 @@ namespace YoutubeContentGenerator.Engine
         }
 
         //todo move it to file updater
+        //todo i don't know what this method does anymore and i am afraid to move it
         private void UpdateNumbers()
         {
 
-            int num = 0;
-            using (StreamReader sr = new StreamReader(options.DefaultLastEpNumberFile))
-            {
-                string line;
-                // Read and display lines from the file until the end of
-                // the file is reached.
-                while ((line = sr.ReadLine()) != null)
-                {
-                    num = int.Parse(line);
-                }
-            }
+            int num = episodeNumberHelper.GetLastEpisodeNumber();
+
             if(num==0)
             {
                 logger.LogError("Last ep file is empty");
@@ -79,10 +75,7 @@ namespace YoutubeContentGenerator.Engine
             logger.LogInformation("TEST RUN NO WRITE OPERATIONS PERFORMED");
             logger.LogInformation($"Pretending to update last ep number to {num}");
 #else
-            using (StreamWriter writer = new StreamWriter(options.DefaultLastEpNumberFile, false))
-            {
-                writer.Write(num);
-            }
+            episodeNumberHelper.UpdateLastEpisodeNumber(num);
 #endif
         }
 
