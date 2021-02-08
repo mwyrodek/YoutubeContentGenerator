@@ -5,19 +5,25 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator
 {
     public static class Dates
     {
-        public static int GetNextWeekNumber()
+        public static int GetNextWeekNumber(this DateTime date)
         {
             CultureInfo myCI = new CultureInfo("pl-PL");
-            DateTime date = DateTime.UtcNow;
             Calendar myCal = myCI.Calendar;
-            var nextNextweek = date.AddDays(7);
-            return myCal.GetWeekOfYear(nextNextweek, myCI.DateTimeFormat.CalendarWeekRule, myCI.DateTimeFormat.FirstDayOfWeek);
+            var nextWeek = date.AddDays(7);
+            return myCal.GetWeekOfYear(nextWeek, myCI.DateTimeFormat.CalendarWeekRule, myCI.DateTimeFormat.FirstDayOfWeek);
         }
 
-        public static DateTime GetNextWeekSaturday()
+        public static DateTime GetNextWeekSaturday(this DateTime date)
         {
-            var date = DateTime.UtcNow;
-            return  date.Next(DayOfWeek.Saturday).AddDays(7);
+            switch (date.DayOfWeek)
+            {
+                case DayOfWeek.Saturday:
+                    return date.AddDays(7);
+                case DayOfWeek.Sunday:
+                    return date.AddDays(6);
+                default:
+                    return  date.Next(DayOfWeek.Saturday).AddDays(7);
+            }
         }
         
         //stolen from https://stackoverflow.com/a/7611480

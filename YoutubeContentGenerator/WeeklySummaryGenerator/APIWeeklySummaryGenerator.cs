@@ -52,7 +52,7 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator
                 return;
             }
 
-            var date = Dates.GetNextWeekSaturday();
+            var date = DateTime.UtcNow.GetNextWeekSaturday();
             logger.LogTrace($"Scheduling post for {date}");
 
 #if !TEST

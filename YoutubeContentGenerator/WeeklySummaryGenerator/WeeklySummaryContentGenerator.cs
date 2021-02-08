@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using YCG.Models;
 
@@ -8,7 +9,7 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator
     {
         
         private static string builtContent;
-        private static string tittle = $"ITea Morning – Links of the week {Dates.GetNextWeekNumber()}";
+        private static string tittle = $"ITea Morning – Links of the week {DateTime.UtcNow.GetNextWeekNumber()}";
         private static  string Foreword = @$"
 On my YouTube channel I have a project called “[ITea Morning](https://youtube.com/c/ITeaMorning)”.
 The idea is to make daily short videos with few links to articles for audience to read to morning tea or coffee.
