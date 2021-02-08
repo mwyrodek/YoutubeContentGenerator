@@ -10,14 +10,14 @@ using NUnit.Framework.Internal;
 using OpenQA.Selenium;
 using YoutubeContentGenerator.Blog;
 using YoutubeContentGenerator.Settings;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace YCG.Tests.Blog
 {
     public class LoginPageTest
     {
         private Mock<IWebDriver> webDriverMock;
-        private ILogger<LoginPage> logger;
-        private IOptions<WordPressOptions> options;
+
         private IFixture fixture;
 
         [SetUp]
@@ -32,10 +32,6 @@ namespace YCG.Tests.Blog
         [Test]
         public void GoTo_Calls_Navigate()
         {
-
-
-
-
             var loginPage = fixture.Create<LoginPage>();
             loginPage.GoTo();
             
@@ -43,37 +39,103 @@ namespace YCG.Tests.Blog
         }
         
         //todo brokentest - needs fixing
-        // [Test]
-        // public void Login()
-        // {
-        //     string login = "log";
-        //     string password = "pas";
-        //     var callsLogin = 0;
-        //     var callsPassword = 0;
-        //     var callsClick = 0;
-        //     var webElementLogin= new Mock<IWebElement>();
-        //     var webElementPassword= new Mock<IWebElement>();
-        //     var webElementButton = new Mock<IWebElement>();
-        //
-        //
-        //     webElementLogin.Setup(element => element.SendKeys(login)).Callback(()=>callsLogin++);
-        //     webElementPassword.Setup(element => element.SendKeys(password)).Callback(()=>callsPassword++);
-        //     webElementButton.Setup(element => element.Click()).Callback(()=>callsClick++);
-        //     webDriverMock.SetupSequence(driver => driver.FindElement(It.IsAny<By>())).Returns(webElementLogin.Object).Returns(webElementPassword.Object).Returns(webElementButton.Object);
-        //     webDriverMock.SetupProperty(d => d.Manage().Timeouts().ImplicitWait, TimeSpan.Zero);
-        //     //webDriverMock.SetupAllProperties();
-        //
-        //     var webDriver = webDriverMock.Object;
-        //     var loginPage = new LoginPage(webDriver, logger, options);
-        //     loginPage.Login(login,password);
-        //     
-        //     Assert.That(callsLogin, Is.EqualTo(1));
-        //     Assert.That(callsPassword, Is.EqualTo(1));
-        //     Assert.That(callsClick, Is.EqualTo(1));
-        // }
+        [Test]
+        public void HappyPath_Login()
+        {
+            string login = "log";
+            string password = "pas";
+            var callsLogin = 0;
+            var callsPassword = 0;
+            var callsClick = 0;
+            var anyWebElement= new Mock<IWebElement>();
+            var loggerMock = new Mock<ILogger<LoginPage>>();
         
+            var wpOptions = new WordPressOptions();
+            wpOptions.BlogUrl = "testurl.com";
+                
+            var optionsMock = new Mock<IOptions<WordPressOptions>>();
+            optionsMock.Setup(ap => ap.Value).Returns(wpOptions);
+            webDriverMock.Setup(wd => wd.Url).Returns("wp-login");
+            anyWebElement.SetupSequence(element => element.SendKeys(login)).Pass().Throws<NoSuchElementException>();
+            anyWebElement.Setup(element => element.SendKeys(password)).Callback(()=>callsPassword++);
+            anyWebElement.Setup(element => element.Click()).Callback(()=>callsClick++);
+            webDriverMock.Setup(driver => driver.FindElement(It.IsAny<By>())).Returns(anyWebElement.Object);
+            webDriverMock.SetupProperty(d => d.Manage().Timeouts().ImplicitWait, TimeSpan.Zero);
+            
         
+            var webDriver = webDriverMock.Object;
+            var loginPage = new LoginPage(webDriver, loggerMock.Object, optionsMock.Object);
+            loginPage.Login(login,password);
+            
+            Assert.That(callsPassword, Is.EqualTo(1));
+            Assert.That(callsClick, Is.EqualTo(1));
+        }
         
+        [Test]
+        public void HappyPath_NeededRe_Login()
+        {
+            string login = "log";
+            string password = "pas";
+            var callsLogin = 0;
+            var callsPassword = 0;
+            var callsClick = 0;
+            var anyWebElement= new Mock<IWebElement>();
+            var loggerMock = new Mock<ILogger<LoginPage>>();
         
+            var wpOptions = new WordPressOptions();
+            wpOptions.BlogUrl = "testurl.com";
+                
+            var optionsMock = new Mock<IOptions<WordPressOptions>>();
+            optionsMock.Setup(ap => ap.Value).Returns(wpOptions);
+            webDriverMock.Setup(wd => wd.Url).Returns("wp-login");
+            anyWebElement.Setup(element => element.SendKeys(login)).Callback(()=>callsLogin++);
+            anyWebElement.Setup(element => element.SendKeys(password)).Callback(()=>callsPassword++);
+            anyWebElement.Setup(element => element.Click()).Callback(()=>callsClick++);
+            webDriverMock.Setup(driver => driver.FindElement(It.IsAny<By>())).Returns(anyWebElement.Object);
+            webDriverMock.SetupProperty(d => d.Manage().Timeouts().ImplicitWait, TimeSpan.Zero);
+            
+        
+            var webDriver = webDriverMock.Object;
+            var loginPage = new LoginPage(webDriver, loggerMock.Object, optionsMock.Object);
+            loginPage.Login(login,password);
+            
+            Assert.That(callsLogin, Is.EqualTo(2));
+            Assert.That(callsPassword, Is.EqualTo(2));
+            Assert.That(callsClick, Is.EqualTo(2));
+        }
+        
+                
+        [Test]
+        public void HappyPath_AlreadyLogged()
+        {
+            string login = "log";
+            string password = "pas";
+            var callsLogin = 0;
+            var callsPassword = 0;
+            var callsClick = 0;
+            var anyWebElement= new Mock<IWebElement>();
+            var loggerMock = new Mock<ILogger<LoginPage>>();
+        
+            var wpOptions = new WordPressOptions();
+            wpOptions.BlogUrl = "testurl.com";
+                
+            var optionsMock = new Mock<IOptions<WordPressOptions>>();
+            optionsMock.Setup(ap => ap.Value).Returns(wpOptions);
+            webDriverMock.Setup(wd => wd.Url).Returns(String.Empty);
+            anyWebElement.Setup(element => element.SendKeys(login)).Callback(()=>callsLogin++);
+            anyWebElement.Setup(element => element.SendKeys(password)).Callback(()=>callsPassword++);
+            anyWebElement.Setup(element => element.Click()).Callback(()=>callsClick++);
+            webDriverMock.Setup(driver => driver.FindElement(It.IsAny<By>())).Returns(anyWebElement.Object);
+            webDriverMock.SetupProperty(d => d.Manage().Timeouts().ImplicitWait, TimeSpan.Zero);
+            
+        
+            var webDriver = webDriverMock.Object;
+            var loginPage = new LoginPage(webDriver, loggerMock.Object, optionsMock.Object);
+            loginPage.Login(login,password);
+            
+            Assert.That(callsLogin, Is.EqualTo(0));
+            Assert.That(callsPassword, Is.EqualTo(0));
+            Assert.That(callsClick, Is.EqualTo(0));
+        }
     }
 }

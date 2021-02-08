@@ -26,22 +26,7 @@ namespace YoutubeContentGenerator.Blog
             Thread.Sleep(500);
             return this;
         }
-
-        public bool IsUserLogedIn()
-        {
-            var url = $"{BaseUrl}/wp-admin/index.php";
-            Driver.Navigate().GoToUrl(url);
-            try
-            {
-                Driver.FindElement(By.Id("title-wrap"));
-            }
-            catch
-            {
-                return false;
-            }
-            return true;
-        }
-
+        
         public ILoginPage Login(string user, string password)
         {
             if(!Driver.Url.Contains("wp-login"))

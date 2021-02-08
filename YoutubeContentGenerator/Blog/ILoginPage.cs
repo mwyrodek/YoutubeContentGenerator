@@ -4,6 +4,5 @@ namespace YoutubeContentGenerator.Blog
     {
         public ILoginPage GoTo();
         public ILoginPage Login(string user, string password);
-        public bool IsUserLogedIn();
     }
 }
