@@ -7,8 +7,8 @@ namespace YoutubeContentGenerator.Engine
 {
     public class EpisodeNumberHelperFromTextFile : IEpisodeNumberHelper
     {
-        private ILogger<EpisodeNumberHelperFromTextFile> logger;
-        private IOptions<DefaultsOptions> options;
+        private readonly ILogger<EpisodeNumberHelperFromTextFile> logger;
+        private readonly IOptions<DefaultsOptions> options;
         public EpisodeNumberHelperFromTextFile(ILogger<EpisodeNumberHelperFromTextFile> logger, IOptions<DefaultsOptions> options)
         {
             this.logger=logger;
@@ -16,7 +16,8 @@ namespace YoutubeContentGenerator.Engine
         }
         public int GetLastEpisodeNumber()
         {
-            int num = 0;
+            var num = 0;
+            logger.LogTrace($"reading from file {options.Value.DefaultLastEpNumberFile}");
             using (StreamReader sr = new StreamReader(options.Value.DefaultLastEpNumberFile))
             {
                 string line;
@@ -27,16 +28,18 @@ namespace YoutubeContentGenerator.Engine
                     num = int.Parse(line);
                 }
             }
-
+            logger.LogTrace($"Number {num} read from file.");
             return num;
         }
 
         public void UpdateLastEpisodeNumber(int number)
         {
+            logger.LogTrace($"Saving new number to file");
             using (StreamWriter writer = new StreamWriter(options.Value.DefaultLastEpNumberFile, false))
             {
                 writer.Write(number);
             }
+            logger.LogTrace($"Number saved");
         }
     }
 }

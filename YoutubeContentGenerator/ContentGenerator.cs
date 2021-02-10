@@ -41,6 +41,7 @@ namespace YoutubeContentGenerator
             this.logger.LogTrace("Starting Week Summary Generation");
             this.engine.GenerateWeekSummary();
              this.logger.LogTrace("Done Week Summary Generation");
+             await Task.FromResult(0);
         }
         
     }
