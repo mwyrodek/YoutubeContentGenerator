@@ -9,7 +9,7 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator
     {
         
         private static string builtContent;
-        private static readonly string tittle = $"ITea Morning – Links of the week {DateTime.UtcNow.GetNextWeekNumber()}";
+        private static readonly string Title = $"ITea Morning – Links of the week {DateTime.UtcNow.GetNextWeekNumber()}";
         private static readonly string Foreword = @$"
 On my YouTube channel I have a project called “[ITea Morning](https://youtube.com/c/ITeaMorning)”.
 The idea is to make daily short videos with few links to articles for audience to read to morning tea or coffee.
@@ -19,10 +19,9 @@ Since my channel is in polish for your conviniece I am [weekly sharing here](htt
 Now Let’s drink our ITea!
 ";
 
-        private static readonly string TitleLine = "## ITea Morning #";
+        private const string TitleLine = "## ITea Morning #";
 
-        private static readonly string footer = "That is all for today see you next week!";
-
+        private const string Footer = "That is all for today see you next week!";
 
 
         public static WeeklySummaryPost CreateWeeklySummaryContent(List<Episode> episodes)
@@ -30,7 +29,7 @@ Now Let’s drink our ITea!
             StringBuilder content = new StringBuilder();
 
             var post = new WeeklySummaryPost();
-            post.Title = tittle;
+            post.Title = Title;
         content.AppendLine(Foreword);
             foreach (var episode in episodes)
             {
@@ -42,7 +41,7 @@ Now Let’s drink our ITea!
 
                 content.AppendLine();
             }
-            content.AppendLine(footer);
+            content.AppendLine(Footer);
             builtContent = content.ToString();
             post.Body = builtContent;
 
