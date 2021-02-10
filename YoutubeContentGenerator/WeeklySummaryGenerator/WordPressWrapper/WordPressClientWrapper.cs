@@ -17,7 +17,7 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator.WordPressWrapper
     public class WordPressClientWrapper : IWordPressClientWrapper
     {
         private WordPressClient client;
-        private ILogger logger;
+        private readonly ILogger logger;
         public WordPressClientWrapper(ILogger<WordPressClientWrapper> logger)
         {
             this.logger = logger;
@@ -67,7 +67,7 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator.WordPressWrapper
             logger.LogTrace($"geting wordpress category with name {category}");
             var task = client.Categories.GetAll();
             task.Wait();
-            return task.Result.Where(p=>p.Name == category).First();
+            return task.Result.First(p=>p.Name == category);
         }
     }
 }

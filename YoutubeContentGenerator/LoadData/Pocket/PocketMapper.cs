@@ -7,7 +7,7 @@ using YCG.Models;
 
 namespace YoutubeContentGenerator.LoadData.Pocket
 {
-    public class PocketMapper
+    public static class PocketMapper
     {
         public static Article Map(PocketItem item)
         {

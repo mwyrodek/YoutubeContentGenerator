@@ -9,7 +9,6 @@ namespace YoutubeContentGenerator.LoadData
     [ExcludeFromCodeCoverage]
     public class DummyLoadData : ILoadData
     {
-        int episodeCount = 1;
         public List<Episode> Execute()
         {
             var list = new List<Episode>();

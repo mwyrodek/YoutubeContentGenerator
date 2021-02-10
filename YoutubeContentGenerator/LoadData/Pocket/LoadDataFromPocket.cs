@@ -15,16 +15,16 @@ namespace YoutubeContentGenerator.LoadData.Pocket
         private readonly List<string> tags;
         private readonly ILogger logger;
         
-        private readonly IPocketConector pocketConector;
+        private readonly IPocketConector pocketConnector;
         private readonly PocketOptions options;
 
-        public LoadDataFromPocket(ILogger<LoadDataFromPocket> logger, IOptions<PocketOptions> options, IPocketConector pocketConector)
+        public LoadDataFromPocket(ILogger<LoadDataFromPocket> logger, IOptions<PocketOptions> options, IPocketConector pocketConnector)
         {
             this.logger = logger;
             this.options = options.Value; 
             tags = options.Value.Tags;
             
-            this.pocketConector = pocketConector;
+            this.pocketConnector = pocketConnector;
         }
 
         public List<Episode> Execute()
@@ -36,12 +36,13 @@ namespace YoutubeContentGenerator.LoadData.Pocket
 
         private void ValidateTags()
         {
-            if(tags.Count<1) throw new ArgumentOutOfRangeException("At least one Tag is required");
+            
+            if(tags.Count<1) throw new ArgumentOutOfRangeException(nameof(tags),"At least one Tag is required");
         }
 
         private void ValidateSeasonLength()
         {
-            if (options.SeasonLength <= 0) throw new ArgumentOutOfRangeException("Season Leangth has to be greater than 0");
+            if (options.SeasonLength <= 0) throw new ArgumentOutOfRangeException(nameof(options.SeasonLength),"Season Length has to be greater than 0");
         }
 
         private Episode CreateEpisode()
@@ -50,7 +51,7 @@ namespace YoutubeContentGenerator.LoadData.Pocket
             var episode =new Episode();
             foreach (var tag in tags)
             {
-                    var article = pocketConector.MoveArticleFromPocketByTag(tag);
+                    var article = pocketConnector.MoveArticleFromPocketByTag(tag);
                     if (article != null)//todo make sure if realy is null 
                     {
                         episode.Articles.Add(article);    
