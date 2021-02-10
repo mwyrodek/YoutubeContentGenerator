@@ -75,7 +75,7 @@ namespace YoutubeContentGenerator
 #if DUMMYSHORTENER
                     services.AddScoped<ILinkShortener, DummyShortener>();
 #else
-                    services.AddScoped<ILinkShortener, SeleniumShortenLinks>();
+                    services.AddScoped<ILinkShortener, SeleniumLinkShortener.SeleniumLinkShortener>();
                     services.AddScoped<IQuickLinkPage, DashboardAsQuickLinkPage>();
 #endif
 

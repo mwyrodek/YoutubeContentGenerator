@@ -18,7 +18,7 @@ namespace YCG.Tests.Generator
     {
         private Mock<LoginPage> LoginMock;
         private Mock<IQuickLinkPage> QLPMock;
-        private SeleniumShortenLinks _sut; 
+        private SeleniumLinkShortener _sut; 
 
         [SetUp]
         public void Setup()
@@ -36,7 +36,7 @@ namespace YCG.Tests.Generator
             var episodes = fixture.Create<List<Episode>>();
 
             var mockLoginPage = fixture.Freeze<Mock<ILoginPage>>();
-            _sut = fixture.Create<SeleniumShortenLinks>();
+            _sut = fixture.Create<SeleniumLinkShortener>();
             _sut.ShortenAllLinks(episodes);
             mockLoginPage.Verify(m=>m.Login(It.IsAny<string>(),It.IsAny<string>()));
 
@@ -50,7 +50,7 @@ namespace YCG.Tests.Generator
             var episodes = fixture.Create<List<Episode>>();
 
             var mockLoginPage = fixture.Freeze<Mock<ILoginPage>>();
-            _sut = fixture.Create<SeleniumShortenLinks>();
+            _sut = fixture.Create<SeleniumLinkShortener>();
             _sut.ShortenAllLinks(episodes);
             mockLoginPage.Verify(m=>m.GoTo());
         }
@@ -77,7 +77,7 @@ namespace YCG.Tests.Generator
             mock.Setup(s=>s.AddLink(It.IsAny<string>())).Returns(test);
             fixture.Inject(mock);
                 
-            _sut = fixture.Create<SeleniumShortenLinks>();
+            _sut = fixture.Create<SeleniumLinkShortener>();
             var shortenAllLinks = _sut.ShortenAllLinks(episodes);
             mock.Verify(m=>m.GoTo());
             
@@ -97,7 +97,7 @@ namespace YCG.Tests.Generator
             mock.Setup(s=>s.AddLink(It.IsAny<string>())).Returns(test);
             fixture.Inject(mock);
                 
-            _sut = fixture.Create<SeleniumShortenLinks>();
+            _sut = fixture.Create<SeleniumLinkShortener>();
             var shortenAllLinks = _sut.ShortenAllLinks(episodes);
             mock.Verify(m=>m.GoTo());
             var articles = shortenAllLinks.SelectMany(episodes => episodes.Articles);

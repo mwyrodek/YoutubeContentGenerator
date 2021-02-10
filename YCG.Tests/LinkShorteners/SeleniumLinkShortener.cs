@@ -23,7 +23,7 @@ namespace YCG.Tests.LinkShorteners
         //translates link for each episode and article
         //negative paths
         
-        private SeleniumShortenLinks sut;
+        private YoutubeContentGenerator.SeleniumLinkShortener.SeleniumLinkShortener sut;
         private Mock<IQuickLinkPage> mockQuickPage;
         private Mock<ILoginPage> mockLoginPage;
         private IFixture fixture;
@@ -42,7 +42,7 @@ namespace YCG.Tests.LinkShorteners
         public void HappyPath_UserLogsIn()
         {
             var episode = fixture.Create<List<Episode>>();
-            sut = fixture.Create<SeleniumShortenLinks>();
+            sut = fixture.Create<YoutubeContentGenerator.SeleniumLinkShortener.SeleniumLinkShortener>();
             sut.ShortenAllLinks(episode);
             mockLoginPage.Verify(lp=>lp.GoTo());
             mockLoginPage.Verify(lp=>lp.Login(It.IsAny<string>(),It.IsAny<string>()));
@@ -52,7 +52,7 @@ namespace YCG.Tests.LinkShorteners
         public void HappyPath_EpisodesAreChanged()
         {
             var episode = fixture.Create<List<Episode>>();
-            sut = fixture.Create<SeleniumShortenLinks>();
+            sut = fixture.Create<YoutubeContentGenerator.SeleniumLinkShortener.SeleniumLinkShortener>();
             var actualEpisode =sut.ShortenAllLinks(episode);
             mockLoginPage.Verify(lp=>lp.GoTo());
             mockLoginPage.Verify(lp=>lp.Login(It.IsAny<string>(),It.IsAny<string>()));
@@ -65,7 +65,7 @@ namespace YCG.Tests.LinkShorteners
         public void HappyPath_GoesToQuickPageAfterEveryCase()
         {
             var episode = fixture.Create<List<Episode>>();
-            sut = fixture.Create<SeleniumShortenLinks>();
+            sut = fixture.Create<YoutubeContentGenerator.SeleniumLinkShortener.SeleniumLinkShortener>();
             sut.ShortenAllLinks(episode);
             
             var count = episode.SelectMany(d => d.Articles).Count();

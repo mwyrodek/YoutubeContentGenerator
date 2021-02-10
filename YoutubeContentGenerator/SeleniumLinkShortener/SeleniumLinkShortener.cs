@@ -11,32 +11,32 @@ using YoutubeContentGenerator.Settings;
 
 namespace YoutubeContentGenerator.SeleniumLinkShortener
 {
-    public class SeleniumShortenLinks : ILinkShortener
+    public class SeleniumLinkShortener : ILinkShortener
     {
 
         private readonly ILoginPage loginPage;
         private readonly IQuickLinkPage quickLinkPage;
-        private readonly ILogger<SeleniumShortenLinks> logger;
-        //todo move it to config
-        private string username; 
-        private string passowrd; 
+        private readonly ILogger<SeleniumLinkShortener> logger;
 
-        public SeleniumShortenLinks(ILoginPage loginPage, IQuickLinkPage quickLinkPage, IOptions<WordPressOptions> options, ILogger<SeleniumShortenLinks> logger)
+        private readonly string username; 
+        private readonly string password; 
+
+        public SeleniumLinkShortener(ILoginPage loginPage, IQuickLinkPage quickLinkPage, IOptions<WordPressOptions> options, ILogger<SeleniumLinkShortener> logger)
         {
             this.loginPage = loginPage;
             this.quickLinkPage = quickLinkPage;
             this.logger = logger;
             username = options.Value.BlogLogin;
-            passowrd = options.Value.BlogPassword;
+            password = options.Value.BlogPassword;
         }
         
 
         public List<Episode> ShortenAllLinks(List<Episode> episodes)
         {
-            logger.LogTrace("Loging to Wordpress");
+            logger.LogTrace("Logging in to Wordpress");
             loginPage.GoTo();
-            loginPage.Login(username, passowrd);
-            logger.LogTrace("user loged in goint to dashboard");
+            loginPage.Login(username, password);
+            logger.LogTrace("user logged into to dashboard");
             quickLinkPage.GoTo();
             logger.LogTrace("user on dashboard");
             logger.LogTrace("Starting shortening links");
