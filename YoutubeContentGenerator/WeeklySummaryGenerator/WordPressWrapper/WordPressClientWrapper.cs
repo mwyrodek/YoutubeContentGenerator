@@ -33,17 +33,35 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator.WordPressWrapper
         public IWordPressClientWrapper Authenticate(string username, string password)
         {
             logger.LogTrace("Requesting JWT token");
-            client.AuthMethod = AuthMethod.JWTAuth;
-            client.RequestJWToken(username, password);
-            logger.LogInformation($"Checking if token is valid {client.IsValidJWToken().Result}");
+            RequestJTWToken(username, password, AuthMethod.JWTAuth);
+            logger.LogInformation($"Checking if token is valid");
             var isValidJwToken = client.IsValidJWToken();
             isValidJwToken.Wait();
-            if (!isValidJwToken.Result)
+            if (isValidJwToken.Result)
             {
-                throw new AuthenticationException("Token is not valid");
+                logger.LogTrace("Token recived and validated");
+                return this;    
             }
-            logger.LogTrace("Token recived and validated");
-            return this;
+            
+            RequestJTWToken(username, password, AuthMethod.JWT);
+            logger.LogInformation($"Checking if token is valid");
+            isValidJwToken = client.IsValidJWToken();
+            isValidJwToken.Wait();
+            logger.LogWarning("Logging via JWTAuth failed trying JTW");
+            if (isValidJwToken.Result)
+            {
+                logger.LogTrace("Token recived and validated");
+                return this;    
+            }    
+            
+            throw new AuthenticationException("Token is not valid");
+            
+        }
+
+        private void RequestJTWToken(string username, string password, AuthMethod method)
+        {
+            client.AuthMethod = method;
+            client.RequestJWToken(username, password);
         }
 
         public IWordPressClientWrapper Post(WeeklySummaryPost post, string category, DateTime publishDate)

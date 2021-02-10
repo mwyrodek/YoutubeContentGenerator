@@ -20,7 +20,8 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestDesc|AnyCPU'">
-      <DefineConstants>TRACE;DUMMYLOADER;DUMMYSHORTENER;TEST</DefineConstants>
+      <DefineConstants>TRACE;DUMMYLOADER;DUMMYSHORTENER;TEST;DEBUG</DefineConstants>
+      <DebugSymbols>true</DebugSymbols>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestLoader|AnyCPU'">
