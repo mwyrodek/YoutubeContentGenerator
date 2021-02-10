@@ -32,7 +32,7 @@ namespace YCG.Tests.EngineTest
             mockLoadData.Setup(ld=>ld.Execute()).Returns(testdata);
             sut = fixture.Create<SimpleEngine>();
             sut.LoadData();
-            Assert.That(sut.episodes, Is.EqualTo(testdata));
+            Assert.That(sut.Episodes, Is.EqualTo(testdata));
             mockLoadData.Verify(d => d.Execute(), Times.Once);
         }
 

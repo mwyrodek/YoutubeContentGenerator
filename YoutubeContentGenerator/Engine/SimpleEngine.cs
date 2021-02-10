@@ -1,13 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Runtime.CompilerServices;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using YCG.Models;
 using YoutubeContentGenerator.EpisodeGenerator;
 using YoutubeContentGenerator.LoadData;
-using YoutubeContentGenerator.Settings;
 using YoutubeContentGenerator.WeeklySummuryGenerator;
 
 [assembly:InternalsVisibleTo("YCG.Tests")]
@@ -22,39 +18,35 @@ namespace YoutubeContentGenerator.Engine
         private readonly IWeeklySummaryGenerator summeryGenerator;
         private readonly ILoadData data;
         private readonly IEpisodeNumberHelper episodeNumberHelper;
-        internal List<Episode> episodes { get; private set; }
-        private readonly DefaultsOptions options;
+        internal List<Episode> Episodes { get; private set; }
 
-        public SimpleEngine(ILogger<SimpleEngine> logger, ILinkShortener shortener, IYouTubeDescriptionGenerator youTubeDescriptionGenerator, IWeeklySummaryGenerator summeryGenerator, ILoadData data, IOptions<DefaultsOptions> options, IEpisodeNumberHelper episodeNumberHelper)
+        public SimpleEngine(ILogger<SimpleEngine> logger, ILinkShortener shortener, IYouTubeDescriptionGenerator youTubeDescriptionGenerator, IWeeklySummaryGenerator summeryGenerator, ILoadData data, IEpisodeNumberHelper episodeNumberHelper)
         {
             this.logger = logger;
             this.shortener = shortener;
             this.youTubeDescriptionGenerator = youTubeDescriptionGenerator;
             this.summeryGenerator = summeryGenerator;
             this.data = data;
-            this.options = options.Value;
             this.episodeNumberHelper = episodeNumberHelper;
         }
         
         public void LoadData()
         {
-            episodes = data.Execute();
+            Episodes = data.Execute();
         }
 
         public void GenerateLinks()
         {
-            episodes = shortener.ShortenAllLinks(episodes);
+            Episodes = shortener.ShortenAllLinks(Episodes);
         }
 
         public void GenerateDescription()
         {
             UpdateNumbers();
-            youTubeDescriptionGenerator.CreateEpisodesDescription(episodes);
+            youTubeDescriptionGenerator.CreateEpisodesDescription(Episodes);
             youTubeDescriptionGenerator.Save();
         }
 
-        //todo move it to file updater
-        //todo i don't know what this method does anymore and i am afraid to move it
         private void UpdateNumbers()
         {
 
@@ -65,7 +57,7 @@ namespace YoutubeContentGenerator.Engine
                 logger.LogError("Last ep file is empty");
                 return;
             }
-            foreach (var episode in episodes)
+            foreach (var episode in Episodes)
             {
                 num++;
                 episode.EpisodeNum = num;
@@ -81,7 +73,7 @@ namespace YoutubeContentGenerator.Engine
 
         public void GenerateWeekSummary()
         {
-            summeryGenerator.CreateWeeklySummaryDescription(episodes);
+            summeryGenerator.CreateWeeklySummaryDescription(Episodes);
             summeryGenerator.Save();
         }
     }

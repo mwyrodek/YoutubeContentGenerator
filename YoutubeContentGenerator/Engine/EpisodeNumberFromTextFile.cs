@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -5,6 +6,9 @@ using YoutubeContentGenerator.Settings;
 
 namespace YoutubeContentGenerator.Engine
 {
+    //This is basicaly wrapper for system function unit testing is pointless
+    //but some integration test would be good idea.
+    [ExcludeFromCodeCoverage]
     public class EpisodeNumberHelperFromTextFile : IEpisodeNumberHelper
     {
         private readonly ILogger<EpisodeNumberHelperFromTextFile> logger;
