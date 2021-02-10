@@ -62,7 +62,7 @@ namespace YCG.Tests.Pocket
             optionsMock.Setup(o => o.Value).Returns(pocketOptions);
             this.sut = new LoadDataFromPocket(loggerMock.Object, optionsMock.Object, pocketConector.Object);
             //Act
-            Assert.Throws<ArgumentOutOfRangeException>(
+            Assert.Throws<InvalidOperationException>(
                 () => { sut.Execute(); }
             );
         }
@@ -81,7 +81,7 @@ namespace YCG.Tests.Pocket
             optionsMock.Setup(o => o.Value).Returns(pocketOptions);
             this.sut = new LoadDataFromPocket(loggerMock.Object, optionsMock.Object, pocketConector.Object);
             //Act
-            Assert.Throws<ArgumentOutOfRangeException>(
+            Assert.Throws<InvalidOperationException>(
                 () => { sut.Execute(); }
             );
         }

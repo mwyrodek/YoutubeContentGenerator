@@ -10,7 +10,7 @@ namespace YoutubeContentGenerator.EpisodeGenerator
 {
     public class YouTubeDescriptionGenerator : IYouTubeDescriptionGenerator
     {
-        private string descrption = @"<TITTLE> 🍵 📰 ITea Morning #Number
+        private readonly string description = @"<TITTLE> 🍵 📰 ITea Morning #Number
 
 
 <DESCRIPTION>
@@ -37,7 +37,7 @@ License: http://creativecommons.org/licenses/by/4.0/
 
 🖥️ Materiały z odcinka:";
         
-        private StringBuilder content = new StringBuilder();
+        private readonly StringBuilder content = new StringBuilder();
         private string buildContent;
         private readonly DefaultsOptions options;
 
@@ -74,7 +74,7 @@ License: http://creativecommons.org/licenses/by/4.0/
 
         private void CreateEpisodeDescription(Episode episode)
         {
-            var tempDesctiption = descrption;
+            var tempDesctiption = description;
             if(episode.EpisodeNum>0)
             {
                 tempDesctiption= tempDesctiption.Replace("#Number", $"#{episode.EpisodeNum}");
