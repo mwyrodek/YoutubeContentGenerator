@@ -16,8 +16,7 @@ namespace YCG.Tests.Blog
         public class ContentGeneratorTest
         {
             private IFixture fixture;
-            private DashboardAsQuickLinkPage sut;
-
+            
 
             [SetUp]
             public void Setup()
@@ -40,9 +39,9 @@ namespace YCG.Tests.Blog
             [Test]
             public void Add_Link_ReturnsShortenLink()
             {
-                string fakeLink = "fake";
-                string shorturl = "kkkk";
-                string url = "test.pl";
+                var fakeLink = "fake";
+                var shorturl = "kkkk";
+                const string url = "test.pl";
 
                 var webDriverMock = fixture.Freeze<Mock<IWebDriver>>();
                 var webElementMock = new Mock<IWebElement>();
@@ -59,8 +58,8 @@ namespace YCG.Tests.Blog
                     .Returns(webElementMock.Object);
                 
                     
-                var quickLinkPage = fixture.Create<DashboardAsQuickLinkPage>();
-                var addLink = quickLinkPage.AddLink(fakeLink);
+                var sut = fixture.Create<DashboardAsQuickLinkPage>();
+                var addLink = sut.AddLink(fakeLink);
 
                 Assert.That(addLink, Does.StartWith(url));
             }

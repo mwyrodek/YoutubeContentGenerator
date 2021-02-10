@@ -9,7 +9,7 @@ namespace YoutubeContentGenerator.Blog
 {
     public class LoginPage :PageBase, ILoginPage
     {
-        private ILogger logger;
+        private readonly ILogger logger;
         public LoginPage(IWebDriver driver, ILogger<LoginPage> logger, IOptions<WordPressOptions> options) : base(driver,options)
         {
             this.logger = logger;
@@ -18,8 +18,6 @@ namespace YoutubeContentGenerator.Blog
 
         public ILoginPage GoTo()
         {
-            //wypadku zmiany url to i tak bedzie wymagało manaulej porpway przez zahardkodowany link w srodku
-            //todo sprawdzic czy link dalej jest potrzebny
             var url = $"{BaseUrl}/wp-login.php?redirect_to=https%3A%2F%2Fwww.wyrodek.pl%2Fwp-admin%2Findex.php&auth=1";
             logger.LogTrace($"going to {url}");
             Driver.Navigate().GoToUrl(url);
@@ -47,9 +45,9 @@ namespace YoutubeContentGenerator.Blog
                 Driver.FindElement(By.Id("user_pass")).SendKeys(password);
                 Driver.FindElement(By.Id("wp-submit")).Click();
             }
-            catch (NoSuchElementException e)
+            catch (NoSuchElementException)
             {
-                logger.LogInformation("Anti automation not triggered");
+                logger.LogTrace("Anti automation not triggered");
             }
             return this;
         }

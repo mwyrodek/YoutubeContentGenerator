@@ -28,9 +28,8 @@ Now Let’s drink our ITea!
         {
             StringBuilder content = new StringBuilder();
 
-            var post = new WeeklySummaryPost();
-            post.Title = Title;
-        content.AppendLine(Foreword);
+            var post = new WeeklySummaryPost {Title = Title};
+            content.AppendLine(Foreword);
             foreach (var episode in episodes)
             {
                 content.AppendLine($"{TitleLine}{episode.EpisodeNum}");

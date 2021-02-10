@@ -1,16 +1,13 @@
 using System;
 using AutoFixture;
 using AutoFixture.AutoMoq;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using OpenQA.Selenium;
 using YoutubeContentGenerator.Blog;
 using YoutubeContentGenerator.Settings;
-using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace YCG.Tests.Blog
 {
@@ -25,8 +22,6 @@ namespace YCG.Tests.Blog
         {
             this.fixture = new Fixture().Customize(new AutoMoqCustomization());
             webDriverMock = fixture.Freeze<Mock<IWebDriver>>();
-            //   logger.Setup(x => x.LogTrace(It.IsAny<string>()));
-
         }
 
         [Test]
@@ -74,8 +69,8 @@ namespace YCG.Tests.Blog
         [Test]
         public void HappyPath_NeededRe_Login()
         {
-            string login = "log";
-            string password = "pas";
+            const string login = "log";
+            const string password = "pas";
             var callsLogin = 0;
             var callsPassword = 0;
             var callsClick = 0;
@@ -108,8 +103,8 @@ namespace YCG.Tests.Blog
         [Test]
         public void HappyPath_AlreadyLogged()
         {
-            string login = "log";
-            string password = "pas";
+            const string login = "log";
+            const string password = "pas";
             var callsLogin = 0;
             var callsPassword = 0;
             var callsClick = 0;
