@@ -13,6 +13,7 @@ using YoutubeContentGenerator.LoadData;
 using YoutubeContentGenerator.LoadData.Pocket;
 using YoutubeContentGenerator.SeleniumLinkShortener;
 using YoutubeContentGenerator.Settings;
+using YoutubeContentGenerator.WeeklySummaryGenerator;
 using YoutubeContentGenerator.WeeklySummuryGenerator;
 using YoutubeContentGenerator.WeeklySummuryGenerator.WordPressWrapper;
 
@@ -84,7 +85,7 @@ namespace YoutubeContentGenerator
 #else
 
                     services.AddScoped<IWordPressClientWrapper, WordPressClientWrapper>();
-                    services.AddScoped<IWeeklySummaryGenerator, WeeklySummuryGenerator.APIWeeklySummaryGenerator>();
+                    services.AddScoped<IWeeklySummaryGenerator, ApiWeeklySummaryGenerator>();
 #endif
 #if !DUMMYSUMMARY || !DUMMYSHORTENER
                     services.AddScoped<IWebDriver, ChromeDriver>();

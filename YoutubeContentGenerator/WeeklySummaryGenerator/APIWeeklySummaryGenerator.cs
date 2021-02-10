@@ -1,41 +1,32 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Security.Authentication;
-using YCG.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using WordPressPCL;
-using WordPressPCL.Models;
+using YCG.Models;
 using YoutubeContentGenerator.Settings;
+using YoutubeContentGenerator.WeeklySummuryGenerator;
 using YoutubeContentGenerator.WeeklySummuryGenerator.WordPressWrapper;
 
-namespace YoutubeContentGenerator.WeeklySummuryGenerator
+namespace YoutubeContentGenerator.WeeklySummaryGenerator
 {
-    public class APIWeeklySummaryGenerator : IWeeklySummaryGenerator
+    public class ApiWeeklySummaryGenerator : IWeeklySummaryGenerator
     {
         private WeeklySummaryPost post;
         private readonly ILogger logger;
-        private readonly string username;
-        private readonly string password;
-        private readonly string blogUrl;
         private readonly string category;
-        private IWordPressClientWrapper wrapper;
+        private readonly IWordPressClientWrapper wrapper;
 
-        public APIWeeklySummaryGenerator(IWordPressClientWrapper wrapper, ILogger<APIWeeklySummaryGenerator> logger,
+        public ApiWeeklySummaryGenerator(IWordPressClientWrapper wrapper, ILogger<ApiWeeklySummaryGenerator> logger,
             IOptions<WordPressOptions> options)
         {
             this.logger = logger;
             this.wrapper = wrapper;
 
-            username = options.Value.BlogLogin;
-            password = options.Value.BlogPassword;
             category = options.Value.BlogCategoryName;
-            blogUrl = $"{options.Value.BlogUrl}/wp-json/";
+            var blogUrl = $"{options.Value.BlogUrl}/wp-json/";
             wrapper
                 .CreateClient(blogUrl)
-                .Authenticate(username, password);
+                .Authenticate(options.Value.BlogLogin, options.Value.BlogPassword);
         }
 
         public void CreateWeeklySummaryDescription(List<Episode> episodes)

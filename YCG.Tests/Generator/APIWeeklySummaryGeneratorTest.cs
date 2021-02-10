@@ -6,6 +6,7 @@ using AutoFixture.AutoMoq;
 using Moq;
 using YCG.Models;
 using YoutubeContentGenerator.Blog;
+using YoutubeContentGenerator.WeeklySummaryGenerator;
 using YoutubeContentGenerator.WeeklySummuryGenerator;
 using YoutubeContentGenerator.WeeklySummuryGenerator.WordPressWrapper;
 
@@ -15,7 +16,7 @@ namespace YCG.Tests.Generator
     public class APIWeeklySummaryGeneratorTest
     {
         private IFixture fixture;
-        private APIWeeklySummaryGenerator sut;
+        private ApiWeeklySummaryGenerator sut;
         
 
         [SetUp]
@@ -29,7 +30,7 @@ namespace YCG.Tests.Generator
         {
             var wrapperMock = fixture.Freeze<Mock<IWordPressClientWrapper>>();
 
-            sut = fixture.Create<APIWeeklySummaryGenerator>();
+            sut = fixture.Create<ApiWeeklySummaryGenerator>();
             sut.Save();
             wrapperMock.Verify(w=>w.Post(It.IsAny<WeeklySummaryPost>(), It.IsAny<string>(), It.IsAny<DateTime>()),Times.Never);
         }
@@ -41,7 +42,7 @@ namespace YCG.Tests.Generator
             var wrapperMock = fixture.Freeze<Mock<IWordPressClientWrapper>>();
             wrapperMock.Setup(a => a.CreateClient(It.IsAny<string>())).Returns(wrapperMock.Object);
             wrapperMock.Setup(a => a.Authenticate(It.IsAny<string>(),It.IsAny<string>())).Returns(wrapperMock.Object);
-            sut = fixture.Create<APIWeeklySummaryGenerator>();
+            sut = fixture.Create<ApiWeeklySummaryGenerator>();
             
             wrapperMock.Verify(w=>w.CreateClient(It.IsAny<string>()),Times.Once);
             wrapperMock.Verify(w=>w.Authenticate(It.IsAny<string>(), It.IsAny<string>()),Times.Once);
@@ -51,7 +52,7 @@ namespace YCG.Tests.Generator
         {
             var wrapperMock = fixture.Freeze<Mock<IWordPressClientWrapper>>();
 
-            sut = fixture.Create<APIWeeklySummaryGenerator>();
+            sut = fixture.Create<ApiWeeklySummaryGenerator>();
             sut.CreateWeeklySummaryDescription(fixture.Create<List<Episode>>());
             sut.Save();
             wrapperMock.Verify(w=>w.Post(It.IsAny<WeeklySummaryPost>(), It.IsAny<string>(), It.IsAny<DateTime>()),Times.Once);
