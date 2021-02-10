@@ -39,7 +39,6 @@ namespace YCG.Tests.Blog
         {
             string login = "log";
             string password = "pas";
-            var callsLogin = 0;
             var callsPassword = 0;
             var callsClick = 0;
             var anyWebElement= new Mock<IWebElement>();

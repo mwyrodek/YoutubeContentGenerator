@@ -36,13 +36,12 @@ namespace YoutubeContentGenerator.LoadData.Pocket
 
         private void ValidateTags()
         {
-            
-            if(tags.Count<1) throw new ArgumentOutOfRangeException(nameof(tags),"At least one Tag is required");
+            if(tags.Count<1) throw new InvalidOperationException ("At least one Tag is required");
         }
 
         private void ValidateSeasonLength()
         {
-            if (options.SeasonLength <= 0) throw new ArgumentOutOfRangeException(nameof(options.SeasonLength),"Season Length has to be greater than 0");
+            if (options.SeasonLength <= 0) throw new InvalidOperationException ("Season Length has to be greater than 0");
         }
 
         private Episode CreateEpisode()
@@ -52,7 +51,7 @@ namespace YoutubeContentGenerator.LoadData.Pocket
             foreach (var tag in tags)
             {
                     var article = pocketConnector.MoveArticleFromPocketByTag(tag);
-                    if (article != null)//todo make sure if realy is null 
+                    if (article != null)
                     {
                         episode.Articles.Add(article);    
                     }
