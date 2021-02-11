@@ -54,7 +54,8 @@ namespace YoutubeContentGenerator
                 {
                     services.AddTransient<ContentGenerator>();
                     services.AddScoped<IEpisodeNumberHelper, EpisodeNumberHelperFromTextFile>();
-                    services.AddScoped<IYouTubeDescriptionGenerator, YouTubeDescriptionGenerator>();
+                    services.AddScoped<IYouTubeDescriptionGenerator, YouTubeDescriptionGeneratorText>();
+                    services.AddScoped<IYoutubeDescriptionContent, YoutubeDescriptionContent>();
                     
                     //Configs:
                     services.Configure<WordPressOptions>(hostContext.Configuration.GetSection(WordPressOptions.WordPress));
