@@ -9,6 +9,7 @@ using OpenQA.Selenium.Chrome;
 using YoutubeContentGenerator.Blog;
 using YoutubeContentGenerator.Engine;
 using YoutubeContentGenerator.EpisodeGenerator;
+using YoutubeContentGenerator.EpisodeGenerator.GoogleAPI;
 using YoutubeContentGenerator.LoadData;
 using YoutubeContentGenerator.LoadData.Pocket;
 using YoutubeContentGenerator.SeleniumLinkShortener;
@@ -25,7 +26,6 @@ namespace YoutubeContentGenerator
         
         public static async Task Main(string[] args)
         {
-            Console.WriteLine("Starting");
 
             var host = CreateHostBuilder(args).Build();
             using (var serviceScope = host.Services.CreateScope())
@@ -61,6 +61,11 @@ namespace YoutubeContentGenerator
                     services.Configure<WordPressOptions>(hostContext.Configuration.GetSection(WordPressOptions.WordPress));
                     services.Configure<DefaultsOptions>(hostContext.Configuration.GetSection(DefaultsOptions.Defaults));
                     services.Configure<PocketOptions>(hostContext.Configuration.GetSection(PocketOptions.Pocket));
+                    services.Configure<GoogleOptions>(hostContext.Configuration.GetSection(GoogleOptions.Google));
+                    
+                    //engine is progamcore
+                    services.AddScoped<IEngine, SimpleEngine>();
+                    
 #if DUMMYLOADER 
                     services.AddScoped<ILoadData, DummyLoadData>();
 #else
@@ -69,8 +74,7 @@ namespace YoutubeContentGenerator
                     services.AddScoped<IPocketConector, PocketConector>();
 #endif
 
-                    //engine is progamcore
-                    services.AddScoped<IEngine, SimpleEngine>();
+                    
 
                     //verision of link shorener
 #if DUMMYSHORTENER
@@ -79,7 +83,16 @@ namespace YoutubeContentGenerator
                     services.AddScoped<ILinkShortener, SeleniumLinkShortener.SeleniumLinkShortener>();
                     services.AddScoped<IQuickLinkPage, DashboardAsQuickLinkPage>();
 #endif
-
+#if DUMMYYOUTUBE
+                    services.AddScoped<IEpisodeNumberHelper, EpisodeNumberHelperFromTextFile>();
+                    services.AddScoped<IYouTubeDescriptionGenerator, YouTubeDescriptionGeneratorDummy>();
+                    services.AddScoped<IYoutubeDescriptionContent, YoutubeDescriptionContent>();
+#else
+                    services.AddScoped<IEpisodeNumberHelper, EpisodeNumberHelperFromTextFile>();
+                    services.AddScoped<IYouTubeDescriptionGenerator, GoogleDocYoutubeDescriptionGenerator>();
+                    services.AddScoped<IGoogleDocApi, GoogleDocsApi>();
+                    services.AddScoped<IYoutubeDescriptionContent, YoutubeDescriptionContent>();
+#endif
                     
 #if DUMMYSUMMARY
                     services.AddScoped<IWeeklySummaryGenerator, WeeklySummuryGenerator.DummuWeeklySummaryGenerator>();

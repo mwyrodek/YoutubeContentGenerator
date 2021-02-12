@@ -13,19 +13,18 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-		TestDesc|Any CPU = TestDesc|Any CPU
 		TestLoader|Any CPU = TestLoader|Any CPU
 		TestRun|Any CPU = TestRun|Any CPU
 		TestShortener|Any CPU = TestShortener|Any CPU
 		TestShortener-Summary|Any CPU = TestShortener-Summary|Any CPU
+		TestWeeklySummary|Any CPU = TestWeeklySummary|Any CPU
+		TestYoutubeContent|Any CPU = TestYoutubeContent|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestDesc|Any CPU.ActiveCfg = TestDesc|Any CPU
-		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestDesc|Any CPU.Build.0 = TestDesc|Any CPU
 		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestLoader|Any CPU.ActiveCfg = TestLoader|Any CPU
 		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestLoader|Any CPU.Build.0 = TestLoader|Any CPU
 		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestRun|Any CPU.ActiveCfg = TestRun|Any CPU
@@ -34,12 +33,14 @@ Global
 		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestShortener|Any CPU.Build.0 = TestShortener|Any CPU
 		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestShortener-Summary|Any CPU.ActiveCfg = TestShortener-Summary|Any CPU
 		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestShortener-Summary|Any CPU.Build.0 = TestShortener-Summary|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestWeeklySummary|Any CPU.ActiveCfg = TestWeeklySummary|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestWeeklySummary|Any CPU.Build.0 = TestWeeklySummary|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestYoutubeContent|Any CPU.ActiveCfg = TestYoutubeContent|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestYoutubeContent|Any CPU.Build.0 = TestYoutubeContent|Any CPU
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestDesc|Any CPU.ActiveCfg = TestDesc|Any CPU
-		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestDesc|Any CPU.Build.0 = TestDesc|Any CPU
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestLoader|Any CPU.ActiveCfg = DummyLoader|Any CPU
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestLoader|Any CPU.Build.0 = DummyLoader|Any CPU
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestRun|Any CPU.ActiveCfg = TestRun|Any CPU
@@ -48,12 +49,14 @@ Global
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestShortener|Any CPU.Build.0 = TestShortener|Any CPU
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestShortener-Summary|Any CPU.ActiveCfg = TestShortener-Summary|Any CPU
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestShortener-Summary|Any CPU.Build.0 = TestShortener-Summary|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestWeeklySummary|Any CPU.ActiveCfg = TestWeeklySummary|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestWeeklySummary|Any CPU.Build.0 = TestWeeklySummary|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestYoutubeContent|Any CPU.ActiveCfg = TestYoutubeContent|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestYoutubeContent|Any CPU.Build.0 = TestYoutubeContent|Any CPU
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestDesc|Any CPU.ActiveCfg = TestDesc|Any CPU
-		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestDesc|Any CPU.Build.0 = TestDesc|Any CPU
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestLoader|Any CPU.ActiveCfg = DummyLoader|Any CPU
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestLoader|Any CPU.Build.0 = DummyLoader|Any CPU
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestRun|Any CPU.ActiveCfg = TestRun|Any CPU
@@ -62,6 +65,10 @@ Global
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestShortener|Any CPU.Build.0 = TestShortener|Any CPU
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestShortener-Summary|Any CPU.ActiveCfg = TestShortener-Summary|Any CPU
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestShortener-Summary|Any CPU.Build.0 = TestShortener-Summary|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestWeeklySummary|Any CPU.ActiveCfg = TestWeeklySummary|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestWeeklySummary|Any CPU.Build.0 = TestWeeklySummary|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestYoutubeContent|Any CPU.ActiveCfg = TestYoutubeContent|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestYoutubeContent|Any CPU.Build.0 = TestYoutubeContent|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

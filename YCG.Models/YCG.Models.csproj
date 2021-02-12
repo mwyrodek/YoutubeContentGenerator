@@ -2,7 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <Configurations>Debug;Release;TestRun;DummyLoader;TestShortener;TestDesc;TestShortener-Summary</Configurations>
+        <Configurations>Debug;Release;TestRun;DummyLoader;TestShortener;TestShortener-Summary;TestWeeklySummary;TestYoutubeContent</Configurations>
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
     <ItemGroup>

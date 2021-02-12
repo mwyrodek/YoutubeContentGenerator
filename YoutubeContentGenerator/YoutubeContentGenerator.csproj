@@ -3,8 +3,9 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <Configurations>Debug;Release;TestRun;TestLoader;TestShortener;TestDesc;TestShortener-Summary</Configurations>
+        <Configurations>Debug;Release;TestRun;TestLoader;TestShortener;TestShortener-Summary;TestWeeklySummary;TestYoutubeContent</Configurations>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestRun|AnyCPU'">
@@ -12,23 +13,28 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestShortener|AnyCPU'">
-      <DefineConstants>TRACE;DUMMYLOADER;DUMMYSUMMARY;TEST</DefineConstants>
+      <DefineConstants>TRACE;DUMMYLOADER;DUMMYSUMMARY;TEST;;DUMMYYOUTUBE</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestShortener-Summary|AnyCPU'">
       <DefineConstants>TRACE;DUMMYLOADER;TEST</DefineConstants>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestDesc|AnyCPU'">
-      <DefineConstants>TRACE;DUMMYLOADER;DUMMYSHORTENER;TEST;DEBUG</DefineConstants>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestLoader|AnyCPU'">
+      <DefineConstants>TRACE;DUMMYSHORTENER;DUMMYSUMMARY;TEST;DUMMYYOUTUBE</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'TestWeeklySummary' ">
+      <DefineConstants>TRACE;DUMMYLOADER;DUMMYSHORTENER;TEST;DEBUG;DUMMYYOUTUBE</DefineConstants>
       <DebugSymbols>true</DebugSymbols>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestLoader|AnyCPU'">
-      <DefineConstants>TRACE;DUMMYSHORTENER;DUMMYSUMMARY;TEST</DefineConstants>
+    <PropertyGroup Condition=" '$(Configuration)' == 'TestYoutubeContent' ">
+      <DefineConstants>TRACE;DUMMYLOADER;DUMMYSHORTENER;TEST;DUMMYSUMMARY;DEBUG</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Google.Apis.Docs.v1" Version="1.50.0.2177" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.6" />
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.6" />
       <PackageReference Include="PocketSharp" Version="5.0.0" />
@@ -41,6 +47,9 @@
 
     <ItemGroup>
       <None Update="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="client_secret.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

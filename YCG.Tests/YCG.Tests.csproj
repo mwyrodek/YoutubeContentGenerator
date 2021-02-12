@@ -5,14 +5,16 @@
 
         <IsPackable>false</IsPackable>
 
-        <Configurations>Debug;Release;TestRun;DummyLoader;TestShortener;TestDesc;TestShortener-Summary</Configurations>
+        <Configurations>Debug;Release;TestRun;DummyLoader;TestShortener;TestShortener-Summary;TestWeeklySummary;TestYoutubeContent</Configurations>
 
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
+
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="AutoFixture.AutoMoq" Version="4.13.0" />
-        <PackageReference Include="Google.Apis.Docs.v1" Version="1.49.0.2170" />
+        <PackageReference Include="Google.Apis.Docs.v1" Version="1.50.0.2177" />
         <PackageReference Include="Moq" Version="4.14.5" />
         <PackageReference Include="nunit" Version="3.12.0" />
         <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
