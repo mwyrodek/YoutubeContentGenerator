@@ -21,16 +21,16 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
     public class GoogleDocsApi : IGoogleDocApi
     {
         private static string[] Scopes = {DocsService.Scope.Documents};
-        private static string ApplicationName;
-        private static string documentId;
-        private static DocsService service;
-        private ILogger.ILogger logger;
+        private readonly string ApplicationName;
+        private readonly string DocumentId;
+        private DocsService service;
+        private readonly ILogger.ILogger logger;
 
         public GoogleDocsApi(IOptions<GoogleOptions> option, ILogger<GoogleDocsApi> logger)
         {
             this.logger = logger;
             ApplicationName = option.Value.ApplicationName;
-            documentId = option.Value.DocumentId;
+            DocumentId = option.Value.DocumentId;
         }
         public void Authenticate()
         {
@@ -52,9 +52,9 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
 
         public Document ReadFile()
         {
-            DocumentsResource.GetRequest request = service.Documents.Get(documentId);
+            var request = service.Documents.Get(DocumentId);
             
-            Document doc = request.Execute();
+            var doc = request.Execute();
             return doc;
         }
 
@@ -68,7 +68,7 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
             
             BatchUpdateDocumentRequest body = new BatchUpdateDocumentRequest();
             body.Requests = requests;
-            service.Documents.BatchUpdate(body, documentId).Execute();
+            service.Documents.BatchUpdate(body, DocumentId).Execute();
             logger.LogTrace("Updating doc - Done");
         }
 

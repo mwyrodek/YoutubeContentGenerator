@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenQA.Selenium;
@@ -12,7 +11,6 @@ using YoutubeContentGenerator.EpisodeGenerator;
 using YoutubeContentGenerator.EpisodeGenerator.GoogleAPI;
 using YoutubeContentGenerator.LoadData;
 using YoutubeContentGenerator.LoadData.Pocket;
-using YoutubeContentGenerator.SeleniumLinkShortener;
 using YoutubeContentGenerator.Settings;
 using YoutubeContentGenerator.WeeklySummaryGenerator;
 using YoutubeContentGenerator.WeeklySummuryGenerator;

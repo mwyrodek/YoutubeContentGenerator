@@ -5,8 +5,8 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
 {
     public class GoogleDocYoutubeDescriptionGenerator : IYouTubeDescriptionGenerator
     {
-        private IGoogleDocApi api;
         private string builtContent;
+        private readonly IGoogleDocApi api;
         private readonly IYoutubeDescriptionContent content;
         
         public GoogleDocYoutubeDescriptionGenerator(IYoutubeDescriptionContent content, IGoogleDocApi api)
