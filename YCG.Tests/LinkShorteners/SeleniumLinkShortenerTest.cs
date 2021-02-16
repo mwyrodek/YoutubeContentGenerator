@@ -15,7 +15,7 @@ using YoutubeContentGenerator.Settings;
 namespace YCG.Tests.LinkShorteners
 {
     [TestFixture]
-    public class SeleniumLinkShortener
+    public class SeleniumLinkShortenerTest
     {
         
 

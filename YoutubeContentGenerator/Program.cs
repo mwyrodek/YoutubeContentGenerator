@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Http;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using YoutubeContentGenerator.Blog;
 using YoutubeContentGenerator.Engine;
 using YoutubeContentGenerator.EpisodeGenerator;
 using YoutubeContentGenerator.EpisodeGenerator.GoogleAPI;
+using YoutubeContentGenerator.LinkShortener;
 using YoutubeContentGenerator.LoadData;
 using YoutubeContentGenerator.LoadData.Pocket;
 using YoutubeContentGenerator.Settings;
@@ -60,6 +63,7 @@ namespace YoutubeContentGenerator
                     services.Configure<DefaultsOptions>(hostContext.Configuration.GetSection(DefaultsOptions.Defaults));
                     services.Configure<PocketOptions>(hostContext.Configuration.GetSection(PocketOptions.Pocket));
                     services.Configure<GoogleOptions>(hostContext.Configuration.GetSection(GoogleOptions.Google));
+                    services.Configure<YourlsOptions>(hostContext.Configuration.GetSection(YourlsOptions.Yourls));
                     
                     //engine is progamcore
                     services.AddScoped<IEngine, SimpleEngine>();
@@ -78,13 +82,17 @@ namespace YoutubeContentGenerator
 #if DUMMYSHORTENER
                     services.AddScoped<ILinkShortener, DummyShortener>();
 #else
-                    services.AddScoped<ILinkShortener, SeleniumLinkShortener.SeleniumLinkShortener>();
-                    services.AddScoped<IQuickLinkPage, DashboardAsQuickLinkPage>();
+                    services.AddScoped<HttpClient,HttpClient>();
+                    services.AddScoped<IYourlsApi, YourlsApi>();
+                    services.AddScoped<ILinkShortener, YourlsLinkShortener>();
+                    
+
+                    
+                   
 #endif
 #if DUMMYYOUTUBE
                     services.AddScoped<IEpisodeNumberHelper, EpisodeNumberHelperFromTextFile>();
                     services.AddScoped<IYouTubeDescriptionGenerator, YouTubeDescriptionGeneratorDummy>();
-                    services.AddScoped<IYoutubeDescriptionContent, YoutubeDescriptionContent>();
 #else
                     services.AddScoped<IEpisodeNumberHelper, EpisodeNumberHelperFromTextFile>();
                     services.AddScoped<IYouTubeDescriptionGenerator, GoogleDocYoutubeDescriptionGenerator>();
