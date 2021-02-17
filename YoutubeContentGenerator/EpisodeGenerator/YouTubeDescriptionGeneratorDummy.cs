@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Google.Apis.Logging;
 using Microsoft.Extensions.Logging;
 using YCG.Models;
@@ -6,6 +7,7 @@ using YoutubeContentGenerator.EpisodeGenerator;
 
 namespace YoutubeContentGenerator
 {
+    [ExcludeFromCodeCoverage]
     public class YouTubeDescriptionGeneratorDummy : IYouTubeDescriptionGenerator
     {
         private readonly ILogger<YouTubeDescriptionGeneratorDummy> logger;

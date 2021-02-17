@@ -5,9 +5,7 @@ using AutoFixture;
 using AutoFixture.AutoMoq;
 using Moq;
 using YCG.Models;
-using YoutubeContentGenerator.Blog;
 using YoutubeContentGenerator.WeeklySummaryGenerator;
-using YoutubeContentGenerator.WeeklySummuryGenerator;
 using YoutubeContentGenerator.WeeklySummuryGenerator.WordPressWrapper;
 
 namespace YCG.Tests.Generator

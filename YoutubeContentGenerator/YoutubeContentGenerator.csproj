@@ -39,9 +39,6 @@
       <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.12" />
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.12" />
       <PackageReference Include="PocketSharp" Version="5.0.0" />
-      <PackageReference Include="Selenium.Support" Version="3.141.0" />
-      <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-      <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="88.0.4324.9600" />
       <PackageReference Include="TextCopy" Version="4.2.0" />
       <PackageReference Include="WordPressPCL" Version="1.8.5" />
     </ItemGroup>

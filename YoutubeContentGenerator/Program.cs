@@ -5,16 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Http;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using YoutubeContentGenerator.Blog;
 using YoutubeContentGenerator.Engine;
 using YoutubeContentGenerator.EpisodeGenerator;
 using YoutubeContentGenerator.EpisodeGenerator.GoogleAPI;
 using YoutubeContentGenerator.LinkShortener;
 using YoutubeContentGenerator.LoadData;
 using YoutubeContentGenerator.LoadData.Pocket;
-using YoutubeContentGenerator.SeleniumLinkShortener;
 using YoutubeContentGenerator.Settings;
 using YoutubeContentGenerator.WeeklySummaryGenerator;
 using YoutubeContentGenerator.WeeklySummuryGenerator;
@@ -107,10 +103,6 @@ namespace YoutubeContentGenerator
 
                     services.AddScoped<IWordPressClientWrapper, WordPressClientWrapper>();
                     services.AddScoped<IWeeklySummaryGenerator, ApiWeeklySummaryGenerator>();
-#endif
-#if !DUMMYSUMMARY || !DUMMYSHORTENER
-                    services.AddScoped<IWebDriver, ChromeDriver>();
-                    services.AddScoped<ILoginPage, LoginPage>();
 #endif
                 });
 

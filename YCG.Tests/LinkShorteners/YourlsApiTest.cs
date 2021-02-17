@@ -151,7 +151,6 @@ namespace YCG.Tests.LinkShorteners
         {
             var httpClient = SetupMockedHttpClient(HttpStatusCode.OK, SampleAnswer);
             fixture.Inject(httpClient);
-            string code = "123456789";
             sut = fixture.Create<YourlsApi>();
 
             var param = "http://test.pl/test/org?params&param";

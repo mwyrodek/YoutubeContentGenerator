@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using Microsoft.Extensions.Options;
@@ -27,7 +28,7 @@ namespace YoutubeContentGenerator.EpisodeGenerator
         }
 
 
-
+        [ExcludeFromCodeCoverage]
         public void Save()
         {
             using (StreamWriter writer = new StreamWriter($"{this.options.DefaultDesciriptionLocation}\\{this.options.DefaultDesciriptionFileName}", true))
