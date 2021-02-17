@@ -75,7 +75,10 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator.WordPressWrapper
                 Categories = new []{GetCategory(category).Id}
             };
             logger.LogTrace($"Scheduleing post for date {publishDate}");
-            client.Posts.Create(blogPost);
+            var task = client.Posts.Create(blogPost);
+            task.Wait();
+            
+            
             logger.LogTrace($"Post Scheduled");
             return this;
         }

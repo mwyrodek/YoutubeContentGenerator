@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 using System.Web;
 using AutoFixture;
 using AutoFixture.AutoMoq;
-using Castle.Core.Logging;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Protected;
@@ -25,13 +23,11 @@ namespace YCG.Tests.LinkShorteners
         private IYourlsApi sut;
         private Mock<HttpMessageHandler> httpMessageHandlerMock;
         private IFixture fixture;
-        private HttpClient client;
         private YourlsOptions options;
         private Mock<IOptions<YourlsOptions>> iOptionsMock;
 
-        private string sampleAnswer =
-            @"{'url':{'keyword':'3','url':'https:\/\/thebests.kotaku.com\/aa','title':'Aa - Gaming Reviews, News, Tips and More. | Kotaku','date':'2021-02-16 21:08:10','ip':'89.151.39.72'},'status':'success','message':'https:\/\/thebests.kotaku.com\/aa added to database','title':'Aa - Gaming Reviews, News, Tips and More. | Kotaku','shorturl':'https:\/\/wyrodek.pl\/x\/3','statusCode':200}";
-        
+        private const string SampleAnswer = @"{'url':{'keyword':'3','url':'https:\/\/thebests.kotaku.com\/aa','title':'Aa - Gaming Reviews, News, Tips and More. | Kotaku','date':'2021-02-16 21:08:10','ip':'89.151.39.72'},'status':'success','message':'https:\/\/thebests.kotaku.com\/aa added to database','title':'Aa - Gaming Reviews, News, Tips and More. | Kotaku','shorturl':'https:\/\/wyrodek.pl\/x\/3','statusCode':200}";
+
         [SetUp]
         public void Setup()
         {
@@ -51,7 +47,7 @@ namespace YCG.Tests.LinkShorteners
         [Test]
         public void ShortenUrl_UsesAdressFromOptions()
         {
-            var httpClient = SetupMockedHttpClient(HttpStatusCode.OK, sampleAnswer);
+            var httpClient = SetupMockedHttpClient(HttpStatusCode.OK, SampleAnswer);
             fixture.Inject(httpClient);
 
             sut = fixture.Create<YourlsApi>();
@@ -75,7 +71,7 @@ namespace YCG.Tests.LinkShorteners
         [Test]
         public void ShortenUrl_SignatureFromOptionsIsAdded()
         {
-            var httpClient = SetupMockedHttpClient(HttpStatusCode.OK, sampleAnswer);
+            var httpClient = SetupMockedHttpClient(HttpStatusCode.OK, SampleAnswer);
             fixture.Inject(httpClient);
             string code = "123456789";
             options.Signature = code;
@@ -84,14 +80,14 @@ namespace YCG.Tests.LinkShorteners
             var param = "test";
             sut.ShortenUrl(param);
 
-            string expectedQuerryFragment = $"signature={code}";
+            string expectedQueryFragment = $"signature={code}";
  
             httpMessageHandlerMock.Protected().Verify(
                 "SendAsync",
                 Times.Exactly(1), // we expected a single external request
                 ItExpr.Is<HttpRequestMessage>(req =>
                         req.Method == HttpMethod.Get  // we expected a GET request
-                        && req.RequestUri.ToString().Contains(expectedQuerryFragment) // to this uri
+                        && req.RequestUri.ToString().Contains(expectedQueryFragment) // to this uri
                 ),
                 ItExpr.IsAny<CancellationToken>()
             );
@@ -117,7 +113,7 @@ namespace YCG.Tests.LinkShorteners
         {
             var httpClient = SetupMockedHttpClient(HttpStatusCode.NotFound, "{'message':'Please log in','errorCode':403,'callback':''}");
             fixture.Inject(httpClient);
-            string code = "123456789";
+            const string code = "123456789";
             options.Signature = code;
             sut = fixture.Create<YourlsApi>();
         
@@ -131,21 +127,20 @@ namespace YCG.Tests.LinkShorteners
         {
             var httpClient = SetupMockedHttpClient(HttpStatusCode.OK, "{'id':1,'value':'1'}");
             fixture.Inject(httpClient);
-            string code = "123456789";
-            sut = fixture.Create<YourlsApi>();
-            //sut = fixture.Create<TestableYourlsApi>();
 
-            var param = "test";
+            sut = fixture.Create<YourlsApi>();
+
+            const string param = "test";
             sut.ShortenUrl(param);
 
-            string expectedQuerryFragment = $"action=shorturl";
+            var expectedQueryFragment = $"action=shorturl";
  
             httpMessageHandlerMock.Protected().Verify(
                 "SendAsync",
                 Times.Exactly(1), // we expected a single external request
                 ItExpr.Is<HttpRequestMessage>(req =>
                         req.Method == HttpMethod.Get  // we expected a GET request
-                        && req.RequestUri.ToString().Contains(expectedQuerryFragment) // to this uri
+                        && req.RequestUri.ToString().Contains(expectedQueryFragment) // to this uri
                 ),
                 ItExpr.IsAny<CancellationToken>()
             );
@@ -154,7 +149,7 @@ namespace YCG.Tests.LinkShorteners
         [Test]
         public void ShortenUrl_RequestUrlIsEncoded()
         {
-            var httpClient = SetupMockedHttpClient(HttpStatusCode.OK, sampleAnswer);
+            var httpClient = SetupMockedHttpClient(HttpStatusCode.OK, SampleAnswer);
             fixture.Inject(httpClient);
             string code = "123456789";
             sut = fixture.Create<YourlsApi>();
@@ -162,14 +157,14 @@ namespace YCG.Tests.LinkShorteners
             var param = "http://test.pl/test/org?params&param";
             sut.ShortenUrl(param);
 
-            string expectedQuerryFragment = HttpUtility.UrlEncode(param);
+            var expectedQueryFragment = HttpUtility.UrlEncode(param);
  
             httpMessageHandlerMock.Protected().Verify(
                 "SendAsync",
                 Times.Exactly(1), // we expected a single external request
                 ItExpr.Is<HttpRequestMessage>(req =>
                         req.Method == HttpMethod.Get  // we expected a GET request
-                        && req.RequestUri.ToString().Contains(expectedQuerryFragment) // to this uri
+                        && req.RequestUri.ToString().Contains(expectedQueryFragment) // to this uri
                 ),
                 ItExpr.IsAny<CancellationToken>()
             );
@@ -178,22 +173,21 @@ namespace YCG.Tests.LinkShorteners
         [Test]
         public void ShortenUrl_ReturnFormatIsSetToJson()
         {
-            var httpClient = SetupMockedHttpClient(HttpStatusCode.OK, sampleAnswer);
+            var httpClient = SetupMockedHttpClient(HttpStatusCode.OK, SampleAnswer);
             fixture.Inject(httpClient);
-            string code = "123456789";
             sut = fixture.Create<YourlsApi>();
 
             var param = "http://test.pl/test/org?params&param";
             sut.ShortenUrl(param);
 
-            string expectedQuerryFragment = "format=json";
+            var expectedQueryFragment = "format=json";
  
             httpMessageHandlerMock.Protected().Verify(
                 "SendAsync",
                 Times.Exactly(1), // we expected a single external request
                 ItExpr.Is<HttpRequestMessage>(req =>
                         req.Method == HttpMethod.Get  // we expected a GET request
-                        && req.RequestUri.ToString().Contains(expectedQuerryFragment) // to this uri
+                        && req.RequestUri.ToString().Contains(expectedQueryFragment) // to this uri
                 ),
                 ItExpr.IsAny<CancellationToken>()
             );
@@ -207,10 +201,9 @@ namespace YCG.Tests.LinkShorteners
                 @"{'url':{'keyword':'3','url':'https:\/\/thebests.kotaku.com\/aa','title':'Aa - Gaming Reviews, News, Tips and More. | Kotaku','date':'2021-02-16 21:08:10','ip':'89.151.39.72'},'status':'success','message':'https:\/\/thebests.kotaku.com\/aa added to database','title':'Aa - Gaming Reviews, News, Tips and More. | Kotaku','shorturl':'https:\/\/wyrodek.pl\/x\/3','statusCode':200}";
             var httpClient = SetupMockedHttpClient(HttpStatusCode.OK, asnswer);
             fixture.Inject(httpClient);
-            string code = "123456789";
             sut = fixture.Create<YourlsApi>();
-
             var param = "http://test.pl/test/org?params&param";
+            
             var result = sut.ShortenUrl(param);
             
             Assert.That(result, Is.EqualTo("https://wyrodek.pl/x/3"));
@@ -241,13 +234,4 @@ namespace YCG.Tests.LinkShorteners
         
     }
     
-    // //this is ass solution - thnaiks microsoft
-    // class TestableYourlsApi: YourlsApi
-    // {
-    //     public TestableYourlsApi(ILogger<YourlsApi> logger, IOptions<YourlsOptions> options, HttpClient client) : base(logger,options)
-    //     {
-    //         client.BaseAddress = new Uri(options.Value.Url);
-    //         base.client = client;
-    //     }
-    // }
 }

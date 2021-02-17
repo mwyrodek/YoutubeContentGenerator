@@ -14,6 +14,7 @@ using YoutubeContentGenerator.EpisodeGenerator.GoogleAPI;
 using YoutubeContentGenerator.LinkShortener;
 using YoutubeContentGenerator.LoadData;
 using YoutubeContentGenerator.LoadData.Pocket;
+using YoutubeContentGenerator.SeleniumLinkShortener;
 using YoutubeContentGenerator.Settings;
 using YoutubeContentGenerator.WeeklySummaryGenerator;
 using YoutubeContentGenerator.WeeklySummuryGenerator;

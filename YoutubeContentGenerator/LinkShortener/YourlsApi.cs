@@ -16,15 +16,14 @@ namespace YoutubeContentGenerator.LinkShortener
 {
     public class YourlsApi : IYourlsApi
     {
-        protected HttpClient client;
+        private readonly HttpClient client;
         private readonly ILogger<YourlsApi> logger;
         private readonly YourlsOptions options;
         private const string EndpointAddress = "yourls-api.php";
-        private StringBuilder request;
+        private readonly StringBuilder request;
         public YourlsApi(HttpClient client, ILogger<YourlsApi> logger, IOptions<YourlsOptions> options)
         {
             this.client = client;
-            //this.client = new HttpClient();
             this.logger = logger;
             this.options = options.Value;
             client.BaseAddress = new Uri(this.options.Url);
@@ -34,18 +33,18 @@ namespace YoutubeContentGenerator.LinkShortener
         public string ShortenUrl(string url)
         {
             logger.LogTrace("prepering request");
-            //append endpoint
+            // append endpoint
             request.Append(EndpointAddress);
-            //startparams
+            // startparams
             request.Append("?");
-            //add signature (authorization
+            // add signature (authorization
             request.Append($"signature={options.Signature}");
-            //Set action
+            // Set action
             request.Append($"&action=shorturl");
-            //Set action
+            // Set action
             var encodedUrl = HttpUtility.UrlEncode(url);
             request.Append($"&url={encodedUrl}");
-            //Set response format
+            // Set response format
             request.Append($"format=json");
             logger.LogTrace("sending request");
             var result = this.client.GetAsync(request.ToString());
@@ -58,10 +57,9 @@ namespace YoutubeContentGenerator.LinkShortener
                 throw new ExternalException($"Link Shortener returned un expected result status code {result.Result.StatusCode}");
             
             var resultContent = result.Result.Content.ReadAsStringAsync().Result;
-            
-            //if (resultContent is null) throw new NullReferenceException("Content is null");
+
             var yourlsResponse = JsonConvert.DeserializeObject<YourlsResponse>(resultContent);
-            //throw new System.NotImplementedException();
+
             return yourlsResponse.Shorturl;
         }
         

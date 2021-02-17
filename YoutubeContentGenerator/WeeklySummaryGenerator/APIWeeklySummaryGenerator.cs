@@ -46,11 +46,11 @@ namespace YoutubeContentGenerator.WeeklySummaryGenerator
             var date = DateTime.UtcNow.GetNextWeekSaturday();
             logger.LogTrace($"Scheduling post for {date}");
 
-#if !TEST
+//#if !TEST
             wrapper.Post(post, category, date);
-#else
+//#else
             logger.LogInformation("Test Run - pretending to save episode");
-#endif
+//#endif
         }
     }
 }
