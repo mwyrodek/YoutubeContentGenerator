@@ -1,15 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using PocketSharp;
 using PocketSharp.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.Extensions.Options;
-using OpenQA.Selenium;
 using YCG.Models;
-using YoutubeContentGenerator.Settings;
 
 namespace YoutubeContentGenerator.LoadData.Pocket
 {
