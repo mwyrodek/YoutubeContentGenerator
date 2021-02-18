@@ -61,7 +61,8 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator.WordPressWrapper
         private void RequestJTWToken(string username, string password, AuthMethod method)
         {
             client.AuthMethod = method;
-            client.RequestJWToken(username, password);
+            var requestJwToken = client.RequestJWToken(username, password);
+            requestJwToken.Wait();
         }
 
         public IWordPressClientWrapper Post(WeeklySummaryPost post, string category, DateTime publishDate)
