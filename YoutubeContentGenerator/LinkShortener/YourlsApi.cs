@@ -45,7 +45,7 @@ namespace YoutubeContentGenerator.LinkShortener
             var encodedUrl = HttpUtility.UrlEncode(url);
             request.Append($"&url={encodedUrl}");
             // Set response format
-            request.Append($"format=json");
+            request.Append($"&format=json");
             logger.LogTrace("sending request");
             var result = this.client.GetAsync(request.ToString());
             logger.LogTrace("waiting for answer");
