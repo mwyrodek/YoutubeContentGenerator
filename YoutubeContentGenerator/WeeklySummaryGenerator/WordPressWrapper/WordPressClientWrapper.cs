@@ -18,10 +18,7 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator.WordPressWrapper
     {
         private WordPressClient client;
         private readonly ILogger logger;
-        public WordPressClientWrapper(ILogger<WordPressClientWrapper> logger)
-        {
-            this.logger = logger;
-        }
+        public WordPressClientWrapper(ILogger<WordPressClientWrapper> logger) => this.logger = logger;
         public IWordPressClientWrapper CreateClient(string blogUrl)
         {
             logger.LogTrace($"creating client for address {blogUrl}");

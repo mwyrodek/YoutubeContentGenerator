@@ -6,12 +6,7 @@ namespace YCG.Models
     [ExcludeFromCodeCoverage]
     public class Episode
     {
-        public Episode()
-        {
-            Articles = new List<Article>();
-        }
-
-        public List<Article> Articles { get; set; }
+        public List<Article> Articles { get; set; } = new List<Article>();
         public int EpisodeNum { get; set; }
     }
 }

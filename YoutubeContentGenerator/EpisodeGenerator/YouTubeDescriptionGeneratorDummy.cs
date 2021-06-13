@@ -12,10 +12,8 @@ namespace YoutubeContentGenerator
     {
         private readonly ILogger<YouTubeDescriptionGeneratorDummy> logger;
 
-        public YouTubeDescriptionGeneratorDummy(ILogger<YouTubeDescriptionGeneratorDummy> logger)
-        {
-            this.logger = logger;
-        }
+        public YouTubeDescriptionGeneratorDummy(ILogger<YouTubeDescriptionGeneratorDummy> logger) => logger = this.logger;
+        
         public void CreateEpisodesDescription(List<Episode> episodes)
         {
             logger.LogInformation("pretending to create episode description");
