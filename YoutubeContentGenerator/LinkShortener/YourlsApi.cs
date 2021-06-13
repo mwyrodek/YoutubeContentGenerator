@@ -36,7 +36,7 @@ namespace YoutubeContentGenerator.LinkShortener
             // append endpoint
             request.Append(EndpointAddress);
             // startparams
-            request.Append("?");
+            request.Append('?');
             // add signature (authorization
             request.Append($"signature={options.Signature}");
             // Set action
