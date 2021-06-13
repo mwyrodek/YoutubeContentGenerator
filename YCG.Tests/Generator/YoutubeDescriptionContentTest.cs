@@ -35,7 +35,7 @@ namespace YCG.Tests.Generator
             Assert.Multiple(() =>
             {
                  StringAssert.StartsWith("<TITTLE> 🍵 📰 ITea Morning", result);
-                 StringAssert.Contains($"#{episode.EpisodeNum}", result);
+                 StringAssert.Contains($"#{episode.EpisodeNumber}", result);
                  episode.Articles.ForEach(a => StringAssert.Contains(a.Link, result));
                  episode.Articles.ForEach(a => StringAssert.Contains(a.Title, result));
             });
@@ -51,7 +51,7 @@ namespace YCG.Tests.Generator
             Assert.Multiple(() =>
             {
                 StringAssert.StartsWith("<TITTLE> 🍵 📰 ITea Morning", result);
-                StringAssert.Contains($"#{episode.EpisodeNum}", result);
+                StringAssert.Contains($"#{episode.EpisodeNumber}", result);
             });
         }
         
@@ -75,7 +75,7 @@ namespace YCG.Tests.Generator
             Assert.Multiple(() =>
             {
                 StringAssert.StartsWith("<TITTLE> 🍵 📰 ITea Morning", result);
-                episodes.ForEach(e=> StringAssert.Contains($"#{e.EpisodeNum}",result));
+                episodes.ForEach(e=> StringAssert.Contains($"#{e.EpisodeNumber}",result));
                 episodes[0].Articles.ForEach(a => StringAssert.Contains(a.Link, result));
                 episodes[0].Articles.ForEach(a => StringAssert.Contains(a.Title, result));
             });

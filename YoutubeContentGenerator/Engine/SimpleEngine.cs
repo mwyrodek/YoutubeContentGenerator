@@ -60,7 +60,7 @@ namespace YoutubeContentGenerator.Engine
             foreach (var episode in Episodes)
             {
                 num++;
-                episode.EpisodeNum = num;
+                episode.EpisodeNumber = num;
 
             }
 #if TEST

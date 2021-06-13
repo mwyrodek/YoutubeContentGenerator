@@ -7,6 +7,6 @@ namespace YCG.Models
     public class Episode
     {
         public List<Article> Articles { get; set; } = new List<Article>();
-        public int EpisodeNum { get; set; }
+        public int EpisodeNumber { get; set; }
     }
 }

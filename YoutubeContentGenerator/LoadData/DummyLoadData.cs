@@ -24,7 +24,7 @@ namespace YoutubeContentGenerator.LoadData
                 list.Add(
                     new Episode()
                     {
-                        EpisodeNum = i,
+                        EpisodeNumber = i,
                         Articles = Articles
                     });
                 

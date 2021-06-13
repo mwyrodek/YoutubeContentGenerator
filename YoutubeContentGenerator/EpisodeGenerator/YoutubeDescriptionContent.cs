@@ -50,9 +50,9 @@ License: http://creativecommons.org/licenses/by/4.0/
         {
             var content = new StringBuilder();
             var tempDesctiption = description;
-            if (episode.EpisodeNum > 0)
+            if (episode.EpisodeNumber > 0)
             {
-                tempDesctiption = tempDesctiption.Replace("#Number", $"#{episode.EpisodeNum}");
+                tempDesctiption = tempDesctiption.Replace("#Number", $"#{episode.EpisodeNumber}");
             }
 
             content.Append(tempDesctiption);

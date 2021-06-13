@@ -30,7 +30,7 @@ Zachęcam do przeglądania!
             content.AppendLine(Foreword);
             foreach (var episode in episodes)
             {
-                content.AppendLine($"{TitleLine}{episode.EpisodeNum}");
+                content.AppendLine($"{TitleLine}{episode.EpisodeNumber}");
                 foreach (var article in episode.Articles)
                 {
                     content.AppendLine($"• [{article.Title}]({article.Link})");
