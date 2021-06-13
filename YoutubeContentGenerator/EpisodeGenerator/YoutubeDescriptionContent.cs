@@ -32,7 +32,7 @@ License: http://creativecommons.org/licenses/by/4.0/
 🎬 Intro - Adam Kowalczyk
 🎨 Agenda i Thumbnail - Agnieszka Gawrońska  https://pomagierka.pl/
 
-🖥️ Materiały z odcinka:";
+🖥️ Artykuły z odcinka:";
 
         public string CreateEpisodesDescription(List<Episode> episodes)
         {
@@ -64,7 +64,7 @@ License: http://creativecommons.org/licenses/by/4.0/
             content.AppendLine();
             content.AppendLine();
             content.AppendLine();
-            content.Append($"📅 Wydarzenia: \n");
+            content.Append($"☕ Kubek Różności: \n");
             content.Append($"🔗  <opis><link>: \n");
             content.AppendLine();
             content.AppendLine();
