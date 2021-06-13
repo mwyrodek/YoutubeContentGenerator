@@ -8,19 +8,18 @@ namespace YoutubeContentGenerator.WeeklySummaryGenerator
 {
     public static class WeeklySummaryContentGenerator
     {
-        private static readonly string Title = $"ITea Morning – Links of the week {DateTime.UtcNow.GetNextWeekNumber()}";
+        private static readonly string Title = $"ITea Morning – Linki z Tygodnia {DateTime.UtcNow.GetNextWeekNumber()}";
         private static readonly string Foreword = @$"
-On my YouTube channel I have a project called “[ITea Morning](https://youtube.com/c/ITeaMorning)”.
-The idea is to make daily short videos with few links to articles for audience to read to morning tea or coffee.
+[ITea Morning](https://youtube.com/c/ITeaMorning) jest codzienną serią video na moim kanale YouTube  gdzie omawiam różne ciekawe artykuły ze świata IT.
 
-Since my channel is in polish for your convenience I am [weekly sharing here](https://wyrodek.pl/category/itea/) all the interesting materials I am talking about
+By ułatwić ich wyszukiwanie w przyszłości raz w tygodniu rzucam tutaj wszystkie linki.
 
-Now Let’s drink our ITea!
+Zachęcam do przeglądania!
 ";
 
         private const string TitleLine = "## ITea Morning #";
 
-        private const string Footer = "That is all for today see you next week!";
+        private const string Footer = "To wszystko na dziś do zobaczenia za tydzień!";
 
 
         public static WeeklySummaryPost CreateWeeklySummaryContent(List<Episode> episodes)
