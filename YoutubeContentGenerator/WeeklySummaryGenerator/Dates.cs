@@ -13,18 +13,12 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator
             return myCal.GetWeekOfYear(nextWeek, myCI.DateTimeFormat.CalendarWeekRule, myCI.DateTimeFormat.FirstDayOfWeek);
         }
 
-        public static DateTime GetNextWeekSaturday(this DateTime date)
+        public static DateTime GetNextWeekSaturday(this DateTime date) => date.DayOfWeek switch
         {
-            switch (date.DayOfWeek)
-            {
-                case DayOfWeek.Saturday:
-                    return date.AddDays(7);
-                case DayOfWeek.Sunday:
-                    return date.AddDays(6);
-                default:
-                    return  date.Next(DayOfWeek.Saturday).AddDays(7);
-            }
-        }
+            DayOfWeek.Saturday => date.AddDays(7),
+            DayOfWeek.Sunday =>  date.AddDays(6),
+            _ => date.Next(DayOfWeek.Saturday).AddDays(7),
+        };
         
         //stolen from https://stackoverflow.com/a/7611480
         public static DateTime Next(this DateTime from, DayOfWeek dayOfWeek)
