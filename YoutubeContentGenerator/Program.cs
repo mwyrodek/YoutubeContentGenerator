@@ -52,7 +52,7 @@ namespace YoutubeContentGenerator
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddTransient<ContentGenerator>();
-                    services.AddScoped<IEpisodeNumberHelper, EpisodeNumberHelperFromTextFile>();
+                    services.AddScoped<IDataBaseQuery, CosmosDbQuery>();
                     services.AddScoped<IYouTubeDescriptionGenerator, YouTubeDescriptionGeneratorText>();
                     services.AddScoped<IYoutubeDescriptionContent, YoutubeDescriptionContent>();
 
@@ -62,9 +62,10 @@ namespace YoutubeContentGenerator
                     services.Configure<PocketOptions>(hostContext.Configuration.GetSection(PocketOptions.Pocket));
                     services.Configure<GoogleOptions>(hostContext.Configuration.GetSection(GoogleOptions.Google));
                     services.Configure<YourlsOptions>(hostContext.Configuration.GetSection(YourlsOptions.Yourls));
+                    services.Configure<CosmosDB>(hostContext.Configuration.GetSection(CosmosDB.Cosmos));
 
                     //engine is progamcore
-                    services.AddScoped<IEngine, SimpleEngine>();
+                    services.AddScoped<IEngine, CosmosDBEngine>();
 
 #if DUMMYLOADER
                     services.AddScoped<ILoadData, DummyLoadData>();

@@ -10,7 +10,7 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestRun|AnyCPU'">
-      <DefineConstants>TRACE;TestRun;TEST</DefineConstants>
+      <DefineConstants>TRACE;TestRun;TESTCOREAPP;DUMMYLOADER;DUMMYSHORTENER;DUMMYYOUTUBE;DUMMYSUMMARYCOREAPP</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestShortener|AnyCPU'">
@@ -36,6 +36,8 @@
 
     <ItemGroup>
       <PackageReference Include="Google.Apis.Docs.v1" Version="1.51.0.2273" />
+      <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.19.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
       <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
