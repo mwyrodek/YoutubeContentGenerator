@@ -7,7 +7,7 @@ namespace YoutubeContentGenerator.WeeklySummuryGenerator
     {
         public static int GetNextWeekNumber(this DateTime date)
         {
-            CultureInfo myCI = new CultureInfo("pl-PL");
+            var myCI = new CultureInfo("pl-PL");
             Calendar myCal = myCI.Calendar;
             var nextWeek = date.AddDays(7);
             return myCal.GetWeekOfYear(nextWeek, myCI.DateTimeFormat.CalendarWeekRule, myCI.DateTimeFormat.FirstDayOfWeek);

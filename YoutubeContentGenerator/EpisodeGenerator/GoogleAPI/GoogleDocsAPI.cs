@@ -66,7 +66,7 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
             req.InsertText = insertTextRequest;
             var requests = new List<Request>() {req};
             
-            BatchUpdateDocumentRequest body = new BatchUpdateDocumentRequest();
+            var body = new BatchUpdateDocumentRequest();
             body.Requests = requests;
             service.Documents.BatchUpdate(body, DocumentId).Execute();
             logger.LogTrace("Updating doc - Done");

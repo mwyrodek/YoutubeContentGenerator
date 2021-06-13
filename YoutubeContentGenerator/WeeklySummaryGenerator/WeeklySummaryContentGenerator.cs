@@ -24,7 +24,7 @@ Zachęcam do przeglądania!
 
         public static WeeklySummaryPost CreateWeeklySummaryContent(List<Episode> episodes)
         {
-            StringBuilder content = new StringBuilder();
+            var content = new StringBuilder();
 
             var post = new WeeklySummaryPost {Title = Title};
             content.AppendLine(Foreword);

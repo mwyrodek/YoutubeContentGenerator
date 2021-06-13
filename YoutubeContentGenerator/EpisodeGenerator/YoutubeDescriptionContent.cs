@@ -48,7 +48,7 @@ License: http://creativecommons.org/licenses/by/4.0/
 
         public string CreateEpisodeDescription(Episode episode)
         {
-            StringBuilder content = new StringBuilder();
+            var content = new StringBuilder();
             var tempDesctiption = description;
             if (episode.EpisodeNum > 0)
             {

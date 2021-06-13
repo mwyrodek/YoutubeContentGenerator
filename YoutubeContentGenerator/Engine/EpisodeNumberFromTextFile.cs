@@ -22,7 +22,7 @@ namespace YoutubeContentGenerator.Engine
         {
             var num = 0;
             logger.LogTrace($"reading from file {options.Value.DefaultLastEpNumberFile}");
-            using (StreamReader sr = new StreamReader(options.Value.DefaultLastEpNumberFile))
+            using (var sr = new StreamReader(options.Value.DefaultLastEpNumberFile))
             {
                 string line;
                 // Read and display lines from the file until the end of
@@ -39,7 +39,7 @@ namespace YoutubeContentGenerator.Engine
         public void UpdateLastEpisodeNumber(int number)
         {
             logger.LogTrace($"Saving new number to file");
-            using (StreamWriter writer = new StreamWriter(options.Value.DefaultLastEpNumberFile, false))
+            using (var writer = new StreamWriter(options.Value.DefaultLastEpNumberFile, false))
             {
                 writer.Write(number);
             }
