@@ -20,7 +20,7 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
     [ExcludeFromCodeCoverage]
     public class GoogleDocsApi : IGoogleDocApi
     {
-        private static string[] Scopes = {DocsService.Scope.Documents};
+        private static readonly string[] Scopes = {DocsService.Scope.Documents};
         private readonly string ApplicationName;
         private readonly string DocumentId;
         private DocsService service;
@@ -65,18 +65,22 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
             var insertTextRequest = CreateInsertTextRequest(content, location, out var req);
             req.InsertText = insertTextRequest;
             var requests = new List<Request>() {req};
-            
-            var body = new BatchUpdateDocumentRequest();
-            body.Requests = requests;
+
+            var body = new BatchUpdateDocumentRequest
+            {
+                Requests = requests
+            };
             service.Documents.BatchUpdate(body, DocumentId).Execute();
             logger.LogTrace("Updating doc - Done");
         }
 
         private static InsertTextRequest CreateInsertTextRequest(string content, Location location, out Request req)
         {
-            var text = new InsertTextRequest();
-            text.Text = $"\n{content}";
-            text.Location = location;
+            var text = new InsertTextRequest
+            {
+                Text = $"\n{content}",
+                Location = location
+            };
             req = new Request();
             return text;
         }
@@ -85,8 +89,10 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
         {
             var readFile = ReadFile();
             var endIndex = readFile.Body.Content.Last().EndIndex;
-            var location = new Location();
-            location.Index = endIndex - 1;
+            var location = new Location
+            {
+                Index = endIndex - 1
+            };
             return location;
         }
     }

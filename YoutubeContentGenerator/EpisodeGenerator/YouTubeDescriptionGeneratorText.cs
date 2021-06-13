@@ -32,8 +32,7 @@ namespace YoutubeContentGenerator.EpisodeGenerator
         public void Save()
         {
             using var writer = new StreamWriter($"{this.options.DefaultDesciriptionLocation}\\{this.options.DefaultDesciriptionFileName}", true);
-            writer.Write(builtContent);
-            
+            writer.Write(builtContent); 
         }
     }
 }

@@ -85,9 +85,11 @@ namespace YCG.Tests.Pocket
         {
             string testtag = "Tag";
             var item = fixture.Create<PocketItem>();
-            var items = new List<PocketItem>();
-            items.Add(item);
-            
+            var items = new List<PocketItem>
+            {
+                item
+            };
+
             var mockPocketClient = new Mock<IPocketClient>();
             mockPocketClient
                 .Setup(pc => pc.Get(It.IsAny<State?>(), It.IsAny<bool?>(), It.IsAny<string>(), It.IsAny<ContentType?>(),
@@ -111,8 +113,10 @@ namespace YCG.Tests.Pocket
         {
             string testtag = "Tag";
             var item = fixture.Create<PocketItem>();
-            var items = new List<PocketItem>();
-            items.Add(item);
+            var items = new List<PocketItem>
+            {
+                item
+            };
             var mappedArt = PocketMapper.Map(item);
             var mockPocketClient = new Mock<IPocketClient>();
             mockPocketClient
