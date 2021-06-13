@@ -2,10 +2,11 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
         <Configurations>Debug;Release;TestRun;TestLoader;TestShortener;TestShortener-Summary;TestWeeklySummary;TestYoutubeContent</Configurations>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
         <Platforms>AnyCPU</Platforms>
+        <LangVersion>9</LangVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='TestRun|AnyCPU'">
