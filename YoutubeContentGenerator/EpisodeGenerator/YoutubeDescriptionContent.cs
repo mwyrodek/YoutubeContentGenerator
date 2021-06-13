@@ -20,7 +20,7 @@ To wszystko i wiele więcej w dzisiejszym 🍵 ITea Morning
 🔗 Gdzie mnie można znaleźć
 Twitter: https://twitter.com/maciejwyrodek
 GitHub: https://github.com/mwyrodek
-Facebook: https://www.facebook.com/MaciejWyrodek.Blog/
+Facebook: https://www.facebook.com/MaciejWyrodek.ITea/
 LinkedIn: https://www.linkedin.com/in/wyrodek/
 
 🎵 Muzyka:
