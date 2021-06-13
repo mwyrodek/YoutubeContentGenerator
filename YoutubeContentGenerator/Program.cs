@@ -22,29 +22,29 @@ namespace YoutubeContentGenerator
     [ExcludeFromCodeCoverage]
     public static class Program
     {
-        
+
         public static async Task Main(string[] args)
         {
 
             var host = CreateHostBuilder(args).Build();
-            using (var serviceScope = host.Services.CreateScope())
+            using var serviceScope = host.Services.CreateScope();
+
+
+            var services = serviceScope.ServiceProvider;
+
+            try
             {
+                var myService = services.GetRequiredService<ContentGenerator>();
+                await myService.Run();
 
-                var services = serviceScope.ServiceProvider;
-
-                try
-                {
-                    var myService = services.GetRequiredService<ContentGenerator>();
-                    await myService.Run();
-
-                    Console.WriteLine("Success");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error Occured");
-                    Console.WriteLine(ex.Message);
-                }
+                Console.WriteLine("Success");
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error Occured");
+                Console.WriteLine(ex.Message);
+            }
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -55,18 +55,18 @@ namespace YoutubeContentGenerator
                     services.AddScoped<IEpisodeNumberHelper, EpisodeNumberHelperFromTextFile>();
                     services.AddScoped<IYouTubeDescriptionGenerator, YouTubeDescriptionGeneratorText>();
                     services.AddScoped<IYoutubeDescriptionContent, YoutubeDescriptionContent>();
-                    
+
                     //Configs:
                     services.Configure<WordPressOptions>(hostContext.Configuration.GetSection(WordPressOptions.WordPress));
                     services.Configure<DefaultsOptions>(hostContext.Configuration.GetSection(DefaultsOptions.Defaults));
                     services.Configure<PocketOptions>(hostContext.Configuration.GetSection(PocketOptions.Pocket));
                     services.Configure<GoogleOptions>(hostContext.Configuration.GetSection(GoogleOptions.Google));
                     services.Configure<YourlsOptions>(hostContext.Configuration.GetSection(YourlsOptions.Yourls));
-                    
+
                     //engine is progamcore
                     services.AddScoped<IEngine, SimpleEngine>();
-                    
-#if DUMMYLOADER 
+
+#if DUMMYLOADER
                     services.AddScoped<ILoadData, DummyLoadData>();
 #else
                     services.AddScoped<ILoadData, LoadDataFromPocket>();
@@ -74,19 +74,19 @@ namespace YoutubeContentGenerator
                     services.AddScoped<IPocketConector, PocketConector>();
 #endif
 
-                    
+
 
                     //verision of link shorener
 #if DUMMYSHORTENER
                     services.AddScoped<ILinkShortener, DummyShortener>();
 #else
-                    services.AddScoped<HttpClient,HttpClient>();
+                    services.AddScoped<HttpClient, HttpClient>();
                     services.AddScoped<IYourlsApi, YourlsApi>();
                     services.AddScoped<ILinkShortener, YourlsLinkShortener>();
-                    
 
-                    
-                   
+
+
+
 #endif
 #if DUMMYYOUTUBE
                     services.AddScoped<IEpisodeNumberHelper, EpisodeNumberHelperFromTextFile>();
@@ -97,7 +97,7 @@ namespace YoutubeContentGenerator
                     services.AddScoped<IGoogleDocApi, GoogleDocsApi>();
                     services.AddScoped<IYoutubeDescriptionContent, YoutubeDescriptionContent>();
 #endif
-                    
+
 #if DUMMYSUMMARY
                     services.AddScoped<IWeeklySummaryGenerator, WeeklySummuryGenerator.DummuWeeklySummaryGenerator>();
 #else

@@ -36,11 +36,11 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
         {
             logger.LogTrace("Authenticating to google api");
             GoogleCredential credential;
-            using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
-            {
-                credential = GoogleCredential.FromStream(stream)
+            using var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read);
+            
+            credential = GoogleCredential.FromStream(stream)
                     .CreateScoped(Scopes);
-            }
+            
 
             service = new DocsService(new BaseClientService.Initializer()
             {

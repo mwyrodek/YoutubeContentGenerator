@@ -31,10 +31,9 @@ namespace YoutubeContentGenerator.EpisodeGenerator
         [ExcludeFromCodeCoverage]
         public void Save()
         {
-            using (var writer = new StreamWriter($"{this.options.DefaultDesciriptionLocation}\\{this.options.DefaultDesciriptionFileName}", true))
-            {
-                writer.Write(builtContent);
-            }
+            using var writer = new StreamWriter($"{this.options.DefaultDesciriptionLocation}\\{this.options.DefaultDesciriptionFileName}", true);
+            writer.Write(builtContent);
+            
         }
     }
 }

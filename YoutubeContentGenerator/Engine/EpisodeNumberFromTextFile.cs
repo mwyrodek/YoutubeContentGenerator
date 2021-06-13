@@ -15,23 +15,23 @@ namespace YoutubeContentGenerator.Engine
         private readonly IOptions<DefaultsOptions> options;
         public EpisodeNumberHelperFromTextFile(ILogger<EpisodeNumberHelperFromTextFile> logger, IOptions<DefaultsOptions> options)
         {
-            this.logger=logger;
-            this.options=options;
+            this.logger = logger;
+            this.options = options;
         }
         public int GetLastEpisodeNumber()
         {
             var num = 0;
             logger.LogTrace($"reading from file {options.Value.DefaultLastEpNumberFile}");
-            using (var sr = new StreamReader(options.Value.DefaultLastEpNumberFile))
+            string line;
+            using var sr = new StreamReader(options.Value.DefaultLastEpNumberFile);
+
+            // Read and display lines from the file until the end of
+            // the file is reached.
+            while ((line = sr.ReadLine()) != null)
             {
-                string line;
-                // Read and display lines from the file until the end of
-                // the file is reached.
-                while ((line = sr.ReadLine()) != null)
-                {
-                    num = int.Parse(line);
-                }
+                num = int.Parse(line);
             }
+
             logger.LogTrace($"Number {num} read from file.");
             return num;
         }
@@ -39,10 +39,9 @@ namespace YoutubeContentGenerator.Engine
         public void UpdateLastEpisodeNumber(int number)
         {
             logger.LogTrace($"Saving new number to file");
-            using (var writer = new StreamWriter(options.Value.DefaultLastEpNumberFile, false))
-            {
-                writer.Write(number);
-            }
+            using var writer = new StreamWriter(options.Value.DefaultLastEpNumberFile, false);
+            writer.Write(number);
+           
             logger.LogTrace($"Number saved");
         }
     }
