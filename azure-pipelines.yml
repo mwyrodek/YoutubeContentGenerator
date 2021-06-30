@@ -54,4 +54,4 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      start D:\a\1\s\YCG.Tests\bin\Release\net5.0\YoutubeContentGenerator.exe
+      D:\a\1\s\YCG.Tests\bin\Release\net5.0\YoutubeContentGenerator.exe
