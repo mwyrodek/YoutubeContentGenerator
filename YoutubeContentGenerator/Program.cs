@@ -51,6 +51,7 @@ namespace YoutubeContentGenerator
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
+
                     services.AddTransient<ContentGenerator>();
                     services.AddScoped<IDataBaseQuery, CosmosDbQuery>();
                     services.AddScoped<IYouTubeDescriptionGenerator, YouTubeDescriptionGeneratorText>();
