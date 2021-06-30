@@ -9,5 +9,6 @@ namespace YoutubeContentGenerator.Settings
         
         public string ApplicationName { get; set; } 
         public string DocumentId { get; set; }
+        public string CredentialsFile { get; set; }
     }
 }

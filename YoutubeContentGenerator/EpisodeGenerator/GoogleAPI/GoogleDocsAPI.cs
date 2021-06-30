@@ -23,6 +23,7 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
         private static readonly string[] Scopes = {DocsService.Scope.Documents};
         private readonly string ApplicationName;
         private readonly string DocumentId;
+        private readonly string CredentialsFile;
         private DocsService service;
         private readonly ILogger.ILogger logger;
 
@@ -31,12 +32,13 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
             this.logger = logger;
             ApplicationName = option.Value.ApplicationName;
             DocumentId = option.Value.DocumentId;
+            CredentialsFile = option.Value.CredentialsFile;
         }
         public void Authenticate()
         {
             logger.LogTrace("Authenticating to google api");
             GoogleCredential credential;
-            using var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read);
+            using var stream = new FileStream(CredentialsFile, FileMode.Open, FileAccess.Read);
             
             credential = GoogleCredential.FromStream(stream)
                     .CreateScoped(Scopes);
