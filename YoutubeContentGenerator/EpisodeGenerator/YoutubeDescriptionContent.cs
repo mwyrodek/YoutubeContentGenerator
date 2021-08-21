@@ -23,6 +23,10 @@ GitHub: https://github.com/mwyrodek
 Facebook: https://www.facebook.com/MaciejWyrodek.ITea/
 LinkedIn: https://www.linkedin.com/in/wyrodek/
 
+🎙️Podcast
+Spotify: https://open.spotify.com/show/3Yo5AtGfQVXAxFA5q13zdF
+Google Podcast: https://www.google.com/podcasts?feed=aHR0cHM6Ly9hbmNob3IuZm0vcy82NjJlZDEwOC9wb2RjYXN0L3Jzcw==
+
 🎵 Muzyka:
 Easy Lemon (30 second) by Kevin MacLeod
 Link: https://incompetech.filmmusic.io/song/3695-easy-lemon-30-second-
