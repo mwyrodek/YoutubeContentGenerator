@@ -10,5 +10,8 @@ namespace YCG.Models
         public Guid Id { get; set; } = Guid.NewGuid();
         public List<Article> Articles { get; set; } = new List<Article>();
         public int EpisodeNumber { get; set; }
+        
+        public List<string> Tags { get; set; }
+        
     }
 }

@@ -14,7 +14,8 @@ namespace YoutubeContentGenerator.LoadData.Pocket
             return new Article()
             {
                 Title = item.Title,
-                Link = item.Uri.ToString()
+                Link = item.Uri.ToString(),
+                Tags = MapTags(item.Tags)
             };
         }
 
@@ -23,8 +24,20 @@ namespace YoutubeContentGenerator.LoadData.Pocket
             return new Article()
             {
                 Title = pocketArticle.Title,
-                Link = pocketArticle.Uri.ToString()
+                Link = pocketArticle.Uri.ToString(),
+
             };
+        }
+
+        private static List<string> MapTags(IEnumerable<PocketTag> tags)
+        {
+            var list = new List<string>();
+            foreach (var pocketTag in tags)
+            {
+                list.Add(pocketTag.Name);
+            }
+
+            return list;
         }
     }
 }

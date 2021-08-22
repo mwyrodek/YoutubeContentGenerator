@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Threading.Tasks;
 using YCG.Models;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Logging;
@@ -10,6 +10,7 @@ using YoutubeContentGenerator.Settings;
 
 namespace YoutubeContentGenerator.Engine
 {
+    [ExcludeFromCodeCoverage]
     public class CosmosDbQuery :IDataBaseQuery
     {
      
@@ -54,9 +55,7 @@ namespace YoutubeContentGenerator.Engine
                 itemAsync.Wait();
                 var item = itemAsync.Result;
                 Console.WriteLine(item.Resource.EpisodeNumber);
-                
             }
-            
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace YCG.Models
 {
@@ -7,5 +8,6 @@ namespace YCG.Models
     {
         public string Title { get; set; }
         public string Link { get; set; }
+        public List<string> Tags { get; set; }
     }
 }

@@ -52,6 +52,12 @@ License: http://creativecommons.org/licenses/by/4.0/
 
         public string CreateEpisodeDescription(Episode episode)
         {
+            episode = new EpisodeBuilder(episode)
+                .AggregateTagsFromArticles()
+                .RemoveRedundantTags()
+                .RemoveSpecialTags()
+                .Build();
+            
             var content = new StringBuilder();
             var tempDesctiption = description;
             if (episode.EpisodeNumber > 0)
@@ -76,6 +82,7 @@ License: http://creativecommons.org/licenses/by/4.0/
             content.Append($"0:00 Intro \n");
             content.AppendLine();
             content.Append($"Tags: \n");
+            content.Append(String.Join(", ", episode.Tags));
             content.Append("<InsertTags>");
             content.AppendLine();
             content.AppendLine();

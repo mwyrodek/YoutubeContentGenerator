@@ -1,3 +1,4 @@
+using System.Linq;
 using AutoFixture;
 using AutoFixture.AutoMoq;
 using NUnit.Framework;
@@ -29,6 +30,7 @@ namespace YCG.Tests.Pocket
             
             Assert.That(article.Link, Is.EqualTo(pocketItem.Uri.ToString()));
             Assert.That(article.Title, Is.EqualTo(pocketItem.Title));
+            Assert.That(article.Tags[0], Is.EqualTo(pocketItem.Tags.First().Name));
         }
         
         
