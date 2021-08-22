@@ -14,10 +14,10 @@ using YoutubeContentGenerator.WeeklySummuryGenerator;
 namespace YCG.Tests.EngineTest
 {
     [TestFixture]
-    public class SimpleEngineTest
+    public class CosmosDBEngineTest
     {
         private IFixture fixture;
-        private SimpleEngine sut;
+        private CosmosDBEngine sut;
         [SetUp]
         public void Setup()
         {
@@ -30,7 +30,7 @@ namespace YCG.Tests.EngineTest
             var testdata = fixture.Create<List<Episode>>();
             var mockLoadData = fixture.Freeze<Mock<ILoadData>>();
             mockLoadData.Setup(ld=>ld.Execute()).Returns(testdata);
-            sut = fixture.Create<SimpleEngine>();
+            sut = fixture.Create<CosmosDBEngine>();
             sut.LoadData();
             Assert.That(sut.Episodes, Is.EqualTo(testdata));
             mockLoadData.Verify(d => d.Execute(), Times.Once);
@@ -40,7 +40,7 @@ namespace YCG.Tests.EngineTest
         public void GenerateLinksTest()
         {
             var mock = fixture.Freeze<Mock<ILinkShortener>>();
-            sut = fixture.Create<SimpleEngine>();
+            sut = fixture.Create<CosmosDBEngine>();
             sut.GenerateLinks();
 
             mock.Verify(s => s.ShortenAllLinks(It.IsAny<List<Episode>>()), Times.Once);
@@ -54,7 +54,7 @@ namespace YCG.Tests.EngineTest
             mockLoadData.Setup(ld=>ld.Execute()).Returns(testdata);
             var mockShortener = fixture.Freeze<Mock<ILinkShortener>>();
             
-            sut = fixture.Create<SimpleEngine>();
+            sut = fixture.Create<CosmosDBEngine>();
             sut.LoadData();
             sut.GenerateLinks();
             mockShortener.Verify(s => s.ShortenAllLinks(testdata), Times.Once);
@@ -67,12 +67,13 @@ namespace YCG.Tests.EngineTest
             var mockLoadData = fixture.Freeze<Mock<ILoadData>>();
             mockLoadData.Setup(ld=>ld.Execute()).Returns(testdata);
             
-            var mockEpisodeNumber = fixture.Freeze<Mock<IEpisodeNumberHelper>>();
+            var mockEpisodeNumber = fixture.Freeze<Mock<IDataBaseQuery>>();
             mockEpisodeNumber.Setup(en => en.GetLastEpisodeNumber()).Returns(1);
-            sut = fixture.Create<SimpleEngine>();
+            sut = fixture.Create<CosmosDBEngine>();
             sut.LoadData();
             sut.GenerateDescription();
-            mockEpisodeNumber.Verify(en=>en.UpdateLastEpisodeNumber(testdata.Count+1));
+            
+            Assert.AreEqual(2,sut.Episodes[0].EpisodeNumber);
         }
         
         [Test]
@@ -82,12 +83,14 @@ namespace YCG.Tests.EngineTest
             var mockLoadData = fixture.Freeze<Mock<ILoadData>>();
             mockLoadData.Setup(ld=>ld.Execute()).Returns(testdata);
             
-            var mockEpisodeNumber = fixture.Freeze<Mock<IEpisodeNumberHelper>>();
+            var mockEpisodeNumber = fixture.Freeze<Mock<IDataBaseQuery>>();
             mockEpisodeNumber.Setup(en => en.GetLastEpisodeNumber()).Returns(0);
-            sut = fixture.Create<SimpleEngine>();
+            sut = fixture.Create<CosmosDBEngine>();
             sut.LoadData();
             sut.GenerateDescription();
-            mockEpisodeNumber.Verify(en=>en.UpdateLastEpisodeNumber(It.IsAny<int>()), Times.Never);
+            
+            
+            Assert.AreEqual(testdata[0].EpisodeNumber,sut.Episodes[0].EpisodeNumber);
         }
         
         //todo looks like GenerateDescription is doing to much...
@@ -100,7 +103,7 @@ namespace YCG.Tests.EngineTest
             
             var mockYoutubeDesc = fixture.Freeze<Mock<IYouTubeDescriptionGenerator>>();
             
-            sut = fixture.Create<SimpleEngine>();
+            sut = fixture.Create<CosmosDBEngine>();
             sut.LoadData();
             sut.GenerateDescription();
             mockYoutubeDesc.Verify(yt=>yt.CreateEpisodesDescription(testdata), Times.Once);
@@ -116,7 +119,7 @@ namespace YCG.Tests.EngineTest
             
             var mockWeekDesc = fixture.Freeze<Mock<IWeeklySummaryGenerator>>();
             
-            sut = fixture.Create<SimpleEngine>();
+            sut = fixture.Create<CosmosDBEngine>();
             sut.LoadData();
             sut.GenerateWeekSummary();
             

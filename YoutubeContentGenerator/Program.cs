@@ -54,7 +54,6 @@ namespace YoutubeContentGenerator
 
                     services.AddTransient<ContentGenerator>();
                     services.AddScoped<IDataBaseQuery, CosmosDbQuery>();
-                    services.AddScoped<IYouTubeDescriptionGenerator, YouTubeDescriptionGeneratorText>();
                     services.AddScoped<IYoutubeDescriptionContent, YoutubeDescriptionContent>();
 
                     //Configs:
