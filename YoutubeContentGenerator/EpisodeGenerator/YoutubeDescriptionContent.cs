@@ -62,7 +62,7 @@ License: http://creativecommons.org/licenses/by/4.0/
             var tempDesctiption = description;
             if (episode.EpisodeNumber > 0)
             {
-                tempDesctiption = tempDesctiption.Replace("#Number", $"#{episode.EpisodeNumber}");
+                tempDesctiption = tempDesctiption.Replace("#Number", $"{episode.EpisodeNumber}");
             }
 
             content.Append(tempDesctiption);
@@ -83,7 +83,7 @@ License: http://creativecommons.org/licenses/by/4.0/
             content.AppendLine();
             content.Append($"Tags: \n");
             content.Append(String.Join(", ", episode.Tags));
-            content.Append("<InsertTags>");
+            content.Append(", IT, ITea, ITea Morning, New, IT News, Wyrodek, Maciej Wyrodek, Maciek Wyrodek, <InsertTags>");
             content.AppendLine();
             content.AppendLine();
             content.Append("======================================================================================================");
