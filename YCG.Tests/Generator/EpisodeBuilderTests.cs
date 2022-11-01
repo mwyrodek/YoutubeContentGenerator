@@ -94,5 +94,22 @@ namespace YCG.Tests.Generator
             Assert.That(actualData.Tags.Count, Is.EqualTo(4));
             Assert.That(actualData.Tags, Is.EquivalentTo(new List<string>() {"tag1", "tag2", "tag1", "tag2"}));
         }
+        
+        [Test]
+        public void EmptyCOllection_SkipAddingTags()
+        {
+            var a1 = new Article();
+            a1.Tags = null;
+
+            var episode = new Episode()
+            {
+                Articles = new List<Article>() {a1}
+            };
+            var episodeBuilder = new EpisodeBuilder(episode);
+
+            var actualData = episodeBuilder.AggregateTagsFromArticles().Build();
+            Assert.That(actualData.Tags.Count, Is.EqualTo(1));
+            Assert.That(actualData.Tags, Is.EquivalentTo(new List<string>() {"WARNING NO TAGS ADDED"}));
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.VisualBasic.FileIO;
 using WordPressPCL.Client;
 using WordPressPCL.Models;
@@ -31,7 +32,14 @@ namespace YoutubeContentGenerator.EpisodeGenerator
             episode.Tags = new List<string>();
             foreach (var article in episode.Articles)
             {
-                episode.Tags.AddRange(article.Tags);
+                if (article.Tags != null)
+                {
+                    episode.Tags.AddRange(article.Tags);
+                }
+                else
+                {
+                    episode.Tags.Add("WARNING NO TAGS ADDED");
+                }
             }
 
             return this;
