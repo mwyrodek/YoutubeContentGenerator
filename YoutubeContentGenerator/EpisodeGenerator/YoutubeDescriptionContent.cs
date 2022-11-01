@@ -39,6 +39,32 @@ License: http://creativecommons.org/licenses/by/4.0/
 
 🖥️ Artykuły z odcinka:";
 
+
+        private readonly string socialMediaTemplate = @"Posty sieci społecznościowe
+        Facebook (najlepiej własne #)
+#ITeaMorning 
+        Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
+        Link w komentarzu ⬇️⬇️
+
+        W odcinku #Number:
+        🔸  
+        🔸  
+
+        Twitter
+            Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
+        link
+
+# #IT #ITeaMorning
+            LinkedIn (max 3 #)
+        Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
+
+        W odcinku #Number:
+        🔸  
+        🔸 
+
+        link
+#ITeaMorning #";
+        
         public string CreateEpisodesDescription(List<Episode> episodes)
         {
             if (episodes.Count == 0) throw new ArgumentException("list is empty",nameof(episodes));
@@ -47,6 +73,7 @@ License: http://creativecommons.org/licenses/by/4.0/
             foreach (var episode in episodes)
             {
                 content.Append(CreateEpisodeDescription(episode));
+                content.Append(CreateSocialMediaStub(episode));
             }
 
             return content.ToString();
@@ -81,6 +108,29 @@ License: http://creativecommons.org/licenses/by/4.0/
             content.Append($"Tags: \n");
             content.Append(String.Join(", ", episode.Tags));
             content.Append(", IT, ITea, ITea Morning, New, IT News, Wyrodek, Maciej Wyrodek, Maciek Wyrodek, <InsertTags>");
+            content.AppendLine();
+            content.AppendLine();
+            content.Append("======================================================================================================");
+            content.AppendLine();
+            return content.ToString();
+        }
+        
+        public string CreateSocialMediaStub(Episode episode)
+        {
+            episode = new EpisodeBuilder(episode)
+                .AggregateTagsFromArticles()
+                .RemoveRedundantTags()
+                .RemoveSpecialTags()
+                .Build();
+            
+            var content = new StringBuilder();
+            var tempDesctiption = socialMediaTemplate;
+            if (episode.EpisodeNumber > 0)
+            {
+                tempDesctiption = tempDesctiption.Replace("#Number", $"{episode.EpisodeNumber}");
+            }
+
+            content.Append(tempDesctiption);
             content.AppendLine();
             content.AppendLine();
             content.Append("======================================================================================================");
