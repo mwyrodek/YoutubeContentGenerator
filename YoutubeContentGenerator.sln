@@ -19,6 +19,7 @@ Global
 		TestShortener-Summary|Any CPU = TestShortener-Summary|Any CPU
 		TestWeeklySummary|Any CPU = TestWeeklySummary|Any CPU
 		TestYoutubeContent|Any CPU = TestYoutubeContent|Any CPU
+		Test-ALL|Any CPU = Test-ALL|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -37,6 +38,8 @@ Global
 		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestWeeklySummary|Any CPU.Build.0 = TestWeeklySummary|Any CPU
 		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestYoutubeContent|Any CPU.ActiveCfg = TestYoutubeContent|Any CPU
 		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.TestYoutubeContent|Any CPU.Build.0 = TestYoutubeContent|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.Test-ALL|Any CPU.ActiveCfg = Test-ALL|Any CPU
+		{FB4A3BA7-8559-4703-8D0E-47149D396BAB}.Test-ALL|Any CPU.Build.0 = Test-ALL|Any CPU
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,6 +56,8 @@ Global
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestWeeklySummary|Any CPU.Build.0 = TestWeeklySummary|Any CPU
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestYoutubeContent|Any CPU.ActiveCfg = TestYoutubeContent|Any CPU
 		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.TestYoutubeContent|Any CPU.Build.0 = TestYoutubeContent|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.Test-ALL|Any CPU.ActiveCfg = Test-ALL|Any CPU
+		{5C9BB4DF-C1FC-4621-B741-75CD10BC6809}.Test-ALL|Any CPU.Build.0 = Test-ALL|Any CPU
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,6 +74,8 @@ Global
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestWeeklySummary|Any CPU.Build.0 = TestWeeklySummary|Any CPU
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestYoutubeContent|Any CPU.ActiveCfg = TestYoutubeContent|Any CPU
 		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.TestYoutubeContent|Any CPU.Build.0 = TestYoutubeContent|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.Test-ALL|Any CPU.ActiveCfg = Test-ALL|Any CPU
+		{1B8F4C87-F639-412A-AF6A-F2C88C8FD7C6}.Test-ALL|Any CPU.Build.0 = Test-ALL|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

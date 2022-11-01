@@ -5,7 +5,7 @@
 
         <IsPackable>false</IsPackable>
 
-        <Configurations>Debug;Release;TestRun;DummyLoader;TestShortener;TestShortener-Summary;TestWeeklySummary;TestYoutubeContent</Configurations>
+        <Configurations>Debug;Release;TestRun;DummyLoader;TestShortener;TestShortener-Summary;TestWeeklySummary;TestYoutubeContent;Test-ALL</Configurations>
 
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
 

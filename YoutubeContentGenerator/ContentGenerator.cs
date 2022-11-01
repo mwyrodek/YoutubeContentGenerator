@@ -31,16 +31,16 @@ namespace YoutubeContentGenerator
             this.logger.LogInformation("Application {applicationEvent} at {dateTime}", "Started", DateTime.UtcNow);
             this.logger.LogTrace("Starting Data Loading");
             this.engine.LoadData();
-            this.logger.LogTrace("Data load done Done");
+            /*this.logger.LogTrace("Data load done Done");
             this.logger.LogTrace("Starting Link Generation");
             this.engine.GenerateLinks();
-            this.logger.LogTrace("Done Link Generation");
+            this.logger.LogTrace("Done Link Generation");*/
             this.logger.LogTrace("Starting DEsc Generation");
             this.engine.GenerateDescription();
             this.logger.LogTrace("Done  DEsc Generation");
-            this.logger.LogTrace("Starting Week Summary Generation");
+            /*this.logger.LogTrace("Starting Week Summary Generation");
             this.engine.GenerateWeekSummary();
-             this.logger.LogTrace("Done Week Summary Generation");
+             this.logger.LogTrace("Done Week Summary Generation");*/
              await Task.FromResult(0);
         }
         

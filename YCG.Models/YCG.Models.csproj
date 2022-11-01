@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <Configurations>Debug;Release;TestRun;DummyLoader;TestShortener;TestShortener-Summary;TestWeeklySummary;TestYoutubeContent</Configurations>
+        <Configurations>Debug;Release;TestRun;DummyLoader;TestShortener;TestShortener-Summary;TestWeeklySummary;TestYoutubeContent;Test-ALL</Configurations>
         <Platforms>AnyCPU</Platforms>
         <LangVersion>9</LangVersion>
     </PropertyGroup>

@@ -98,14 +98,15 @@ namespace YoutubeContentGenerator
                     services.AddScoped<IGoogleDocApi, GoogleDocsApi>();
                     services.AddScoped<IYoutubeDescriptionContent, YoutubeDescriptionContent>();
 #endif
-
-#if DUMMYSUMMARY
+                    services.AddScoped<IWeeklySummaryGenerator, WeeklySummuryGenerator.DummuWeeklySummaryGenerator>();
+                    //disabled cause not working
+/*#if DUMMYSUMMARY
                     services.AddScoped<IWeeklySummaryGenerator, WeeklySummuryGenerator.DummuWeeklySummaryGenerator>();
 #else
 
                     services.AddScoped<IWordPressClientWrapper, WordPressClientWrapper>();
                     services.AddScoped<IWeeklySummaryGenerator, ApiWeeklySummaryGenerator>();
-#endif
+#endif*/
                 });
 
     }

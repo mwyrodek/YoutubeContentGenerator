@@ -7,6 +7,7 @@ namespace YoutubeContentGenerator.EpisodeGenerator
 {
     public class YoutubeDescriptionContent : IYoutubeDescriptionContent
     {
+        private readonly string weekStart = "<WEEKSTART> \n \n";
         private readonly string description = @"<TITTLE> 🍵 📰 ITea Morning #Number
 
 
@@ -42,6 +43,7 @@ License: http://creativecommons.org/licenses/by/4.0/
         {
             if (episodes.Count == 0) throw new ArgumentException("list is empty",nameof(episodes));
             var content = new StringBuilder();
+            content.Append(weekStart);
             foreach (var episode in episodes)
             {
                 content.Append(CreateEpisodeDescription(episode));
@@ -71,11 +73,6 @@ License: http://creativecommons.org/licenses/by/4.0/
             {
                 content.Append($"🔗 {article.Title} {article.Link} \n");
             }
-            content.AppendLine();
-            content.AppendLine();
-            content.AppendLine();
-            content.Append($"☕ Kubek Różności: \n");
-            content.Append($"🔗  <opis><link>: \n");
             content.AppendLine();
             content.AppendLine();
             content.Append($"⏲ Timestamps: \n");
