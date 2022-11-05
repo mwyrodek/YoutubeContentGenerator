@@ -53,7 +53,7 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
             logger.LogTrace("Authenticated");
         }
 
-        public Document ReadFile()
+        private Document ReadFile()
         {
             var request = service.Documents.Get(DocumentId);
             
@@ -85,7 +85,28 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
 
         public void UpdateLastLineStyle(ContentStyle style)
         {
-            throw new NotImplementedException();
+
+            var req = new Request();
+            var requests = new List<Request>() {req};
+            var range= GetLastRangeFromFile();
+
+            req.UpdateParagraphStyle = new UpdateParagraphStyleRequest()
+            {
+                Range = range,
+                Fields = "namedStyleType",
+                ParagraphStyle =  new ParagraphStyle()
+                {
+                    NamedStyleType = style.ToString()
+                }
+                
+            };
+            //This is a hack to not cover all pararaphs - we are addint new line
+            InsertTestAtDocEnd("\n");
+            var body = new BatchUpdateDocumentRequest
+            {
+                Requests = requests
+            };
+            service.Documents.BatchUpdate(body, DocumentId).Execute();
         }
 
         private static InsertTextRequest CreateInsertTextRequest(string content, Location location)
