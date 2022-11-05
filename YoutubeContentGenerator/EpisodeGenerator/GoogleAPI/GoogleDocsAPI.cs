@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using YoutubeContentGenerator.Settings;
 using ILogger = Microsoft.Extensions.Logging;
+using Range = Google.Apis.Docs.v1.Data.Range;
 
 namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
 {
@@ -60,12 +61,17 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
             return doc;
         }
 
-        public void WriteFile(string content)
+        public void InsertTestAtDocEnd(string content)
         {
-            logger.LogTrace("Updating doc");
+            logger.LogTrace("Inserting Text to Google doc");
             var location = GetLastLocationFromFile();
-            var insertTextRequest = CreateInsertTextRequest(content, location, out var req);
-            req.InsertText = insertTextRequest;
+
+            var req = new Request()
+            {
+                InsertText = CreateInsertTextRequest(content,location)
+                
+            };
+                
             var requests = new List<Request>() {req};
 
             var body = new BatchUpdateDocumentRequest
@@ -73,17 +79,23 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
                 Requests = requests
             };
             service.Documents.BatchUpdate(body, DocumentId).Execute();
-            logger.LogTrace("Updating doc - Done");
+            
+            logger.LogTrace("Inserting Text  to Google Doc- Done");
         }
 
-        private static InsertTextRequest CreateInsertTextRequest(string content, Location location, out Request req)
+        public void UpdateLastLineStyle(ContentStyle style)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static InsertTextRequest CreateInsertTextRequest(string content, Location location)
         {
             var text = new InsertTextRequest
             {
-                Text = $"\n{content}",
+                Text = content,
                 Location = location
             };
-            req = new Request();
+    
             return text;
         }
 
@@ -93,9 +105,21 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
             var endIndex = readFile.Body.Content.Last().EndIndex;
             var location = new Location
             {
-                Index = endIndex - 1
+                Index = endIndex-1
             };
             return location;
+        }
+        
+        private Range GetLastRangeFromFile()
+        {
+            var readFile = ReadFile();
+
+            var range = new Range()
+            {
+                StartIndex = readFile.Body.Content.Last().StartIndex,
+                EndIndex = readFile.Body.Content.Last().EndIndex
+            };
+            return range;
         }
     }
 }

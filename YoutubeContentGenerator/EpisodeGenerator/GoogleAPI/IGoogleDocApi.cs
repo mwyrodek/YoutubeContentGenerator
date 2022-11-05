@@ -5,7 +5,9 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
     public interface IGoogleDocApi
     {
         void Authenticate();
-        Document ReadFile();
-        void WriteFile(string content);
+        void InsertTestAtDocEnd(string content);
+        void UpdateLastLineStyle(ContentStyle style);
+        
+        
     }
 }

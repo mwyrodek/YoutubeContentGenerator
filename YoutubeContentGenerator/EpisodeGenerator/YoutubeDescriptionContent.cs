@@ -7,69 +7,14 @@ namespace YoutubeContentGenerator.EpisodeGenerator
 {
     public class YoutubeDescriptionContent : IYoutubeDescriptionContent
     {
-        private readonly string weekStart = "<WEEKSTART> \n \n";
-        private readonly string description = @"<TITTLE> 🍵 📰 ITea Morning #Number
-
-
-<DESCRIPTION>
-To wszystko i wiele więcej w dzisiejszym 🍵 ITea Morning
-
-🗞️ Subskrybuj Itea!:https://youtube.com/c/ITeaMorning?sub_confirmation=1
-
-☕ Postaw mi herbatę 😊 : https://ko-fi.com/iteamorning
-
-🔗 Gdzie mnie można znaleźć
-Twitter: https://twitter.com/maciejwyrodek
-GitHub: https://github.com/mwyrodek
-Facebook: https://www.facebook.com/MaciejWyrodek.ITea/
-LinkedIn: https://www.linkedin.com/in/wyrodek/
-
-🎙️Podcast
-Spotify: https://open.spotify.com/show/3Yo5AtGfQVXAxFA5q13zdF
-Google Podcast: https://www.google.com/podcasts?feed=aHR0cHM6Ly9hbmNob3IuZm0vcy82NjJlZDEwOC9wb2RjYXN0L3Jzcw==
-
-🎵 Muzyka:
-Easy Lemon (30 second) by Kevin MacLeod
-Link: https://incompetech.filmmusic.io/song/3695-easy-lemon-30-second-
-License: http://creativecommons.org/licenses/by/4.0/
-
-🖼️ Grafiki
-🎬 Intro - Adam Kowalczyk
-🎨 Agenda i Thumbnail - Agnieszka Gawrońska  https://pomagierka.pl/
-
-🖥️ Artykuły z odcinka:";
-
-
-        private readonly string socialMediaTemplate = @"Posty sieci społecznościowe
-        Facebook (najlepiej własne #)
-#ITeaMorning 
-        Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
-        Link w komentarzu ⬇️⬇️
-
-        W odcinku #Number:
-        🔸  
-        🔸  
-
-        Twitter
-            Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
-        link
-
-# #IT #ITeaMorning
-            LinkedIn (max 3 #)
-        Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
-
-        W odcinku #Number:
-        🔸  
-        🔸 
-
-        link
-#ITeaMorning #";
         
         public string CreateEpisodesDescription(List<Episode> episodes)
         {
             if (episodes.Count == 0) throw new ArgumentException("list is empty",nameof(episodes));
             var content = new StringBuilder();
-            content.Append(weekStart);
+            content.Append(YoutubeContentTemplates.WeekStart);
+            content.AppendLine();
+            content.AppendLine();
             foreach (var episode in episodes)
             {
                 content.Append(CreateEpisodeDescription(episode));
@@ -77,6 +22,11 @@ License: http://creativecommons.org/licenses/by/4.0/
             }
 
             return content.ToString();
+        }
+
+        public List<DescriptionSegments> CreateEpisodesDescriptionWithFormating(List<Episode> episodes)
+        {
+            throw new NotImplementedException();
         }
 
         public string CreateEpisodeDescription(Episode episode)
@@ -88,14 +38,13 @@ License: http://creativecommons.org/licenses/by/4.0/
                 .Build();
             
             var content = new StringBuilder();
-            var tempDesctiption = description;
-            if (episode.EpisodeNumber > 0)
-            {
-                tempDesctiption = tempDesctiption.Replace("#Number", $"{episode.EpisodeNumber}");
-            }
 
-            content.Append(tempDesctiption);
+            var title = ReplaceNumber(episode.EpisodeNumber, YoutubeContentTemplates.Title);
+            content.Append(title);
             content.AppendLine();
+            var description  = ReplaceNumber(episode.EpisodeNumber, YoutubeContentTemplates.Description);
+            content.Append(description);
+            
             foreach (var article in episode.Articles)
             {
                 content.Append($"🔗 {article.Title} {article.Link} \n");
@@ -114,7 +63,17 @@ License: http://creativecommons.org/licenses/by/4.0/
             content.AppendLine();
             return content.ToString();
         }
-        
+
+        private static string ReplaceNumber(int number , string content)
+        {
+            if (number > 0)
+            {
+                content = content.Replace("#Number", $"{number}");
+            }
+
+            return content;
+        }
+
         public string CreateSocialMediaStub(Episode episode)
         {
             episode = new EpisodeBuilder(episode)
@@ -122,14 +81,14 @@ License: http://creativecommons.org/licenses/by/4.0/
                 .RemoveRedundantTags()
                 .RemoveSpecialTags()
                 .Build();
-            
+            // SocialDescriptions
+            // Socials
             var content = new StringBuilder();
-            var tempDesctiption = socialMediaTemplate;
-            if (episode.EpisodeNumber > 0)
-            {
-                tempDesctiption = tempDesctiption.Replace("#Number", $"{episode.EpisodeNumber}");
-            }
 
+            var title = ReplaceNumber(episode.EpisodeNumber, YoutubeContentTemplates.SocialSectionHeader);
+            var tempDesctiption = ReplaceNumber(episode.EpisodeNumber, YoutubeContentTemplates.SocialSectionHeader);
+            content.Append(title);
+            content.AppendLine();
             content.Append(tempDesctiption);
             content.AppendLine();
             content.AppendLine();

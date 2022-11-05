@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using AutoFixture;
 using AutoFixture.AutoMoq;
 using Moq;
 using NUnit.Framework.Constraints;
+using WordPressPCL.Models;
 using YCG.Models;
 using YoutubeContentGenerator.EpisodeGenerator;
+using YoutubeContentGenerator.EpisodeGenerator.GoogleAPI;
 
 namespace YCG.Tests.Generator
 {
@@ -35,7 +38,7 @@ namespace YCG.Tests.Generator
             Assert.Multiple(() =>
             {
                  StringAssert.StartsWith("<TITTLE> 🍵 📰 ITea Morning", result);
-                 StringAssert.Contains($"#{episode.EpisodeNumber}", result);
+                 StringAssert.Contains($"{episode.EpisodeNumber}", result);
                  episode.Articles.ForEach(a => StringAssert.Contains(a.Link, result));
                  episode.Articles.ForEach(a => StringAssert.Contains(a.Title, result));
             });
@@ -51,7 +54,7 @@ namespace YCG.Tests.Generator
             Assert.Multiple(() =>
             {
                 StringAssert.StartsWith("<TITTLE> 🍵 📰 ITea Morning", result);
-                StringAssert.Contains($"#{episode.EpisodeNumber}", result);
+                StringAssert.Contains($"{episode.EpisodeNumber}", result);
             });
         }
         
@@ -89,8 +92,20 @@ namespace YCG.Tests.Generator
             {
                 sut.CreateEpisodesDescription(episodes);
             });
-            
+        }
+        
+        [Test]
+        public void HappyPath_CreateEpisodesWithFormating_ShouldStartWithWeekHeader()
+        {
+            var episodes = fixture.Create<List<Episode>>();
+            var result = sut.CreateEpisodesDescriptionWithFormating(episodes);
 
+                Assert.Multiple(() =>
+            {
+                Assert.That(result.First().Content, Is.EqualTo("<WEEKSTART>"));
+                Assert.That(result.First().ContentStyle, Is.EqualTo(ContentStyle.HEADING_1));
+                
+            });
         }
     }
 }

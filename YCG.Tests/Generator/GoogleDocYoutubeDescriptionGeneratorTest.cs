@@ -52,7 +52,7 @@ namespace YCG.Tests.Generator
             sut.CreateEpisodesDescription(episode);
             sut.Save();
             
-            googleDocApiMock.Verify(gda=>gda.WriteFile(It.IsAny<string>()));
+            googleDocApiMock.Verify(gda=>gda.InsertTestAtDocEnd(It.IsAny<string>()));
         }
     }
 }

@@ -22,7 +22,7 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
 
         public void Save()
         {
-            this.api.WriteFile(builtContent);
+            this.api.InsertTestAtDocEnd($"\n{builtContent}");
         }
     }
 }
