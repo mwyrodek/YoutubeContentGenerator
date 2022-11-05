@@ -4,7 +4,7 @@ namespace YoutubeContentGenerator.EpisodeGenerator
 {
     public class DescriptionSegments
     {
-        public string Content { get; }
-        public ContentStyle ContentStyle { get; }
+        public string Content { get; set; }
+        public ContentStyle ContentStyle { get; set; }
     }
 }

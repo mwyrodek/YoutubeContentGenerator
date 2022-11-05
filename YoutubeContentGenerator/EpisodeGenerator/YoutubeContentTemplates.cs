@@ -5,7 +5,7 @@ namespace YoutubeContentGenerator.EpisodeGenerator
         public static string WeekStart { get; } = "<WEEKSTART>";
         public static string Title { get; } = "<TITTLE> 🍵 📰 ITea Morning #Number";
         public static string SocialSectionHeader { get; } = "<SOCIALS> EPISODE #Number";
-        public static string Description { get; } = @"<<DESCRIPTION>
+        public static string Description { get; } = @"<DESCRIPTION>
 To wszystko i wiele więcej w dzisiejszym 🍵 ITea Morning
 
 🗞️ Subskrybuj Itea!:https://youtube.com/c/ITeaMorning?sub_confirmation=1
@@ -35,26 +35,26 @@ License: http://creativecommons.org/licenses/by/4.0/
 
         public static string SocialDescriptions { get; } = @"Facebook (najlepiej własne #)
 #ITeaMorning 
-        Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
-        Link w komentarzu ⬇️⬇️
+Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
+Link w komentarzu ⬇️⬇️
 
-        W odcinku #Number:
-        🔸  
-        🔸  
+W odcinku 591:
+🔸  
+🔸  
 
-        Twitter
-            Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
-        link
+Twitter
+Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
+link
 
 # #IT #ITeaMorning
-            LinkedIn (max 3 #)
-        Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
+LinkedIn (max 3 #)
+Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
 
-        W odcinku #Number:
-        🔸  
-        🔸 
+W odcinku 591:
+🔸  
+🔸 
 
-        link
+link
 #ITeaMorning #";
     }
 }
