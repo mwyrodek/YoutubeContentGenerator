@@ -46,6 +46,9 @@ namespace YCG.Tests.Generator
         public void SaveDescriptionTest()
         {
             var episode = fixture.Create<List<Episode>>();
+            var mockContent = fixture.Freeze<Mock<IYoutubeDescriptionContent>>();
+            var segments = fixture.Create<List<DescriptionSegments>>();
+            mockContent.Setup(c => c.CreateEpisodesDescriptionWithFormating(It.IsAny<List<Episode>>())).Returns(segments);
             var googleDocApiMock = fixture.Freeze<Mock<IGoogleDocApi>>();
             
             sut = fixture.Create<GoogleDocYoutubeDescriptionGenerator>();

@@ -103,7 +103,7 @@ namespace YoutubeContentGenerator.EpisodeGenerator
             content.AppendLine();
             var description  = ReplaceNumber(episode.EpisodeNumber, YoutubeContentTemplates.Description);
             content.Append(description);
-            
+            content.AppendLine();
             foreach (var article in episode.Articles)
             {
                 content.Append($"🔗 {article.Title} {article.Link} \n");
