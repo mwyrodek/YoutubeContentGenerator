@@ -74,7 +74,6 @@ namespace YoutubeContentGenerator.EpisodeGenerator
             var content = new StringBuilder();
             content.AppendLine();
             var tempDesctiption = ReplaceNumber(episode.EpisodeNumber, YoutubeContentTemplates.SocialDescriptions);
-            content.Append(title);
             content.AppendLine();
             content.Append(tempDesctiption);
             content.AppendLine();

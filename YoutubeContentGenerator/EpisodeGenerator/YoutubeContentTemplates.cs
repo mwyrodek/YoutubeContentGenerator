@@ -38,7 +38,7 @@ License: http://creativecommons.org/licenses/by/4.0/
 Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
 Link w komentarzu ⬇️⬇️
 
-W odcinku 591:
+W odcinku #Number:
 🔸  
 🔸  
 
@@ -50,7 +50,7 @@ link
 LinkedIn (max 3 #)
 Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
 
-W odcinku 591:
+W odcinku #Number:
 🔸  
 🔸 
 
