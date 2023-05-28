@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using WordPressPCL.Models;
 using YCG.Models;
@@ -27,6 +28,8 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
         { 
             foreach (var segment in formatedContent)
            {
+
+               this.api.ClearNewlineStyle();
                this.api.InsertTestAtDocEnd(segment.Content);
                this.api.UpdateLastLineStyle(segment.ContentStyle);
            }

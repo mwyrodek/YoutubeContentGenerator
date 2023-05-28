@@ -7,7 +7,8 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
         void Authenticate();
         void InsertTestAtDocEnd(string content);
         void UpdateLastLineStyle(ContentStyle style);
-        
-        
+        void ClearNewlineStyle();
+
+
     }
 }

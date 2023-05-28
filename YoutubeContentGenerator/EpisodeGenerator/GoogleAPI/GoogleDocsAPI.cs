@@ -78,7 +78,18 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
             {
                 Requests = requests
             };
-            service.Documents.BatchUpdate(body, DocumentId).Execute();
+            try
+            {
+                service.Documents.BatchUpdate(body, DocumentId).Execute();
+            }
+            catch (Exception e)
+            {
+                logger.LogError("Quota Reached");
+                logger.LogError(e.Message);
+                logger.LogError("waiting 2 mins and retrying");
+                Thread.Sleep(1200000);
+                service.Documents.BatchUpdate(body, DocumentId).Execute();
+            }
             
             logger.LogTrace("Inserting Text  to Google Doc- Done");
         }
@@ -101,12 +112,23 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
                 
             };
             //This is a hack to not cover all pararaphs - we are addint new line
-            InsertTestAtDocEnd("\n");
+         //   InsertTestAtDocEnd("\n");
             var body = new BatchUpdateDocumentRequest
             {
                 Requests = requests
             };
-            service.Documents.BatchUpdate(body, DocumentId).Execute();
+            try
+            {
+                service.Documents.BatchUpdate(body, DocumentId).Execute();
+            }
+            catch (Exception e)
+            {
+                logger.LogError("Quota Reached");
+                logger.LogError(e.Message);
+                logger.LogError("waiting  2 mins and retrying");
+                Thread.Sleep(1200000);
+                service.Documents.BatchUpdate(body, DocumentId).Execute();
+            }
         }
 
         private static InsertTextRequest CreateInsertTextRequest(string content, Location location)
@@ -141,6 +163,12 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
                 EndIndex = readFile.Body.Content.Last().EndIndex
             };
             return range;
+        }
+
+        public void ClearNewlineStyle()
+        {
+            InsertTestAtDocEnd("\n");
+            UpdateLastLineStyle(ContentStyle.NORMAL_TEXT);
         }
     }
 }
