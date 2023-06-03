@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Http;
 using YoutubeContentGenerator.Engine;
 using YoutubeContentGenerator.EpisodeGenerator;
@@ -22,10 +23,17 @@ namespace YoutubeContentGenerator
     [ExcludeFromCodeCoverage]
     public static class Program
     {
-
+/// <summary>
+/// EPisode type
+/// Normal (defaylt)
+/// Half - halfSpecial
+/// Kata - IteaKata
+/// Special - SPecial
+/// Review - Itea Review
+/// </summary>
+/// <param name="args"> </param>
         public static async Task Main(string[] args)
         {
-
             var host = CreateHostBuilder(args).Build();
             using var serviceScope = host.Services.CreateScope();
 
@@ -63,7 +71,7 @@ namespace YoutubeContentGenerator
                     services.Configure<GoogleOptions>(hostContext.Configuration.GetSection(GoogleOptions.Google));
                     services.Configure<YourlsOptions>(hostContext.Configuration.GetSection(YourlsOptions.Yourls));
                     services.Configure<CosmosDB>(hostContext.Configuration.GetSection(CosmosDB.Cosmos));
-
+                    services.AddSingleton(args);
                     //engine is progamcore
                     services.AddScoped<IEngine, CosmosDBEngine>();
 

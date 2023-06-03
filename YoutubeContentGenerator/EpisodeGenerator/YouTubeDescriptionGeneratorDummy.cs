@@ -19,6 +19,11 @@ namespace YoutubeContentGenerator
             logger.LogInformation("pretending to create episode description");
         }
 
+        public void CreateSpecialEpisodesDescription(SpecialEpisodeType type)
+        {
+            logger.LogInformation("pretending to create special episode {type} description", type);
+        }
+
         public void Save()
         {
             logger.LogInformation("Pretending to save them");

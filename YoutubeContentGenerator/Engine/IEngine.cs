@@ -1,3 +1,5 @@
+using YoutubeContentGenerator.EpisodeGenerator;
+
 namespace YoutubeContentGenerator.Engine
 {
     public interface IEngine
@@ -6,5 +8,6 @@ namespace YoutubeContentGenerator.Engine
         public void GenerateLinks();
         public void GenerateDescription();
         public void GenerateWeekSummary();
+        public void GenerateSpecialEpisodeDescription(SpecialEpisodeType episodeType);
     }
 }

@@ -7,7 +7,6 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
 {
     public class GoogleDocYoutubeDescriptionGenerator : IYouTubeDescriptionGenerator
     {
-        private string builtContent;
         private List<DescriptionSegments> formatedContent;
         private readonly IGoogleDocApi api;
         private readonly IYoutubeDescriptionContent content;
@@ -20,8 +19,12 @@ namespace YoutubeContentGenerator.EpisodeGenerator.GoogleAPI
         }
         public void CreateEpisodesDescription(List<Episode> episodes)
         {
-            builtContent = content.CreateEpisodesDescription(episodes);
             formatedContent = content.CreateEpisodesDescriptionWithFormating(episodes);
+        }
+
+        public void CreateSpecialEpisodesDescription(SpecialEpisodeType type)
+        {
+            formatedContent = content.CreateSpecialEpisodeDescriptionWithFormating(type);
         }
 
         public void Save()

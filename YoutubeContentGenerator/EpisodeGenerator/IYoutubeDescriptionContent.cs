@@ -9,7 +9,9 @@ namespace YoutubeContentGenerator.EpisodeGenerator
     {
         string CreateEpisodesDescription(List<Episode> episodes);
         List<DescriptionSegments> CreateEpisodesDescriptionWithFormating(List<Episode> episodes);
-        string CreateEpisodeDescription(Episode episode);
-
+        List<DescriptionSegments> CreateSpecialEpisodeDescriptionWithFormating(SpecialEpisodeType specialEpisodeType);
+        
+        string CreateSpecialEpisodeDescription(SpecialEpisodeType specialEpisodeType);
+        
     }
 }

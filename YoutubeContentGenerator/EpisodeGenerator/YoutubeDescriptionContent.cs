@@ -11,18 +11,32 @@ namespace YoutubeContentGenerator.EpisodeGenerator
         
         public string CreateEpisodesDescription(List<Episode> episodes)
         {
-            if (episodes.Count == 0) throw new ArgumentException("list is empty",nameof(episodes));
-            var content = new StringBuilder();
-            content.Append(YoutubeContentTemplates.WeekStart);
-            content.AppendLine();
-            content.AppendLine();
-            foreach (var episode in episodes)
-            {
-                content.Append(CreateEpisodeDescription(episode));
-                content.Append(CreateSocialMediaStub(episode));
-            }
+            return FlatenFormatedEpisodes(CreateEpisodesDescriptionWithFormating(episodes));
+        }
 
-            return content.ToString();
+
+        public string CreateEpisodeDescription(Episode episode)
+        {
+            return FlatenFormatedEpisodes(CreateEpisodeDescriptionFormated(episode));
+        }
+
+        public string CreateSpecialEpisodeDescription(SpecialEpisodeType specialEpisodeType)
+        {
+
+            return FlatenFormatedEpisodes(CreateSpecialEpisodeDescriptionWithFormating(specialEpisodeType));
+        }
+
+        public List<DescriptionSegments> CreateSpecialEpisodeDescriptionWithFormating(SpecialEpisodeType specialEpisodeType)
+        {
+
+            var list = new List<DescriptionSegments>();
+            var title = GetTittleForSpecial(specialEpisodeType);
+            list.Add(title);
+            list.Add(CreateSpecialDescriptionBody(specialEpisodeType));
+            
+            //socials
+            list.AddRange(CreateSpecialSocialDescriptionFormated(specialEpisodeType));
+            return list;
         }
 
         public List<DescriptionSegments> CreateEpisodesDescriptionWithFormating(List<Episode> episodes)
@@ -43,9 +57,9 @@ namespace YoutubeContentGenerator.EpisodeGenerator
             return list;
         }
 
-        public string CreateEpisodeDescription(Episode episode)
+        public string CreateSocialMediaStub(Episode episode)
         {
-            var list = CreateEpisodeDescriptionFormated(episode);
+            var list = CreateSocialDescriptionFormated(episode);
             return FlatenFormatedEpisodes(list);
         }
 
@@ -54,7 +68,7 @@ namespace YoutubeContentGenerator.EpisodeGenerator
             var list = new List<DescriptionSegments>();
             var title = new DescriptionSegments()
             {
-                Content = ReplaceNumber(episode.EpisodeNumber, YoutubeContentTemplates.Title),
+                Content = ReplaceNumber(episode.EpisodeNumber, YoutubeContentTemplates.StandardTitle),
                 ContentStyle = ContentStyle.HEADING_2
             };
             list.Add(title);
@@ -89,6 +103,113 @@ namespace YoutubeContentGenerator.EpisodeGenerator
             list.Add(socialDesc);
             return list;
         }
+        
+
+        private List<DescriptionSegments> CreateSpecialSocialDescriptionFormated(SpecialEpisodeType specialEpisodeType)
+        {
+            var list = new List<DescriptionSegments>();
+            var title = new DescriptionSegments()
+            {
+                Content = YoutubeContentTemplates.GenericSpecialSocialSectionHeader,
+                ContentStyle = ContentStyle.HEADING_3
+            };
+            list.Add(title);
+            var content = new StringBuilder();
+            content.AppendLine();
+
+            content.AppendLine();
+            content.Append(GetSocailDescriptionForSpecial(specialEpisodeType));
+            content.AppendLine();
+            content.AppendLine();
+            content.Append("======================================================================================================");
+            content.AppendLine();
+            content.AppendLine();
+            var socialDesc = new DescriptionSegments()
+            {
+                Content = content.ToString(),
+                ContentStyle = ContentStyle.NORMAL_TEXT
+            };
+            list.Add(socialDesc);
+            return list;
+        }
+        
+
+        private DescriptionSegments CreateSpecialDescriptionBody(SpecialEpisodeType specialEpisodeType)
+        {
+            var content = new StringBuilder();
+            content.AppendLine();
+            content.AppendLine();
+            content.AppendLine(YoutubeContentTemplates.GenericSpecialDescription);
+            content.AppendLine();
+            content.AppendLine();
+            content.AppendLine(YoutubeContentTemplates.TimeStamp);
+            content.Append($"0:00 Zajawka \n");
+            content.AppendLine();
+            content.Append($"Tags: \n");
+            content.Append(YoutubeContentTemplates.BrandTags);
+            content.AppendLine();
+            content.AppendLine();
+            return new DescriptionSegments()
+            {
+                Content = content.ToString(),
+                ContentStyle = ContentStyle.NORMAL_TEXT
+            };
+        }
+
+        private DescriptionSegments GetTittleForSpecial(SpecialEpisodeType specialEpisodeType)
+        {
+
+            var episodeTitle = string.Empty;
+            switch (specialEpisodeType)
+            {
+                case SpecialEpisodeType.HALF:
+                    episodeTitle = YoutubeContentTemplates.HalfTitle;
+                    break;
+                case SpecialEpisodeType.SPECIAL:
+                    episodeTitle = YoutubeContentTemplates.SpecialTitle;
+                    break;
+                case SpecialEpisodeType.REVIEW:
+                    episodeTitle = YoutubeContentTemplates.ReviewTitle;
+                    break;
+                case SpecialEpisodeType.KATA:
+                    episodeTitle = YoutubeContentTemplates.KataTitle;
+                    break;
+                case SpecialEpisodeType.GAMES:
+                    episodeTitle = YoutubeContentTemplates.GamesTitle;
+                    break;
+            }
+            var title = new DescriptionSegments()
+            {
+                Content =  episodeTitle,
+                ContentStyle = ContentStyle.HEADING_2
+            };
+            return title;
+        }
+            
+            private string GetSocailDescriptionForSpecial(SpecialEpisodeType specialEpisodeType)
+            {
+                switch (specialEpisodeType)
+                {
+                    case SpecialEpisodeType.HALF:
+                        return YoutubeContentTemplates.HalfSocialDescriptions;
+
+                    case SpecialEpisodeType.SPECIAL:
+                        return YoutubeContentTemplates.SpecialSocialDescriptions;
+
+                    case SpecialEpisodeType.REVIEW:
+                        return YoutubeContentTemplates.ReviewSocialDescriptions;
+
+                    case SpecialEpisodeType.KATA:
+                        return YoutubeContentTemplates.KataSocialDescriptions;
+                    case SpecialEpisodeType.GAMES:
+                        return YoutubeContentTemplates.GameSocialDescriptions;
+                    default:
+                        throw new ArgumentOutOfRangeException($"unknown value of {specialEpisodeType}");
+
+                }
+            }
+
+
         private DescriptionSegments CreateDescriptionBody(Episode episode)
         {
             episode = new EpisodeBuilder(episode)
@@ -109,12 +230,12 @@ namespace YoutubeContentGenerator.EpisodeGenerator
             }
             content.AppendLine();
             content.AppendLine();
-            content.Append($"⏲ Timestamps: \n");
-            content.Append($"0:00 Intro \n");
+            content.AppendLine(YoutubeContentTemplates.TimeStamp);
+            content.Append($"0:00 Meme \n");
             content.AppendLine();
             content.Append($"Tags: \n");
             content.Append(String.Join(", ", episode.Tags));
-            content.Append(", IT, ITea, ITea Morning, New, IT News, Wyrodek, Maciej Wyrodek, Maciek Wyrodek, <InsertTags>");
+            content.Append(YoutubeContentTemplates.BrandTags);
             content.AppendLine();
             content.AppendLine();
 
@@ -123,12 +244,6 @@ namespace YoutubeContentGenerator.EpisodeGenerator
                 Content = content.ToString(),
                 ContentStyle = ContentStyle.NORMAL_TEXT
             };
-        }
-
-        public string CreateSocialMediaStub(Episode episode)
-        {
-            var list = CreateSocialDescriptionFormated(episode);
-            return FlatenFormatedEpisodes(list);
         }
 
         private string FlatenFormatedEpisodes(List<DescriptionSegments> list)

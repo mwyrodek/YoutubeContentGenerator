@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Logging;
 using YCG.Models;
@@ -45,6 +46,12 @@ namespace YoutubeContentGenerator.Engine
             UpdateNumbers();
             SaveToDb();
             youTubeDescriptionGenerator.CreateEpisodesDescription(Episodes);
+            youTubeDescriptionGenerator.Save();
+        }
+        
+        public void GenerateSpecialEpisodeDescription(SpecialEpisodeType type)
+        {
+            youTubeDescriptionGenerator.CreateSpecialEpisodesDescription(type);
             youTubeDescriptionGenerator.Save();
         }
 

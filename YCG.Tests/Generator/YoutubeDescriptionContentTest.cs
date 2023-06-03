@@ -10,6 +10,7 @@ using WordPressPCL.Models;
 using YCG.Models;
 using YoutubeContentGenerator.EpisodeGenerator;
 using YoutubeContentGenerator.EpisodeGenerator.GoogleAPI;
+using static YoutubeContentGenerator.EpisodeGenerator.SpecialEpisodeType;
 
 namespace YCG.Tests.Generator
 {
@@ -138,7 +139,6 @@ namespace YCG.Tests.Generator
 
             Assert.Multiple(() =>
             {
-                StringAssert.StartsWith("<WEEKSTART>", result);
                 episodes.ForEach(e=> StringAssert.Contains($"<TITTLE> 🍵 📰 ITea Morning {e.EpisodeNumber}",result));
                 episodes[0].Articles.ForEach(a => StringAssert.Contains(a.Link, result));
                 episodes[0].Articles.ForEach(a => StringAssert.Contains(a.Title, result));
@@ -178,5 +178,26 @@ namespace YCG.Tests.Generator
                 
             });
         }
+        
+        [TestCase(HALF,"<TITTLE> 🍵★ Pół-ITea Special","Najnowszy Pół-Special juz jest a w nim przemyslenia na temat <TITTLE>")]
+        [TestCase(SPECIAL,"<TITTLE> 🍵🌟 ITea Special","Najnowszy Pełno prawny odcinek specjalny jest już")]
+        [TestCase(REVIEW,"<TITTLE> 🍵📚 Book Review","Najnowszy ITea Review juz jest a w nim recenzja <TITTLE")]
+        [TestCase(GAMES,"<TITTLE> 🍵🎮 Gry a ITea","Najnowsze Gry a ITea jest już dostepne <TITTLE")]
+        [TestCase(KATA,"<TITTLE> 🍵🥋 Itea Kata","Najnowsza ITea Kata czyli seria ciekawych wyzwan z automatyzacji juz jest")]
+        public void HappyPath_CreateSpecialEpisode_Work(SpecialEpisodeType type, string expetedTitle, string expetedSocial)
+        {
+            var result = sut.CreateSpecialEpisodeDescription(type);
+
+            Assert.Multiple(() =>
+            {
+                StringAssert.Contains(expetedTitle,result);
+                StringAssert.Contains(expetedSocial,result);
+                StringAssert.Contains("⏲ Timestamps",result);
+                StringAssert.DoesNotContain("🖥️ Artykuły z odcinka",result);
+                StringAssert.Contains("Tags",result);
+                StringAssert.Contains(", <InsertTags>",result);
+            });
+        }
+        
     }
 }
