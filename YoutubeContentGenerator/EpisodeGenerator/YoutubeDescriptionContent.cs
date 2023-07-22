@@ -43,17 +43,22 @@ namespace YoutubeContentGenerator.EpisodeGenerator
         {
             if (episodes.Count == 0) throw new ArgumentException("list is empty",nameof(episodes));
             var list = new List<DescriptionSegments>();
+            foreach (var episode in episodes)
+            {
+                list.AddRange(CreateEpisodeDescriptionFormated(episode));
+                list.AddRange(CreateSocialDescriptionFormated(episode));
+            }
+            return list;
+        }
+
+        private static List<DescriptionSegments> AddWeekStart(List<DescriptionSegments> list)
+        {
             var descriptionSegments = new DescriptionSegments()
             {
                 Content = YoutubeContentTemplates.WeekStart,
                 ContentStyle = ContentStyle.HEADING_1
             };
             list.Add(descriptionSegments);
-            foreach (var episode in episodes)
-            {
-                list.AddRange(CreateEpisodeDescriptionFormated(episode));
-                list.AddRange(CreateSocialDescriptionFormated(episode));
-            }
             return list;
         }
 

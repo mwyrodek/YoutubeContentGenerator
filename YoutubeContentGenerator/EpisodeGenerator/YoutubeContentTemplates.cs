@@ -74,18 +74,15 @@ License: http://creativecommons.org/licenses/by/4.0/
 ";
 
                 public static string SocialDescriptions { get; } = @"Facebook (najlepiej własne #)
-#ITeaMorning 
 Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
-Link w komentarzu ⬇️⬇️
+🔗 Link ️
 Link w bio ⬆️⬆️
 
 W odcinku #Number:
 🔸  
 🔸  
 
-Twitter
-Najnowszy ITea Morning czyli poranna porcja artykułów ze świata IT już jest!
-🔗link
+#ITeaMorning 
 
 # #IT #ITeaMorning
 LinkedIn (max 3 #)
@@ -95,24 +92,20 @@ W odcinku #Number:
 🔸  
 🔸 
 
-🔗link
+🔗 Link
 #ITeaMorning #";
 
                 public static string KataSocialDescriptions { get; } = @"Facebook (najlepiej własne #)
-#ITeaMorning 
 Najnowsza ITea Kata czyli seria ciekawych wyzwan z automatyzacji juz jest
-Link w komentarzu ⬇️⬇️
+🔗 Link
 Link w bio ⬆️⬆️
 
 W dzisiejszej Kacie:
 🔸  
 🔸  
 
-Twitter
-Najnowsza ITea Kata czyli seria ciekawych wyzwan z automatyzacji juz jest
-🔗link
+#ITeaMorning 
 
-# #IT #ITeaMorning
 LinkedIn (max 3 #)
 Najnowsza ITea Kata czyli seria ciekawych wyzwan z automatyzacji juz jest
 
@@ -124,40 +117,28 @@ W dzisiejszej Kacie:
 #ITeaMorning #";
 
                 public static string ReviewSocialDescriptions { get; } = @"Facebook (najlepiej własne #)
-#ITeaMorning 
 Najnowszy ITea Review juz jest a w nim recenzja <TITTLE>
-Link w komentarzu ⬇️⬇️
+🔗 Link
 Link w bio ⬆️⬆️
-
-
-
-Twitter
-Najnowszy ITea Review juz jest a w nim recenzja <TITTLE>
-🔗link
 
 # #IT #ITeaMorning
 LinkedIn (max 3 #)
 Najnowszy ITea Review juz jest a w nim recenzja <TITTLE>
 
-🔗link
+🔗 Link
 #ITeaMorning #";
 
                 public static string HalfSocialDescriptions { get; } = @"Facebook (najlepiej własne #)
-#ITeaMorning 
 Najnowszy Pół-Special juz jest a w nim przemyslenia na temat <TITTLE>
-Link w komentarzu ⬇️⬇️
+🔗 Link️
 Link w bio ⬆️⬆️
 
 W odcinku dowiecie się o:
 🔸  
 🔸 
 
+#ITeaMorning 
 
-Twitter
-Najnowszy ITea Review juz jest a w nim recenzja <TITTLE>
-🔗link
-
-# #IT #ITeaMorning
 LinkedIn (max 3 #)
 Najnowszy Pół-Special juz jest a w nim przemyslenia na temat <TITTLE>
 
@@ -165,49 +146,38 @@ W odcinku dowiecie się o:
 🔸  
 🔸 
 
-🔗link
+🔗 Link
 #ITeaMorning #";
 
                 public static string GameSocialDescriptions { get; } = @"Facebook (najlepiej własne #)
-#ITeaMorning 
 Najnowsze Gry a ITea jest już dostepne <TITTLE>
-Link w komentarzu ⬇️⬇️
+🔗 Link️
 Link w bio ⬆️⬆️
 
 W odcinku dowiecie się o tym jak gra GAME ma  się do tematu <xyz>
 
+#ITeaMorning 
 
-
-Twitter
-Najnowsze Gry a ITea jest już dostepne <TITTLE>
-🔗link
-
-# #IT #ITeaMorning
 LinkedIn (max 3 #)
 Najnowsze Gry a ITea jest już dostepne <TITTLE>
 
 W odcinku dowiecie się o tym jak gra GAME ma  się do tematu <xyz>
 
-🔗link
+🔗 Link
 #ITeaMorning #";
 
 
                 public static string SpecialSocialDescriptions { get; } = @"Facebook (najlepiej własne #)
-#ITeaMorning 
 Najnowszy Pełno prawny odcinek specjalny jest już dostępny w nim przemyslenia na temat <TITTLE>
-Link w komentarzu ⬇️⬇️
+🔗 Link
 Link w bio ⬆️⬆️
 
 W odcinku dowiecie się o:
 🔸  
 🔸 
 
+#ITeaMorning 
 
-Twitter
-Najnowszy Pełno prawny odcinek specjalny jest już dostępny w nim przemyslenia na temat <TITTLE>
-🔗link
-
-# #IT #ITeaMorning
 LinkedIn (max 3 #)
 Najnowszy Pełno prawny odcinek specjalny jest już dostępny w nim przemyslenia na temat <TITTLE>
 
@@ -215,7 +185,7 @@ W odcinku dowiecie się o:
 🔸  
 🔸 
 
-🔗link
+🔗 Link
 #ITeaMorning #";
         }
 }
